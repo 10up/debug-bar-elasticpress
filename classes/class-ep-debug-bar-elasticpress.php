@@ -37,8 +37,6 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 
 	/**
 	 * Show the menu item in Debug Bar.
-	 *
-	 * @return  void
 	 */
 	public function prerender() {
 		$this->set_visible( true );

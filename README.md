@@ -1,6 +1,6 @@
 # Debug Bar ElasticPress
 
-A WordPress plugin that adds a [Debug Bar panel](https://wordpress.org/plugins/debug-bar/) to debug ElasticPress queries.
+A WordPress plugin that adds a [Debug Bar](https://wordpress.org/plugins/debug-bar/) panel to debug ElasticPress queries.
 
 ## Requirements
 
