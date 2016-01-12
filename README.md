@@ -6,6 +6,7 @@ A WordPress plugin that adds a [Debug Bar](https://wordpress.org/plugins/debug-b
 
 * ElasticPress 1.8+
 * Debug Bar 0.8.2+
+* PHP 5.4+
 
 ## Usage
 
