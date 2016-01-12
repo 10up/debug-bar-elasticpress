@@ -57,7 +57,7 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 
 		?>
 
-		<h2><?php printf( __( '<span>Total ElasticPress Queries:</span> %d', 'debug-bar' ), count( EP_API::factory()->queries ) ); ?></h2>
+		<h2><?php printf( __( '<span>Total ElasticPress Queries:</span> %d', 'debug-bar' ), count( $queries ) ); ?></h2>
 		<h2><?php printf( __( '<span>Total Blocking ElasticPress Query Time:</span> %d ms', 'debug-bar' ), (int) ( $total_query_time * 1000 ) ); ?></h2>
 
 		<?php if ( empty( $queries ) ) : ?>
