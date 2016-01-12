@@ -61,7 +61,9 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 		<h2><?php printf( __( '<span>Total Blocking ElasticPress Query Time:</span> %d ms', 'debug-bar' ), (int) ( $total_query_time * 1000 ) ); ?></h2>
 
 		<?php if ( empty( $queries ) ) : ?>
-			<p><?php esc_html_e( 'No queries to show', 'debug-bar' ); ?></p>
+			<ol class="wpd-queries">
+				<li><?php esc_html_e( 'No queries to show', 'debug-bar' ); ?></li>
+			</ol>
 		<?php else : ?>
 			<ol class="wpd-queries">
 				<?php foreach ( $queries as $query ) : $query_time = ( ! empty( $query['time_start'] ) && ! empty( $query['time_finish'] ) ) ? $query['time_finish'] - $query['time_start'] : false; ?>
