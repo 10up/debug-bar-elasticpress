@@ -46,7 +46,7 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 	 * Show the contents of the panel
 	 */
 	public function render() {
-		$queries = EP_API::factory()->queries;
+		$queries = ep_get_query_log();
 		$total_query_time = 0;
 
 		foreach ( $queries as $query ) {
