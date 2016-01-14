@@ -1,0 +1,17 @@
+.ep-queries-debug .dashicons {
+	cursor: pointer;
+}
+
+.ep-queries-debug .dashicons:before {
+	content: "\f140";
+}
+
+.ep-queries-debug .hide-query-results .query-results,
+.ep-queries-debug .hide-query-body .query-body {
+	display: none;
+}
+
+.ep-queries-debug .hide-query-results .query-result-toggle:before,
+.ep-queries-debug .hide-query-body .query-body-toggle:before {
+	content: "\f142";
+}
