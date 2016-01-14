@@ -24,7 +24,7 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 	 * 
 	 * @return object
 	 */
-	public function factory() {
+	public static function factory() {
 		static $instance;
 
 		if ( empty( $instance ) ) {
