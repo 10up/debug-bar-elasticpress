@@ -5,13 +5,13 @@ Requires at least: 3.7.1
 Tested up to: 4.5
 Stable tag: trunk
 
-Extends the debug bar plugin for ElasticPress queries.
+Extends the Debug Bar plugin for ElasticPress queries.
 
 == Description ==
 
-Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to the [Debug Bar](https://wordpress.org/plugins/debug-bar/) plugin. Allows you to examine every ElasticPress/Elasticsearch query running on any given request.
+Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to the [Debug Bar](https://wordpress.org/plugins/debug-bar/) plugin. Allows you to examine every ElasticPress query running on any given request.
 
-Requirements:
+= Requirements: =
 
 * [ElasticPress 1.8+](https://wordpress.org/plugins/elasticpress)
 * [Debug Bar 0.8.2+](https://wordpress.org/plugins/debug-bar/)

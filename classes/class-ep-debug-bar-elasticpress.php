@@ -57,6 +57,11 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 	 * Show the contents of the panel
 	 */
 	public function render() {
+		if ( ! function_exists( 'ep_get_query_log' ) ) {
+			esc_html_e( 'ElasticPress not activated or not at least version 1.8.', 'debug-bar' );
+			return;
+		}
+
 		$queries = ep_get_query_log();
 		$total_query_time = 0;
 

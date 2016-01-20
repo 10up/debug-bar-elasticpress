@@ -5,7 +5,7 @@
 
 		if ( queries.length > 0 ) {
 			queries = queries[0];
-			
+
 			queries.addEventListener( 'click', function( event ) {
 				var queryWrapper = event.target;
 
@@ -34,9 +34,8 @@
 						queryWrapper = queryWrapper.parentNode;
 					}
 				}
-			}
-
-		} );
+			} );
+		}
 	} );
 
 })( jQuery );
