@@ -20,3 +20,8 @@
 .ep-queries-debug .hide-query-body .query-body-toggle:before {
 	content: "\f142";
 }
+
+.ep-queries-debug .ep-query-failed .ep-query-response-code {
+	font-weight: bold;
+	color: red;
+}
