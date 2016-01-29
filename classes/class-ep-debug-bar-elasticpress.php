@@ -74,14 +74,17 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 		?>
 
 		<h2><?php printf( __( '<span>Total ElasticPress Queries:</span> %d', 'debug-bar' ), count( $queries ) ); ?></h2>
-		<h2><?php printf( __( '<span>Total Blocking ElasticPress Query Time:</span> %d ms', 'debug-bar' ), (int) ( $total_query_time * 1000 ) ); ?></h2>
+		<h2><?php printf( __( '<span>Total Blocking ElasticPress Query Time:</span> %d ms', 'debug-bar' ), (int) ( $total_query_time * 1000 ) ); ?></h2><?php
 
-		<?php if ( empty( $queries ) ) : ?>
-			<ol class="wpd-queries">
+		if ( empty( $queries ) ) :
+
+			?><ol class="wpd-queries">
 				<li><?php esc_html_e( 'No queries to show', 'debug-bar' ); ?></li>
-			</ol>
-		<?php else : ?>
-			<ol class="wpd-queries ep-queries-debug">
+			</ol><?php
+
+		else :
+
+			?><ol class="wpd-queries ep-queries-debug">
 				<?php foreach ( $queries as $query ) :
 					$query_time = ( ! empty( $query['time_start'] ) && ! empty( $query['time_finish'] ) ) ? $query['time_finish'] - $query['time_start'] : false;
 					$response = wp_remote_retrieve_response_code( $query['request'] );
@@ -99,17 +102,17 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 						<?php endif; ?>
 						<strong><?php esc_html_e( 'URL:', 'debug-bar' ); ?></strong> <?php echo esc_url( $query['url'] ); ?><br>
 						<strong><?php esc_html_e( 'Method:', 'debug-bar' ); ?></strong> <?php echo esc_html( $query['args']['method'] ); ?><br>
-						<strong><?php esc_html_e( 'Query Body:', 'debug-bar' ); ?> <div class="query-body-toggle dashicons"></div></strong> <pre class="query-body"><?php echo json_encode( json_decode( $query['args']['body'], true ), JSON_PRETTY_PRINT ); ?></pre><br>
+						<strong><?php esc_html_e( 'Query Body:', 'debug-bar' ); ?> <div class="query-body-toggle dashicons"></div></strong> <pre class="query-body"><?php echo esc_html( stripslashes( json_encode( json_decode( $query['args']['body'], true ), JSON_PRETTY_PRINT ) ) ); ?></pre><br>
 						<?php printf( __( '<strong>Query Response Code:</strong> HTTP %d', 'debug-bar' ), (int) $response ); ?><br>
 						<?php if ( 200 <= $response && $response < 300 ) : ?>
-							<strong><?php esc_html_e( 'Query Result:', 'debug-bar' ); ?> <div class="query-result-toggle dashicons"></div></strong> <pre class="query-results"><?php echo json_encode( json_decode( $result, true ), JSON_PRETTY_PRINT ); ?></pre><br>
+							<strong><?php esc_html_e( 'Query Result:', 'debug-bar' ); ?> <div class="query-result-toggle dashicons"></div></strong> <pre class="query-results"><?php echo esc_html( stripslashes( json_encode( json_decode( $result, true ), JSON_PRETTY_PRINT ) ) ); ?></pre><br>
 						<?php endif; ?>
 
 					</li>
 				<?php endforeach; ?>
-			</ol>
-		<?php endif; ?>
+			</ol><?php
 
-		<?php
+		endif;
 	}
+
 }

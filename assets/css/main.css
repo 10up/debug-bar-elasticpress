@@ -11,6 +11,11 @@
 	display: none;
 }
 
+.ep-queries-debug .query-body,
+.ep-queries-debug .query-results {
+	background-color: white;
+}
+
 .ep-queries-debug .hide-query-results .query-result-toggle:before,
 .ep-queries-debug .hide-query-body .query-body-toggle:before {
 	content: "\f142";
