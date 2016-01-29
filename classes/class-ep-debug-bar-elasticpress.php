@@ -84,33 +84,58 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 
 		else :
 
-			?><ol class="wpd-queries ep-queries-debug">
-				<?php foreach ( $queries as $query ) :
+			?><ol class="wpd-queries ep-queries-debug"><?php
+
+				foreach ( $queries as $query ) :
 					$query_time = ( ! empty( $query['time_start'] ) && ! empty( $query['time_finish'] ) ) ? $query['time_finish'] - $query['time_start'] : false;
+
+					$result = wp_remote_retrieve_body( $query['request'] );
 					$response = wp_remote_retrieve_response_code( $query['request'] );
 
-					if ( $response >= 200 && $response < 300 ) {
-						$result = wp_remote_retrieve_body( $query['request'] );
-					}
-					?>
-					<li class="ep-query-debug hide-query-body hide-query-results">
-						<strong><?php esc_html_e( 'Host:', 'debug-bar' ); ?></strong> <?php echo esc_html( $query['host'] ); ?><br>
-						<?php if ( ! empty( $query_time ) ) : ?>
-							<?php printf( __( '<strong>Time Taken:</strong> %d ms', 'debug-bar' ), ( $query_time * 1000 ) ); ?><br>
-						<?php else : ?>
-							<?php _e( '<strong>Time Taken:</strong> -', 'debug-bar' ); ?><br>
-						<?php endif; ?>
-						<strong><?php esc_html_e( 'URL:', 'debug-bar' ); ?></strong> <?php echo esc_url( $query['url'] ); ?><br>
-						<strong><?php esc_html_e( 'Method:', 'debug-bar' ); ?></strong> <?php echo esc_html( $query['args']['method'] ); ?><br>
-						<strong><?php esc_html_e( 'Query Body:', 'debug-bar' ); ?> <div class="query-body-toggle dashicons"></div></strong> <pre class="query-body"><?php echo esc_html( stripslashes( json_encode( json_decode( $query['args']['body'], true ), JSON_PRETTY_PRINT ) ) ); ?></pre><br>
-						<?php printf( __( '<strong>Query Response Code:</strong> HTTP %d', 'debug-bar' ), (int) $response ); ?><br>
-						<?php if ( 200 <= $response && $response < 300 ) : ?>
-							<strong><?php esc_html_e( 'Query Result:', 'debug-bar' ); ?> <div class="query-result-toggle dashicons"></div></strong> <pre class="query-results"><?php echo esc_html( stripslashes( json_encode( json_decode( $result, true ), JSON_PRETTY_PRINT ) ) ); ?></pre><br>
-						<?php endif; ?>
+					$class = $response < 200 || $response >= 300 ? 'ep-query-failed' : '';
 
-					</li>
-				<?php endforeach; ?>
-			</ol><?php
+					?><li class="ep-query-debug hide-query-body hide-query-results <?php echo sanitize_html_class( $class ); ?>">
+						<div class="ep-query-host">
+							<strong><?php esc_html_e( 'Host:', 'debug-bar' ); ?></strong>
+							<?php echo esc_html( $query['host'] ); ?>
+						</div>
+
+						<div class="ep-query-time"><?php
+							if ( ! empty( $query_time ) ) :
+								printf( __( '<strong>Time Taken:</strong> %d ms', 'debug-bar' ), ( $query_time * 1000 ) );
+							else :
+								_e( '<strong>Time Taken:</strong> -', 'debug-bar' );
+							endif;
+						?></div>
+
+						<div class="ep-query-url">
+							<strong><?php esc_html_e( 'URL:', 'debug-bar' ); ?></strong>
+							<?php echo esc_url( $query['url'] ); ?>
+						</div>
+
+						<div class="ep-query-method">
+							<strong><?php esc_html_e( 'Method:', 'debug-bar' ); ?></strong>
+							<?php echo esc_html( $query['args']['method'] ); ?>
+						</div>
+
+						<div clsas="ep-query-body">
+							<strong><?php esc_html_e( 'Query Body:', 'debug-bar' ); ?> <div class="query-body-toggle dashicons"></div></strong>
+							<pre class="query-body"><?php echo esc_html( stripslashes( json_encode( json_decode( $query['args']['body'], true ), JSON_PRETTY_PRINT ) ) ); ?></pre>
+						</div>
+
+						<div class="ep-query-response-code">
+							<?php printf( __( '<strong>Query Response Code:</strong> HTTP %d', 'debug-bar' ), (int) $response ); ?>
+						</div>
+
+						<div class="ep-query-result">
+							<strong><?php esc_html_e( 'Query Result:', 'debug-bar' ); ?> <div class="query-result-toggle dashicons"></div></strong>
+							<pre class="query-results"><?php echo esc_html( stripslashes( json_encode( json_decode( $result, true ), JSON_PRETTY_PRINT ) ) ); ?></pre>
+						</div>
+					</li><?php
+					
+				endforeach;
+
+			?></ol><?php
 
 		endif;
 	}
