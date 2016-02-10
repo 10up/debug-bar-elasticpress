@@ -62,6 +62,11 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 			return;
 		}
 
+		if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+			esc_html_e( 'Please enable WP_DEBUG to start logging ElasticPress queries.', 'debug-bar' );
+			return;
+		}
+
 		$queries = ep_get_query_log();
 		$total_query_time = 0;
 
@@ -132,7 +137,7 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 							<pre class="query-results"><?php echo esc_html( stripslashes( json_encode( json_decode( $result, true ), JSON_PRETTY_PRINT ) ) ); ?></pre>
 						</div>
 					</li><?php
-					
+
 				endforeach;
 
 			?></ol><?php
