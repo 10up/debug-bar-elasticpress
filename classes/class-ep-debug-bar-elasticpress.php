@@ -26,8 +26,8 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 	 * Enqueue scripts for front end and admin
 	 */
 	public function enqueue_scripts_styles() {
-		wp_enqueue_script( 'debug-bar-elasticpress', plugins_url( '../assets/js/main.js' , __FILE__ ), array( 'jquery' ), '1.0', true );
-		wp_enqueue_style( 'debug-bar-elasticpress', plugins_url( '../assets/css/main.css' , __FILE__ ), array(), '1.0' );
+		wp_enqueue_script( 'debug-bar-elasticpress', plugins_url( '../assets/js/main.js' , __FILE__ ), array( 'jquery' ), EP_DEBUG_VERSION, true );
+		wp_enqueue_style( 'debug-bar-elasticpress', plugins_url( '../assets/css/main.css' , __FILE__ ), array(), EP_DEBUG_VERSION );
 	}
 
 	/**
@@ -94,7 +94,7 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 
 					$class = $response < 200 || $response >= 300 ? 'ep-query-failed' : '';
 
-					?><li class="ep-query-debug hide-query-body hide-query-results <?php echo sanitize_html_class( $class ); ?>">
+					?><li class="ep-query-debug hide-query-body hide-query-results hide-query-args <?php echo sanitize_html_class( $class ); ?>">
 						<div class="ep-query-host">
 							<strong><?php esc_html_e( 'Host:', 'debug-bar' ); ?></strong>
 							<?php echo esc_html( $query['host'] ); ?>
@@ -117,6 +117,13 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 							<strong><?php esc_html_e( 'Method:', 'debug-bar' ); ?></strong>
 							<?php echo esc_html( $query['args']['method'] ); ?>
 						</div>
+
+						<?php if ( ! empty( $query['query_args'] ) ) : ?>
+							<div clsas="ep-query-args">
+								<strong><?php esc_html_e( 'Query Args:', 'debug-bar' ); ?> <div class="query-args-toggle dashicons"></div></strong>
+								<pre class="query-args"><?php echo var_dump( $query['query_args'] ); ?></pre>
+							</div>
+						<?php endif; ?>
 
 						<div clsas="ep-query-body">
 							<strong><?php esc_html_e( 'Query Body:', 'debug-bar' ); ?> <div class="query-body-toggle dashicons"></div></strong>

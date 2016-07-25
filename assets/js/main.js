@@ -29,6 +29,14 @@
 							}
 						}
 
+						if ( event.target.className.match( /query-args-toggle/i ) ) {
+							if ( queryWrapper.className.match( /hide-query-args/i ) ) {
+								queryWrapper.className = queryWrapper.className.replace( /hide-query-args/i, '' );
+							} else {
+								queryWrapper.className += ' hide-query-args';
+							}
+						}
+
 						break;
 					} else {
 						queryWrapper = queryWrapper.parentNode;

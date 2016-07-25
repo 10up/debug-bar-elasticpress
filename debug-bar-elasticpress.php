@@ -4,9 +4,11 @@
  Plugin URI: http://wordpress.org/plugins/debug-bar-elasticpress
  Description: Extends the debug bar plugin for ElasticPress queries.
  Author: 10up
- Version: 1.0
+ Version: 1.1
  Author URI: http://10up.com
  */
+
+define( 'EP_DEBUG_VERSION', '1.1' );
 
 /**
  * Register panel
