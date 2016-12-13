@@ -125,10 +125,12 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 							</div>
 						<?php endif; ?>
 
-						<div clsas="ep-query-body">
-							<strong><?php esc_html_e( 'Query Body:', 'debug-bar' ); ?> <div class="query-body-toggle dashicons"></div></strong>
-							<pre class="query-body"><?php echo esc_html( stripslashes( json_encode( json_decode( $query['args']['body'], true ), JSON_PRETTY_PRINT ) ) ); ?></pre>
-						</div>
+						<?php if ( ! empty( $query['args']['body'] ) ) : ?>
+							<div clsas="ep-query-body">
+								<strong><?php esc_html_e( 'Query Body:', 'debug-bar' ); ?> <div class="query-body-toggle dashicons"></div></strong>
+								<pre class="query-body"><?php echo esc_html( stripslashes( json_encode( json_decode( $query['args']['body'], true ), JSON_PRETTY_PRINT ) ) ); ?></pre>
+							</div>
+						<?php endif; ?>
 
 						<div class="ep-query-response-code">
 							<?php printf( __( '<strong>Query Response Code:</strong> HTTP %d', 'debug-bar' ), (int) $response ); ?>
