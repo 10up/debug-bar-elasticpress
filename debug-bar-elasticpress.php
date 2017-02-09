@@ -32,7 +32,9 @@ add_filter( 'debug_bar_panels', 'ep_add_debug_bar_panel' );
  * @return array
  */
 function ep_add_explain_args( $formatted_args, $args ) {
-	$formatted_args['explain'] = true;
+	if( isset( $_GET['explain'] ) ){
+		$formatted_args['explain'] = true;
+	}
 	return $formatted_args;
 }
 add_filter( 'ep_formatted_args', 'ep_add_explain_args', 10, 2 );
