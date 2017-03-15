@@ -24,6 +24,10 @@ Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to the 
 
 == Changelog ==
 
+= 1.2 =
+* Show query errors (i.e. cURL timeout)
+* Add ?explain to query if GET param is set
+
 = 1.1.1 =
 * Only show query body if it exits
 
