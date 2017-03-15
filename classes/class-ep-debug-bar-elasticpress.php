@@ -94,7 +94,7 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 
 					$class = $response < 200 || $response >= 300 ? 'ep-query-failed' : '';
 
-					?><li class="ep-query-debug hide-query-body hide-query-results hide-query-args <?php echo sanitize_html_class( $class ); ?>">
+					?><li class="ep-query-debug hide-query-body hide-query-results hide-query-errors hide-query-args <?php echo sanitize_html_class( $class ); ?>">
 						<div class="ep-query-host">
 							<strong><?php esc_html_e( 'Host:', 'debug-bar' ); ?></strong>
 							<?php echo esc_html( $query['host'] ); ?>
@@ -132,14 +132,25 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 							</div>
 						<?php endif; ?>
 
-						<div class="ep-query-response-code">
-							<?php printf( __( '<strong>Query Response Code:</strong> HTTP %d', 'debug-bar' ), (int) $response ); ?>
-						</div>
+						<?php if ( ! is_wp_error( $query['request'] ) ) : ?>
 
-						<div class="ep-query-result">
-							<strong><?php esc_html_e( 'Query Result:', 'debug-bar' ); ?> <div class="query-result-toggle dashicons"></div></strong>
-							<pre class="query-results"><?php echo esc_html( stripslashes( json_encode( json_decode( $result, true ), JSON_PRETTY_PRINT ) ) ); ?></pre>
-						</div>
+							<div class="ep-query-response-code">
+								<?php printf( __( '<strong>Query Response Code:</strong> HTTP %d', 'debug-bar' ), (int) $response ); ?>
+							</div>
+
+							<div class="ep-query-result">
+								<strong><?php esc_html_e( 'Query Result:', 'debug-bar' ); ?> <div class="query-result-toggle dashicons"></div></strong>
+								<pre class="query-results"><?php echo esc_html( stripslashes( json_encode( json_decode( $result, true ), JSON_PRETTY_PRINT ) ) ); ?></pre>
+							</div>
+						<?php else : ?>
+							<div class="ep-query-response-code">
+								<strong><?php esc_html_e( 'Query Response Code:', 'debug-bar' ); ?></strong> <?php esc_html_e( 'Request Error', 'debug-bar' ); ?>
+							</div>
+							<div clsas="ep-query-errors">
+								<strong><?php esc_html_e( 'Errors:', 'debug-bar' ); ?> <div class="query-errors-toggle dashicons"></div></strong>
+								<pre class="query-errors"><?php echo esc_html( stripslashes( json_encode( $query['request']->errors, JSON_PRETTY_PRINT ) ) ); ?></pre>
+							</div>
+						<?php endif; ?>
 					</li><?php
 					
 				endforeach;
