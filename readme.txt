@@ -5,11 +5,11 @@ Requires at least: 3.7.1
 Tested up to: 4.8
 Stable tag: trunk
 
-Extends the Debug Bar plugin for ElasticPress queries.
+Extends the Debug Bar plugin for ElasticPress queries. Also includes a troubleshooting feature for support.
 
 == Description ==
 
-Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to the [Debug Bar](https://wordpress.org/plugins/debug-bar/) plugin. Allows you to examine every ElasticPress query running on any given request.
+Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to the [Debug Bar](https://wordpress.org/plugins/debug-bar/) plugin. Allows you to examine every ElasticPress query running on any given request. Also provides ability to export a JSON file for troubleshooting issues with ElasticPress.
 
 = Requirements: =
 
@@ -23,6 +23,9 @@ Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to the 
 3. Install the plugin in WordPress.
 
 == Changelog ==
+
+= 1.3 =
+* Incorporated troubleshooting file export (Tools->EP Troubleshooting).
 
 = 1.2 =
 * Show query errors (i.e. cURL timeout)
