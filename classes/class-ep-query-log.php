@@ -120,7 +120,6 @@ class EP_Debug_Bar_Query_Log {
 			'put_mapping'          => array( $this, 'is_query_error' ),
 			'delete_network_alias' => array( $this, 'is_query_error' ),
 			'create_network_alias' => array( $this, 'is_query_error' ),
-			'query'                => array( $this, 'is_query_error' ),
 			'delete_index'         => array( $this, 'maybe_log_delete_index' ),
 		), $query, $type );
 
