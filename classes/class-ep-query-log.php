@@ -75,7 +75,7 @@ class EP_Debug_Bar_Query_Log {
 	public function maybe_log_delete_index( $query ) {
 		$response_code = wp_remote_retrieve_response_code( $query['request'] );
 
-		return ( 404 !== $response_code );
+		return ( ( $response_code < 200 || $response_code > 299 ) && 404 !== $response_code );
 	}
 
 	/**
