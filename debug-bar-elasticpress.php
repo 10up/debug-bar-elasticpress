@@ -43,6 +43,8 @@ require_once( dirname( __FILE__ ) . '/classes/class-ep-query-log.php' );
 
 /**
  * Set up error log
+ *
+ * @since  1.3
  */
 function ep_setup_query_log() {
 	EP_Debug_Bar_Query_Log::factory();
