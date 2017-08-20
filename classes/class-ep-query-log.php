@@ -120,7 +120,10 @@ class EP_Debug_Bar_Query_Log {
 			'put_mapping'          => array( $this, 'is_query_error' ),
 			'delete_network_alias' => array( $this, 'is_query_error' ),
 			'create_network_alias' => array( $this, 'is_query_error' ),
+			'bulk_index_posts'     => array( $this, 'is_query_error' ),
 			'delete_index'         => array( $this, 'maybe_log_delete_index' ),
+			'create_pipeline'      => array( $this, 'is_query_error' ),
+			'get_pipeline'         => array( $this, 'is_query_error' ),
 		), $query, $type );
 
 		if ( isset( $allowed_log_types[ $type ] ) ) {
