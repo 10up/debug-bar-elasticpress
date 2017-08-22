@@ -124,6 +124,7 @@ class EP_Debug_Bar_Query_Log {
 			'delete_index'         => array( $this, 'maybe_log_delete_index' ),
 			'create_pipeline'      => array( $this, 'is_query_error' ),
 			'get_pipeline'         => array( $this, 'is_query_error' ),
+			'query'                => array( $this, 'is_query_error' ),
 		), $query, $type );
 
 		if ( isset( $allowed_log_types[ $type ] ) ) {
