@@ -86,6 +86,10 @@ class EP_Debug_Bar_Query_Log {
 	 * @return bool
 	 */
 	public function is_query_error( $query ) {
+		if ( is_wp_error( $query['request'] ) ) {
+			return true;
+		}
+		
 		$response_code = wp_remote_retrieve_response_code( $query['request'] );
 
 		return ( $response_code < 200 || $response_code > 299 );
