@@ -18,7 +18,7 @@ define( 'EP_DEBUG_VERSION', '1.3' );
  */
 function ep_add_debug_bar_panel( $panels ) {
 	require_once( dirname( __FILE__ ) . '/classes/class-ep-debug-bar-elasticpress.php' );
-	$panels[] = EP_Debug_Bar_ElasticPress::factory();
+	$panels[] = new EP_Debug_Bar_ElasticPress();
 	return $panels;
 }
 

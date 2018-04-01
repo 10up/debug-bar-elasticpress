@@ -8,14 +8,9 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 	public $title;
 
 	/**
-	 * Dummy construct method
-	 */
-	public function __construct() { }
-
-	/**
 	 * Initial debug bar stuff
 	 */
-	public function setup() {
+	public function init() {
 		$this->title( esc_html__( 'ElasticPress', 'debug-bar' ) );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts_styles' ) );
@@ -28,22 +23,6 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 	public function enqueue_scripts_styles() {
 		wp_enqueue_script( 'debug-bar-elasticpress', plugins_url( '../assets/js/main.js' , __FILE__ ), array( 'jquery' ), EP_DEBUG_VERSION, true );
 		wp_enqueue_style( 'debug-bar-elasticpress', plugins_url( '../assets/css/main.css' , __FILE__ ), array(), EP_DEBUG_VERSION );
-	}
-
-	/**
-	 * Get class instance
-	 *
-	 * @return object
-	 */
-	public static function factory() {
-		static $instance;
-
-		if ( empty( $instance ) ) {
-			$instance = new self();
-			$instance->setup();
-		}
-
-		return $instance;
 	}
 
 	/**
