@@ -36,12 +36,16 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 	 * Show the contents of the panel
 	 */
 	public function render() {
-		if ( ! function_exists( 'ep_get_query_log' ) ) {
+		if ( ! function_exists( 'ep_get_query_log' ) && ( ! class_exists( 'ElasticPress\\Elasticsearch' ) ) ) {
 			esc_html_e( 'ElasticPress not activated or not at least version 1.8.', 'debug-bar' );
+
 			return;
 		}
-
-		$queries = ep_get_query_log();
+		if ( ! class_exists( 'ElasticPress\\Elasticsearch' ) ) {
+			$queries = ep_get_query_log();
+		} else {
+			$queries = \ElasticPress\Elasticsearch::factory()->get_query_log();
+		}
 		$total_query_time = 0;
 
 		foreach ( $queries as $query ) {
