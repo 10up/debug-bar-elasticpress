@@ -173,7 +173,9 @@ class EP_Debug_Bar_Query_Log {
 			$enabled = get_option( 'ep_enable_logging' );
 		}
 
-		$log = array_reverse( $log );
+		if ( is_array( $log ) ) {
+			$log = array_reverse( $log );
+		}
 
 		$action = 'options.php';
 
