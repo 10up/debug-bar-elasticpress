@@ -91,7 +91,7 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 					}
 
 					if ( ! empty( $query['args']['body'] ) ) {
-						$curl_request .= " -d '" . $query['args']['body'] . "'";
+						$curl_request .= " -d '" . json_encode( json_decode( $query['args']['body'], true ) ) . "'";
 					}
 
 					$curl_request .= " '" . $query['url'] . "'";

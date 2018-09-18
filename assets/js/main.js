@@ -55,7 +55,7 @@
 
 						break;
 					} else if ( 'A' === queryWrapper.nodeName && queryWrapper.classList.contains( 'copy-curl' ) ) {
-						navigator.clipboard.writeText( queryWrapper.getAttribute( 'data-request' ) );
+						navigator.clipboard.writeText( queryWrapper.getAttribute( 'data-request' ).replace(/\\"/g, '"') );
 						break;
 					} else {
 						queryWrapper = queryWrapper.parentNode;

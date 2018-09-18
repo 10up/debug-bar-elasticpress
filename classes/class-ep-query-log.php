@@ -238,7 +238,7 @@ class EP_Debug_Bar_Query_Log {
 						}
 
 						if ( ! empty( $query['query']['args']['body'] ) ) {
-							$curl_request .= " -d '" . $log_entry['query']['args']['body'] . "'";
+							$curl_request .= " -d '" . json_encode( json_decode( $log_entry['query']['args']['body'], true ) ) . "'";
 						}
 
 						$curl_request .= " '" . $log_entry['query']['url'] . "'";
