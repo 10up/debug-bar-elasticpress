@@ -229,7 +229,7 @@ class EP_Debug_Bar_Query_Log {
 
 						$class = $response < 200 || $response >= 300 ? 'ep-query-failed' : '';
 
-						?><li class="ep-query-debug hide-query-body hide-query-results hide-query-errors hide-query-args <?php echo sanitize_html_class( $class ); ?>">
+						?><li class="ep-query-debug hide-query-body hide-query-results hide-query-errors hide-query-args hide-query-headers <?php echo sanitize_html_class( $class ); ?>">
 							<div class="ep-query-type">
 								<strong><?php esc_html_e( 'Type:', 'debug-bar' ); ?></strong>
 								<?php echo esc_html( $log_entry['type'] ); ?>
@@ -256,6 +256,13 @@ class EP_Debug_Bar_Query_Log {
 								<strong><?php esc_html_e( 'Method:', 'debug-bar' ); ?></strong>
 								<?php echo esc_html( $log_entry['query']['args']['method'] ); ?>
 							</div>
+
+							<?php if ( ! empty( $log_entry['query']['args']['headers'] ) ) : ?>
+								<div clsas="ep-query-headers">
+									<strong><?php esc_html_e( 'Headers:', 'debug-bar' ); ?> <div class="query-headers-toggle dashicons"></div></strong>
+									<pre class="query-headers"><?php echo var_dump( $log_entry['query']['args']['headers'] ); ?></pre>
+								</div>
+							<?php endif; ?>
 
 							<?php if ( ! empty( $log_entry['query']['query_args'] ) ) : ?>
 								<div class="ep-query-args">
