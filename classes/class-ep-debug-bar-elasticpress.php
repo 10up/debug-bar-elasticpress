@@ -51,7 +51,6 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 				return;
 			}
 		}
-
 		$total_query_time = 0;
 
 		foreach ( $queries as $query ) {
