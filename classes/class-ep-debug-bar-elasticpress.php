@@ -36,12 +36,22 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 	 * Show the contents of the panel
 	 */
 	public function render() {
-		if ( ! function_exists( 'ep_get_query_log' ) ) {
-			esc_html_e( 'ElasticPress not activated or not at least version 1.8.', 'debug-bar' );
+		if ( ! defined( 'EP_VERSION' ) ) {
+			esc_html_e( 'ElasticPress not activated.', 'debug-bar' );
 			return;
 		}
 
-		$queries = ep_get_query_log();
+		if ( function_exists( 'ep_get_query_log' ) ) {
+			$queries = ep_get_query_log();
+		} else {
+			if ( class_exists( '\ElasticPress\Elasticsearch' ) ) {
+				$queries = \ElasticPress\Elasticsearch::factory()->get_query_log();
+			} else {
+				esc_html_e( 'ElasticPress not at least version 1.8.', 'debug-bar' );
+				return;
+			}
+		}
+
 		$total_query_time = 0;
 
 		foreach ( $queries as $query ) {
@@ -73,7 +83,7 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 
 					$class = $response < 200 || $response >= 300 ? 'ep-query-failed' : '';
 
-					?><li class="ep-query-debug hide-query-body hide-query-results hide-query-errors hide-query-args <?php echo sanitize_html_class( $class ); ?>">
+					?><li class="ep-query-debug hide-query-body hide-query-results hide-query-errors hide-query-args hide-query-headers <?php echo sanitize_html_class( $class ); ?>">
 						<div class="ep-query-host">
 							<strong><?php esc_html_e( 'Host:', 'debug-bar' ); ?></strong>
 							<?php echo esc_html( $query['host'] ); ?>
@@ -96,6 +106,13 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 							<strong><?php esc_html_e( 'Method:', 'debug-bar' ); ?></strong>
 							<?php echo esc_html( $query['args']['method'] ); ?>
 						</div>
+
+						<?php if ( ! empty( $query['args']['headers'] ) ) : ?>
+							<div clsas="ep-query-headers">
+								<strong><?php esc_html_e( 'Headers:', 'debug-bar' ); ?> <div class="query-headers-toggle dashicons"></div></strong>
+								<pre class="query-headers"><?php echo var_dump( $query['args']['headers'] ); ?></pre>
+							</div>
+						<?php endif; ?>
 
 						<?php if ( ! empty( $query['query_args'] ) ) : ?>
 							<div clsas="ep-query-args">

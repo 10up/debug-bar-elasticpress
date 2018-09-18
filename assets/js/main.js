@@ -37,6 +37,14 @@
 							}
 						}
 
+						if ( event.target.className.match( /query-headers-toggle/i ) ) {
+							if ( queryWrapper.className.match( /hide-query-headers/i ) ) {
+								queryWrapper.className = queryWrapper.className.replace( /hide-query-headers/i, '' );
+							} else {
+								queryWrapper.className += ' hide-query-headers';
+							}
+						}
+
 						if ( event.target.className.match( /query-errors-toggle/i ) ) {
 							if ( queryWrapper.className.match( /hide-query-errors/i ) ) {
 								queryWrapper.className = queryWrapper.className.replace( /hide-query-errors/i, '' );
