@@ -16,5 +16,5 @@
   "require": {
     "php": ">=5.2"
   },
-  "license": "GPLv2"
+  "license": ["GPL-2.0-only"]
 }
