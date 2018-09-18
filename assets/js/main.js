@@ -54,6 +54,9 @@
 						}
 
 						break;
+					} else if ( 'A' === queryWrapper.nodeName && queryWrapper.classList.contains( 'copy-curl' ) ) {
+						navigator.clipboard.writeText( queryWrapper.getAttribute( 'data-request' ) );
+						break;
 					} else {
 						queryWrapper = queryWrapper.parentNode;
 					}

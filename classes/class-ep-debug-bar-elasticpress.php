@@ -82,6 +82,20 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 
 					$class = $response < 200 || $response >= 300 ? 'ep-query-failed' : '';
 
+					$curl_request = 'curl -X' . strtoupper( $query['args']['method'] );
+
+					if ( ! empty( $query['args']['headers'] ) ) {
+						foreach ( $query['args']['headers'] as $key => $value ) {
+							$curl_request .= " -H '$key: $value'";
+						}
+					}
+
+					if ( ! empty( $query['args']['body'] ) ) {
+						$curl_request .= " -d '" . $query['args']['body'] . "'";
+					}
+
+					$curl_request .= " '" . $query['url'] . "'";
+
 					?><li class="ep-query-debug hide-query-body hide-query-results hide-query-errors hide-query-args hide-query-headers <?php echo sanitize_html_class( $class ); ?>">
 						<div class="ep-query-host">
 							<strong><?php esc_html_e( 'Host:', 'debug-bar' ); ?></strong>
@@ -146,6 +160,7 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 								<pre class="query-errors"><?php echo esc_html( stripslashes( json_encode( $query['request']->errors, JSON_PRETTY_PRINT ) ) ); ?></pre>
 							</div>
 						<?php endif; ?>
+						<a class="copy-curl" data-request="<?php echo esc_attr( addcslashes( $curl_request, '"' ) ); ?>">Copy cURL Request</a>
 					</li><?php
 					
 				endforeach;

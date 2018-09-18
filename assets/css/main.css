@@ -34,3 +34,8 @@
 	font-weight: bold;
 	color: red;
 }
+
+
+.ep-queries-debug .copy-curl {
+	cursor: pointer;
+}
