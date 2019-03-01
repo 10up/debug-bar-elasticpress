@@ -2,7 +2,7 @@
 Contributors: tlovett1, 10up
 Tags: debug, debug bar, elasticpress, elasticsearch
 Requires at least: 3.7.1
-Tested up to: 4.9
+Tested up to: 5.1
 Stable tag: trunk
 
 Extends the Debug Bar plugin for ElasticPress queries.
@@ -23,6 +23,9 @@ Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to the 
 3. Install the plugin in WordPress.
 
 == Changelog ==
+
+= 1.4 =
+* Support ElasticPress 3.0+
 
 = 1.3 =
 * Add query log

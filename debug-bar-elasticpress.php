@@ -4,11 +4,11 @@
  Plugin URI: http://wordpress.org/plugins/debug-bar-elasticpress
  Description: Extends the debug bar plugin for ElasticPress queries.
  Author: 10up
- Version: 1.3
+ Version: 1.4
  Author URI: http://10up.com
  */
 
-define( 'EP_DEBUG_VERSION', '1.3' );
+define( 'EP_DEBUG_VERSION', '1.4' );
 
 /**
  * Register panel
@@ -17,7 +17,7 @@ define( 'EP_DEBUG_VERSION', '1.3' );
  * @return array
  */
 function ep_add_debug_bar_panel( $panels ) {
-	require_once( dirname( __FILE__ ) . '/classes/class-ep-debug-bar-elasticpress.php' );
+	require_once( __DIR__ . '/classes/class-ep-debug-bar-elasticpress.php' );
 	$panels[] = new EP_Debug_Bar_ElasticPress();
 	return $panels;
 }
@@ -39,7 +39,7 @@ function ep_add_explain_args( $formatted_args, $args ) {
 }
 add_filter( 'ep_formatted_args', 'ep_add_explain_args', 10, 2 );
 
-require_once( dirname( __FILE__ ) . '/classes/class-ep-query-log.php' );
+require_once( __DIR__ . '/classes/class-ep-query-log.php' );
 
 /**
  * Set up error log
