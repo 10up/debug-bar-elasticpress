@@ -2,7 +2,7 @@
 
 > A WordPress plugin that adds a [Debug Bar](https://wordpress.org/plugins/debug-bar/) panel to examine ElasticPress queries.
 
-[![Support Level](https://img.shields.io/badge/support-stable-blue.svg)](#support-level) [![Release Version](https://img.shields.io/github/tag/10up/debug-bar-elasticpress.svg?label=release)](https://github.com/10up/debug-bar-elasticpress/releases/latest) ![WordPress tested up to version](https://img.shields.io/badge/WordPress-v5.1%20tested-success.svg)
+[![Support Level](https://img.shields.io/badge/support-active-green.svg)](#support-level) [![Release Version](https://img.shields.io/github/tag/10up/debug-bar-elasticpress.svg?label=release)](https://github.com/10up/debug-bar-elasticpress/releases/latest) ![WordPress tested up to version](https://img.shields.io/badge/WordPress-v5.1%20tested-success.svg)
 
 ## Requirements
 
@@ -20,7 +20,7 @@ If you identify any errors or have an idea for improving the plugin, please [ope
 
 ## Support Level
 
-**Stable:** 10up is not planning to develop any new features for this, but will still respond to bug reports and security concerns.  We welcome PRs, but any that include new features should be small and easy to integrate and should not include breaking changes.  We otherwise intend to keep this tested up to the most recent version of WordPress.
+**Active:** 10up is actively working on this, and we expect to continue work for the foreseeable future including keeping tested up to the most recent version of WordPress. Bug reports, feature requests, questions, and pull requests are welcome.
 
 ## License
 
