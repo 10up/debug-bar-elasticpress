@@ -3,7 +3,10 @@ Contributors: tlovett1, 10up
 Tags: debug, debug bar, elasticpress, elasticsearch
 Requires at least: 3.7.1
 Tested up to: 5.1
-Stable tag: trunk
+Requires PHP: 5.4
+Stable tag: 1.4
+License: GPLv2
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Extends the Debug Bar plugin for ElasticPress queries.
 
