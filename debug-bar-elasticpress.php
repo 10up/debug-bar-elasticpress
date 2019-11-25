@@ -6,6 +6,9 @@
  Author: 10up
  Version: 1.4
  Author URI: http://10up.com
+ Requires PHP: 5.4
+ License: GPLv2
+ License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
 define( 'EP_DEBUG_VERSION', '1.4' );
