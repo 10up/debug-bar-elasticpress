@@ -137,7 +137,7 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 						<?php if ( ! empty( $query['args']['body'] ) ) : ?>
 							<div clsas="ep-query-body">
 								<strong><?php esc_html_e( 'Query Body:', 'debug-bar' ); ?> <div class="query-body-toggle dashicons"></div></strong>
-								<pre class="query-body"><?php echo esc_html( stripslashes( json_encode( json_decode( $query['args']['body'], true ), JSON_PRETTY_PRINT ) ) ); ?></pre>
+								<pre class="query-body"><?php echo esc_html( json_encode( json_decode( $query['args']['body'], true ), JSON_PRETTY_PRINT ) ); ?></pre>
 							</div>
 						<?php endif; ?>
 
@@ -149,7 +149,7 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 
 							<div class="ep-query-result">
 								<strong><?php esc_html_e( 'Query Result:', 'debug-bar' ); ?> <div class="query-result-toggle dashicons"></div></strong>
-								<pre class="query-results"><?php echo esc_html( stripslashes( json_encode( json_decode( $result, true ), JSON_PRETTY_PRINT ) ) ); ?></pre>
+								<pre class="query-results"><?php echo esc_html( json_encode( json_decode( $result, true ), JSON_PRETTY_PRINT ) ); ?></pre>
 							</div>
 						<?php else : ?>
 							<div class="ep-query-response-code">
@@ -157,7 +157,7 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 							</div>
 							<div clsas="ep-query-errors">
 								<strong><?php esc_html_e( 'Errors:', 'debug-bar' ); ?> <div class="query-errors-toggle dashicons"></div></strong>
-								<pre class="query-errors"><?php echo esc_html( stripslashes( json_encode( $query['request']->errors, JSON_PRETTY_PRINT ) ) ); ?></pre>
+								<pre class="query-errors"><?php echo esc_html( json_encode( $query['request']->errors, JSON_PRETTY_PRINT ) ); ?></pre>
 							</div>
 						<?php endif; ?>
 						<a class="copy-curl" data-request="<?php echo esc_attr( addcslashes( $curl_request, '"' ) ); ?>">Copy cURL Request</a>
