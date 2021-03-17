@@ -30,6 +30,16 @@ class EP_Debug_Bar_Query_Log {
 		add_action( 'ep_remote_request', array( $this, 'log_query' ), 10, 2 );
 		add_action( 'admin_init', array( $this, 'action_admin_init' ) );
 		add_action( 'admin_init', array( $this, 'maybe_clear_log' ) );
+
+		/**
+		 * Handle query storage as JSON strings.
+		 *
+		 * @see json_encode_query_log()
+		 */
+		add_filter( 'pre_update_site_option_ep_query_log', array( $this, 'json_encode_query_log' ) );
+		add_filter( 'pre_update_option_ep_query_log', array( $this, 'json_encode_query_log' ) );
+		add_filter( 'option_ep_query_log', array( $this, 'json_decode_query_log' ) );
+		add_filter( 'site_option_ep_query_log', array( $this, 'json_decode_query_log' ) );
 	}
 
 	/**
@@ -241,121 +251,10 @@ class EP_Debug_Bar_Query_Log {
 
 				<ol class="wpd-queries ep-queries-debug">
 				<?php
-				foreach ( $log as $log_entry ) :
-					$query_time = ( ! empty( $log_entry['query']['time_start'] ) && ! empty( $log_entry['query']['time_finish'] ) ) ? $log_entry['query']['time_finish'] - $log_entry['query']['time_start'] : false;
-
-					$result   = wp_remote_retrieve_body( $log_entry['query']['request'] );
-					$response = wp_remote_retrieve_response_code( $log_entry['query']['request'] );
-
-					$class = $response < 200 || $response >= 300 ? 'ep-query-failed' : '';
-
-					$curl_request = 'curl -X' . strtoupper( $log_entry['query']['args']['method'] );
-
-					if ( ! empty( $log_entry['query']['args']['headers'] ) ) {
-						foreach ( $log_entry['query']['args']['headers'] as $key => $value ) {
-							$curl_request .= " -H '$key: $value'";
-						}
-					}
-
-					if ( ! empty( $query['query']['args']['body'] ) ) {
-						$curl_request .= " -d '" . wp_json_encode( json_decode( $log_entry['query']['args']['body'], true ) ) . "'";
-					}
-
-					$curl_request .= " '" . $log_entry['query']['url'] . "'";
-
-					?>
-					<li class="ep-query-debug hide-query-body hide-query-results hide-query-errors hide-query-args hide-query-headers <?php echo sanitize_html_class( $class ); ?>">
-							<div class="ep-query-type">
-								<strong><?php esc_html_e( 'Type:', 'debug-bar-elasticpress' ); ?></strong>
-								<?php echo esc_html( $log_entry['type'] ); ?>
-							</div>
-							<div class="ep-query-host">
-								<strong><?php esc_html_e( 'Host:', 'debug-bar-elasticpress' ); ?></strong>
-								<?php echo esc_html( $log_entry['query']['host'] ); ?>
-							</div>
-
-							<div class="ep-query-time">
-							<?php
-							if ( ! empty( $query_time ) ) :
-								echo wp_kses_post(
-									/* translators: time spent running the query. */
-									sprintf( __( '<strong>Time Taken:</strong> %d ms', 'debug-bar-elasticpress' ), ( $query_time * 1000 ) )
-								);
-							else :
-								echo wp_kses_post(
-									__( '<strong>Time Taken:</strong> -', 'debug-bar-elasticpress' )
-								);
-							endif;
-							?>
-							</div>
-
-							<div class="ep-query-url">
-								<strong><?php esc_html_e( 'URL:', 'debug-bar-elasticpress' ); ?></strong>
-								<?php echo esc_url( $log_entry['query']['url'] ); ?>
-							</div>
-
-							<div class="ep-query-method">
-								<strong><?php esc_html_e( 'Method:', 'debug-bar-elasticpress' ); ?></strong>
-								<?php echo esc_html( $log_entry['query']['args']['method'] ); ?>
-							</div>
-
-							<?php if ( ! empty( $log_entry['query']['args']['headers'] ) ) : ?>
-								<div clsas="ep-query-headers">
-									<strong>
-										<?php esc_html_e( 'Headers:', 'debug-bar-elasticpress' ); ?>
-										<div class="query-headers-toggle dashicons"></div>
-									</strong>
-									<pre class="query-headers"><?php echo wp_kses_post( var_dump( $log_entry['query']['args']['headers'], true ) ); ?></pre>
-								</div>
-							<?php endif; ?>
-
-							<?php if ( ! empty( $log_entry['query']['query_args'] ) ) : ?>
-								<div class="ep-query-args">
-									<strong>
-										<?php esc_html_e( 'Query Args:', 'debug-bar-elasticpress' ); ?>
-										<div class="query-args-toggle dashicons"></div>
-									</strong>
-									<pre class="query-args"><?php echo wp_kses_post( var_dump( $log_entry['query']['query_args'], true ) ); ?></pre>
-								</div>
-							<?php endif; ?>
-
-							<?php if ( ! empty( $log_entry['query']['args']['body'] ) ) : ?>
-								<div class="ep-query-body">
-									<strong>
-										<?php esc_html_e( 'Query Body:', 'debug-bar-elasticpress' ); ?>
-										<div class="query-body-toggle dashicons"></div>
-									</strong>
-									<pre class="query-body"><?php echo esc_html( stripslashes( wp_json_encode( json_decode( $log_entry['query']['args']['body'], true ), JSON_PRETTY_PRINT ) ) ); ?></pre>
-								</div>
-							<?php endif; ?>
-
-							<?php if ( ! is_wp_error( $log_entry['query']['request'] ) ) : ?>
-
-								<div class="ep-query-response-code">
-									<?php
-									echo wp_kses_post(
-										/* translators: Query HTTP Code response */
-										sprintf( __( '<strong>Query Response Code:</strong> HTTP %d', 'debug-bar-elasticpress' ), (int) $response )
-									);
-									?>
-								</div>
-
-								<div class="ep-query-result">
-									<strong><?php esc_html_e( 'Query Result:', 'debug-bar-elasticpress' ); ?> <div class="query-result-toggle dashicons"></div></strong>
-									<pre class="query-results"><?php echo esc_html( stripslashes( wp_json_encode( json_decode( $result, true ), JSON_PRETTY_PRINT ) ) ); ?></pre>
-								</div>
-							<?php else : ?>
-								<div class="ep-query-response-code">
-									<strong><?php esc_html_e( 'Query Response Code:', 'debug-bar-elasticpress' ); ?></strong> <?php esc_html_e( 'Request Error', 'debug-bar-elasticpress' ); ?>
-								</div>
-								<div clsas="ep-query-errors">
-									<strong><?php esc_html_e( 'Errors:', 'debug-bar-elasticpress' ); ?> <div class="query-errors-toggle dashicons"></div></strong>
-									<pre class="query-errors"><?php echo esc_html( stripslashes( wp_json_encode( $log_entry['query']['request']->errors, JSON_PRETTY_PRINT ) ) ); ?></pre>
-								</div>
-							<?php endif; ?>
-							<a class="copy-curl" data-request="<?php echo esc_attr( addcslashes( $curl_request, '"' ) ); ?>">Copy cURL Request</a>
-						</li>
-				<?php endforeach; ?>
+				foreach ( $log as $log_entry ) {
+					EP_Debug_Bar_Query_Output::render_query( $log_entry['query'], $log_entry['type'] );
+				}
+				?>
 				</ol>
 			<?php endif; ?>
 		</div>
@@ -377,5 +276,27 @@ class EP_Debug_Bar_Query_Log {
 		}
 
 		return $instance;
+	}
+
+	/**
+	 * Store the queries as JSON objects.
+	 *
+	 * This is necessary because otherwise, WP will run it thought `maybe_unserialize()` and break it.
+	 *
+	 * @param mixed $value The ep_query_log option value.
+	 * @return string
+	 */
+	public function json_encode_query_log( $value ) {
+		return wp_json_encode( $value );
+	}
+
+	/**
+	 * Decode the queries back to an associative array.
+	 *
+	 * @param string $value A JSON string.
+	 * @return array
+	 */
+	public function json_decode_query_log( $value ) {
+		return json_decode( $value, true );
 	}
 }
