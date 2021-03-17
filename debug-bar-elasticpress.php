@@ -45,6 +45,7 @@ function ep_add_explain_args( $formatted_args, $args ) {
 add_filter( 'ep_formatted_args', 'ep_add_explain_args', 10, 2 );
 
 require_once __DIR__ . '/classes/class-ep-query-log.php';
+require_once __DIR__ . '/classes/class-ep-debug-bar-query-output.php';
 
 /**
  * Set up error log
