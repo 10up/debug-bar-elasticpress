@@ -29,7 +29,7 @@ The `develop` branch is the development branch which means it contains the next 
 ## Release instructions
 
 1. Branch: Starting from `develop`, cut a release branch named `release/X.Y.Z` for your changes.
-2. Version bump: Bump the version number in `debug-bar-elasticpress.php`, `package.json`, `readme.txt`, `README.md`, and any other relevant files if it does not already reflect the version being released.  In `debug-bar-elasticpress.php` update both the plugin "Version:" property and the plugin `EP_DEBUG_VERSION` constant. In `README.md` change the link of the "WordPress tested up to version" svg.
+2. Version bump: Bump the version number in `debug-bar-elasticpress.php`, `package.json`, `readme.txt`, `README.md`, and any other relevant files if it does not already reflect the version being released.  In `debug-bar-elasticpress.php` update both the plugin "Version:" property and the plugin `EP_DEBUG_VERSION` constant.
 3. Changelog: Add/update the changelog in `CHANGELOG.md` and `readme.txt`, ensuring to link the [X.Y.Z] release reference in the footer of `CHANGELOG.md` (e.g., https://github.com/10up/debug-bar-elasticpress/compare/X.Y.Z-1...X.Y.Z).
 4. Props: Update `CREDITS.md` file with any new contributors, confirm maintainers are accurate.
 5. Readme updates: Make any other readme changes as necessary.  `README.md` is geared toward GitHub and `readme.txt` contains WordPress.org-specific content.  The two are slightly different.
