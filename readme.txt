@@ -2,9 +2,9 @@
 Contributors: tlovett1, 10up
 Tags: debug, debug bar, elasticpress, elasticsearch
 Requires at least: 4.6
-Tested up to: 5.6
+Tested up to: 5.7
 Requires PHP: 5.4
-Stable tag: 1.4
+Stable tag: 2.0.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,8 +16,8 @@ Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to the 
 
 = Requirements: =
 
-* [ElasticPress 1.8+](https://wordpress.org/plugins/elasticpress)
-* [Debug Bar 0.8.2+](https://wordpress.org/plugins/debug-bar/)
+* [ElasticPress 3.0+](https://wordpress.org/plugins/elasticpress)
+* [Debug Bar 1.0+](https://wordpress.org/plugins/debug-bar/)
 * PHP 5.4+
 
 == Installation ==
@@ -26,6 +26,12 @@ Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to the 
 3. Install the plugin in WordPress.
 
 == Changelog ==
+
+= 2.0.0 =
+This release drops the support for older versions of WordPress Core, ElasticPress and Debug Bar.
+
+* Code refactoring
+* Fixed Query Logs in EP Dashboard
 
 = 1.4 =
 * Support ElasticPress 3.0+
