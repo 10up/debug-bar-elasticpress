@@ -30,8 +30,9 @@ Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to the 
 = 2.0.0 =
 This release drops the support for older versions of WordPress Core, ElasticPress and Debug Bar.
 
-* Code refactoring
-* Fixed Query Logs in EP Dashboard
+* Code refactoring. Props [@felipeelia](https://github.com/felipeelia)
+* Fixed Query Logs in EP Dashboard [@felipeelia](https://github.com/felipeelia)
+* Fixed typo from "clsas" to "class" in the query output. Props [@Rahmon](https://github.com/Rahmon) 
 
 = 1.4 =
 * Support ElasticPress 3.0+

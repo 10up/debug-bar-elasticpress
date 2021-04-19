@@ -6,8 +6,9 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 This release drops the support for older versions of WordPress Core, ElasticPress and Debug Bar.
 
-* Code refactoring
-* Fixed Query Logs in EP Dashboard
+* Code refactoring. Props [@felipeelia](https://github.com/felipeelia)
+* Fixed Query Logs in EP Dashboard [@felipeelia](https://github.com/felipeelia)
+* Fixed typo from "clsas" to "class" in the query output. Props [@Rahmon](https://github.com/Rahmon) 
 
 ## [1.4]
 * Support ElasticPress 3.0+
