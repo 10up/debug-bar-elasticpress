@@ -297,6 +297,6 @@ class EP_Debug_Bar_Query_Log {
 	 * @return array
 	 */
 	public function json_decode_query_log( $value ) {
-		return json_decode( $value, true );
+		return ( is_string( $value ) ) ? json_decode( $value, true ) : $value;
 	}
 }
