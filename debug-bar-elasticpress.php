@@ -48,6 +48,9 @@ function ep_add_debug_bar_stati( $stati ) {
 	) {
 		$elasticsearch_version = \ElasticPress\Elasticsearch::factory()->get_elasticsearch_version();
 	}
+	if ( function_exists( '\ElasticPress\Utils\is_epio' ) && \ElasticPress\Utils\is_epio() ) {
+		$elasticsearch_version = esc_html__( 'ElasticPress.io Managed Platform', 'debug-bar-elasticpress' );
+	}
 	$stati[] = array(
 		'es_version',
 		esc_html__( 'Elasticsearch Version', 'debug-bar-elasticpress' ),
