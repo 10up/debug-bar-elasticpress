@@ -92,6 +92,13 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 			);
 			?>
 		</h2>
+
+		<?php if ( function_exists( '\ElasticPress\Utils\is_indexing' ) && \ElasticPress\Utils\is_indexing() ) : ?>
+			<div class="ep-debug-bar-warning">
+				<?php esc_html_e( 'ElasticPress is currently indexing.', 'debug-bar-elasticpress' ); ?>
+			</div>
+		<?php endif; ?>
+
 		<?php if ( empty( $queries ) ) : ?>
 			<ol class="wpd-queries">
 				<li><?php esc_html_e( 'No queries to show', 'debug-bar-elasticpress' ); ?></li>
