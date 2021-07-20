@@ -122,7 +122,7 @@ class EP_Debug_Bar_Query_Log {
 	/**
 	 * Check the request body, as usually bulk indexing does not return a status error.
 	 *
-	 * @since 2.0.1
+	 * @since 2.1.0
 	 * @param array $query Remote request arguments
 	 * @return boolean
 	 */
@@ -159,6 +159,7 @@ class EP_Debug_Bar_Query_Log {
 		 *
 		 * @var   array
 		 * @since 1.3
+		 * @since 2.1.0 Added `bulk_index`
 		 */
 		$allowed_log_types = apply_filters(
 			'ep_debug_bar_allowed_log_types',
