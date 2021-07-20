@@ -102,7 +102,16 @@ class EP_Debug_Bar_Query_Output {
 			<?php if ( ! empty( $query['args']['body'] ) ) : ?>
 				<div class="ep-query-body">
 					<strong><?php esc_html_e( 'Query Body:', 'debug-bar-elasticpress' ); ?> <div class="query-body-toggle dashicons"></div></strong>
-					<pre class="query-body"><?php echo esc_html( stripslashes( wp_json_encode( json_decode( $query['args']['body'], true ), JSON_PRETTY_PRINT ) ) ); ?></pre>
+					<?php
+					// Bulk indexes are not "valid" JSON, for example.
+					$body = json_decode( $query['args']['body'], true );
+					if ( json_last_error() === JSON_ERROR_NONE ) {
+						$body = wp_json_encode( $body, JSON_PRETTY_PRINT );
+					} else {
+						$body = $query['args']['body'];
+					}
+					?>
+					<pre class="query-body"><?php echo esc_html( stripslashes( $body ) ); ?></pre>
 				</div>
 			<?php endif; ?>
 
