@@ -31,6 +31,7 @@ add_filter( 'debug_bar_panels', 'ep_add_debug_bar_panel' );
 /**
  * Register status
  *
+ * @since 2.1.0
  * @param array $stati Debug Bar Stati
  * @return array
  */
