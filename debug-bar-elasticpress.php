@@ -14,6 +14,7 @@
  */
 
 define( 'EP_DEBUG_VERSION', '2.0.0' );
+define( 'EP_DEBUG_URL', plugin_dir_url( __FILE__ ) );
 
 /**
  * Register panel
