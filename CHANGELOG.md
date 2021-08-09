@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, per [the Keep a Changelog standard](http://keepachangelog.com/).
 
-## [2.1.0] - 2021-08-?
+## [2.1.0] - 2021-08-09
 
 ### Added
 * ElasticPress and Elasticsearch versions. Props to [@oscarssanchez](https://github.com/oscarssanchez) and [@felipeelia](https://github.com/felipeelia) via [#43](https://github.com/10up/debug-bar-elasticpress/pull/43)
