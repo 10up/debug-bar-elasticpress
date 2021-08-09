@@ -1,3 +1,10 @@
+.ep-debug-bar-warning {
+	background-color: #ffffe0;
+	border: 1px solid #e6db55;
+	clear: both;
+	padding: 0.5em 10px;
+}
+
 .ep-queries-debug .dashicons {
 	cursor: pointer;
 }

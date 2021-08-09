@@ -120,6 +120,22 @@ class EP_Debug_Bar_Query_Log {
 	}
 
 	/**
+	 * Check the request body, as usually bulk indexing does not return a status error.
+	 *
+	 * @since 2.1.0
+	 * @param array $query Remote request arguments
+	 * @return boolean
+	 */
+	public function is_bulk_index_error( $query ) {
+		if ( $this->is_query_error( $query ) ) {
+			return true;
+		}
+
+		$request_body = json_decode( wp_remote_retrieve_body( $query['request'] ), true );
+		return ! empty( $request_body['errors'] );
+	}
+
+	/**
 	 * Conditionally save a query to the log which is stored in options. This is a big performance hit so be careful.
 	 *
 	 * @param array  $query Remote request arguments
@@ -143,6 +159,7 @@ class EP_Debug_Bar_Query_Log {
 		 *
 		 * @var   array
 		 * @since 1.3
+		 * @since 2.1.0 Added `bulk_index`
 		 */
 		$allowed_log_types = apply_filters(
 			'ep_debug_bar_allowed_log_types',
@@ -150,6 +167,7 @@ class EP_Debug_Bar_Query_Log {
 				'put_mapping'          => array( $this, 'is_query_error' ),
 				'delete_network_alias' => array( $this, 'is_query_error' ),
 				'create_network_alias' => array( $this, 'is_query_error' ),
+				'bulk_index'           => array( $this, 'is_bulk_index_error' ),
 				'bulk_index_posts'     => array( $this, 'is_query_error' ),
 				'delete_index'         => array( $this, 'maybe_log_delete_index' ),
 				'create_pipeline'      => array( $this, 'is_query_error' ),
