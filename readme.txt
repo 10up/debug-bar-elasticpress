@@ -2,7 +2,7 @@
 Contributors: tlovett1, 10up
 Tags: debug, debug bar, elasticpress, elasticsearch
 Requires at least: 4.6
-Tested up to: 5.8
+Tested up to: 6.0.1
 Requires PHP: 5.4
 Stable tag: 2.1.1
 License: GPLv2
