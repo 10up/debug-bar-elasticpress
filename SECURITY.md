@@ -45,5 +45,5 @@ Past security advisories, if any, are listed below.
 
 | Advisory Number | Type               | Versions affected | Reported by           | Additional Information      |
 |-----------------|--------------------|:-----------------:|-----------------------|-----------------------------|
-| TBD | XSS | 1.0 - 2.1.1 | Piotr Bajer + WP VIP Team | TBD |
+| TBD | XSS | 1.0 - 2.1.0 | Piotr Bajer + WP VIP Team | TBD |
 | -               | -                  | -                 | -                     | -                           |
