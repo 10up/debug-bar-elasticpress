@@ -40,10 +40,10 @@ class EP_Debug_Bar_Query_Output {
 					$error_type   = $error['type'];
 					$error_reason = $error['reason'];
 					$error_field  = $error_type;
-					$error_msg    = 'The error is due to: ' . $error_field . '. Re-index your content to resolve this issue.';
+					$error_msg    = 'The error is due to: ' . $error_field . '. Please re-sync your content to resolve this issue.';
 					if ( preg_match( '/field \[(.*?)\]/', $error_reason, $matches ) ) {
 						$error_field = $matches[1];
-						$error_msg   = 'The error is due to the field:"' . $error_field . '". Please re-index your content to resolve this issue.';
+						$error_msg   = 'The error is due to the field:"' . $error_field . '". Please re-sync your content to resolve this issue.';
 					}
 					if ( ! empty( $error_field ) && ! empty( $error_msg ) ) {
 						$error_handler[ $error_field ] = $error_msg;
