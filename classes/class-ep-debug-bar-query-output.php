@@ -27,11 +27,30 @@ class EP_Debug_Bar_Query_Output {
 
 		$query_time = ( ! empty( $query['time_start'] ) && ! empty( $query['time_finish'] ) ) ? $query['time_finish'] - $query['time_start'] : false;
 
-		$result   = wp_remote_retrieve_body( $query['request'] );
-		$response = wp_remote_retrieve_response_code( $query['request'] );
+		$result        = wp_remote_retrieve_body( $query['request'] );
+		$response      = wp_remote_retrieve_response_code( $query['request'] );
+		$error_handler = array();
 
-		$class = $response < 200 || $response >= 300 ? 'ep-query-failed' : '';
-
+		$class   = $response < 200 || $response >= 300 ? 'ep-query-failed' : '';
+		$results = json_decode( $result, true );
+		if ( $class && ! empty( $results['error'] ) ) {
+			$errors = $results['error']['root_cause'];
+			if ( is_array( $errors ) && ! empty( $errors ) ) {
+				foreach ( $errors as $error ) {
+					$error_type   = $error['type'];
+					$error_reason = $error['reason'];
+					$error_field  = $error_type;
+					$error_msg    = 'The error is due to: ' . $error_field . '. Re-index your content to resolve this issue.';
+					if ( preg_match( '/field \[(.*?)\]/', $error_reason, $matches ) ) {
+						$error_field = $matches[1];
+						$error_msg   = 'The error is due to the field:"' . $error_field . '". Please re-index your content to resolve this issue.';
+					}
+					if ( ! empty( $error_field ) && ! empty( $error_msg ) ) {
+						$error_handler[ $error_field ] = $error_msg;
+					}
+				}
+			}
+		}
 		$curl_request = 'curl -X' . strtoupper( $query['args']['method'] );
 
 		if ( ! empty( $query['args']['headers'] ) ) {
@@ -141,6 +160,28 @@ class EP_Debug_Bar_Query_Output {
 			<?php endif; ?>
 
 			<a class="copy-curl" data-request="<?php echo esc_attr( addcslashes( $curl_request, '"' ) ); ?>">Copy cURL Request</a>
+			<?php if ( ! empty( $error_handler ) ) : ?>
+				<?php foreach ( $error_handler as $error_key => $error_message ) { ?>
+					<div class="ep-query-error-code ep-query-response-code">
+						<?php
+						echo wp_kses_post(
+							sprintf( '<strong>Error Code:</strong> %s', $error_key )
+						);
+						?>
+					</div>
+					<div class="ep-query-error-code ep-query-response-code">
+						<?php
+						echo wp_kses_post(
+							/* translators: Debug bar elasticpress error message */
+							sprintf( __( '<strong>Error Message:</strong> %s', 'debug-bar-elasticpress' ), $error_message )
+						);
+						?>
+					</div>
+					<?php
+				}
+			endif;
+			?>
+
 		</li>
 		<?php
 	}
