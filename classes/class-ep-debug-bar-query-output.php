@@ -11,8 +11,6 @@
 
 defined( 'ABSPATH' ) || exit;
 
-use ElasticPress\StatusReport\FailedQueries;
-
 /**
  * Query Output class.
  */
@@ -26,17 +24,18 @@ class EP_Debug_Bar_Query_Output {
 	 * @return void
 	 */
 	public static function render_query( $query, $type = '' ) {
-
-		$query_logger   = apply_filters( 'ep_query_logger', new \ElasticPress\QueryLogger() );
-		$failed_queries = new FailedQueries( $query_logger );
-
-		$query_time = ( ! empty( $query['time_start'] ) && ! empty( $query['time_finish'] ) ) ? $query['time_finish'] - $query['time_start'] : false;
-
+		$error         = '';
+		$query_time    = ( ! empty( $query['time_start'] ) && ! empty( $query['time_finish'] ) ) ? $query['time_finish'] - $query['time_start'] : false;
 		$result        = wp_remote_retrieve_body( $query['request'] );
 		$response      = wp_remote_retrieve_response_code( $query['request'] );
 		$class         = $response < 200 || $response >= 300 ? 'ep-query-failed' : '';
 		$log['result'] = json_decode( $result, true );
-		$error         = $failed_queries->analyze_log( $log );
+
+		if ( class_exists( 'ElasticPress\StatusReport\FailedQueries' ) && class_exists( 'ElasticPress\QueryLogger' ) ) {
+			$query_logger   = apply_filters( 'ep_query_logger', new \ElasticPress\QueryLogger() );
+			$failed_queries = new ElasticPress\StatusReport\FailedQueries( $query_logger );
+			$error          = $failed_queries->analyze_log( $log );
+		}
 
 		$curl_request = 'curl -X' . strtoupper( $query['args']['method'] );
 
@@ -54,6 +53,33 @@ class EP_Debug_Bar_Query_Output {
 
 		?>
 		<li class="ep-query-debug hide-query-body hide-query-results hide-query-errors hide-query-args hide-query-headers <?php echo sanitize_html_class( $class ); ?>">
+
+			<?php if ( ! is_wp_error( $query['request'] ) ) : ?>
+				<?php if ( ! empty( array_filter( $error ) ) ) : ?>
+					<div class="ep-query-error-code ep-query-response-code">
+						<?php
+						echo wp_kses_post(
+							/* translators: Debug bar elasticpress error message */
+							sprintf( __( '<strong>Error:</strong> %s', 'debug-bar-elasticpress' ), $error[0] )
+						);
+						?>
+					</div>
+					<div class="ep-query-error-code ep-query-response-code">
+						<?php
+						echo wp_kses_post(
+							/* translators: Debug bar elasticpress recommended solution for the error */
+							sprintf( __( '<strong>Recommended Solution:</strong> %s', 'debug-bar-elasticpress' ), $error[1] )
+						);
+						?>
+					</div>
+				<?php endif; ?>
+			<?php else : ?>
+				<div class="ep-query-errors">
+					<strong><?php esc_html_e( 'Errors:', 'debug-bar-elasticpress' ); ?> <div class="query-errors-toggle dashicons"></div></strong>
+					<pre class="query-errors"><?php echo esc_html( stripslashes( wp_json_encode( $query['request']->errors, JSON_PRETTY_PRINT ) ) ); ?></pre>
+				</div>
+			<?php endif; ?>
+
 			<?php if ( $type ) : ?>
 				<div class="ep-query-type">
 					<strong><?php esc_html_e( 'Type:', 'debug-bar-elasticpress' ); ?></strong>
@@ -134,35 +160,11 @@ class EP_Debug_Bar_Query_Output {
 					);
 					?>
 				</div>
-				<?php if ( ! empty( $error ) ) : ?>
-					<div class="ep-query-error-code ep-query-response-code">
-						<?php
-						echo wp_kses_post(
-							sprintf( '<strong>Error:</strong> %s', $error[0] )
-						);
-						?>
-					</div>
-					<div class="ep-query-error-code ep-query-response-code">
-						<?php
-						echo wp_kses_post(
-							/* translators: Debug bar elasticpress error message */
-							sprintf( __( '<strong>Recommended Solution:</strong> %s', 'debug-bar-elasticpress' ), $error[1] )
-						);
-						?>
-					</div>
-					<?php
-				endif;
-				?>
 			<?php else : ?>
 				<div class="ep-query-response-code">
 					<strong><?php esc_html_e( 'Query Response Code:', 'debug-bar-elasticpress' ); ?></strong> <?php esc_html_e( 'Request Error', 'debug-bar-elasticpress' ); ?>
 				</div>
-				<div class="ep-query-errors">
-					<strong><?php esc_html_e( 'Errors:', 'debug-bar-elasticpress' ); ?> <div class="query-errors-toggle dashicons"></div></strong>
-					<pre class="query-errors"><?php echo esc_html( stripslashes( wp_json_encode( $query['request']->errors, JSON_PRETTY_PRINT ) ) ); ?></pre>
-				</div>
 			<?php endif; ?>
-
 			<a class="copy-curl" data-request="<?php echo esc_attr( addcslashes( $curl_request, '"' ) ); ?>">Copy cURL Request</a>
 		</li>
 		<?php
