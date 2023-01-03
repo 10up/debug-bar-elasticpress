@@ -35,6 +35,7 @@ class EP_Debug_Bar_Query_Output {
 			$query_logger   = apply_filters( 'ep_query_logger', new \ElasticPress\QueryLogger() );
 			$failed_queries = new ElasticPress\StatusReport\FailedQueries( $query_logger );
 			$error          = $failed_queries->analyze_log( $log );
+			$error          = array_filter( $error );
 		}
 
 		$curl_request = 'curl -X' . strtoupper( $query['args']['method'] );
@@ -55,7 +56,7 @@ class EP_Debug_Bar_Query_Output {
 		<li class="ep-query-debug hide-query-body hide-query-results hide-query-errors hide-query-args hide-query-headers <?php echo sanitize_html_class( $class ); ?>">
 
 			<?php if ( ! is_wp_error( $query['request'] ) ) : ?>
-				<?php if ( ! empty( array_filter( $error ) ) ) : ?>
+				<?php if ( ! empty( $error ) ) : ?>
 					<div class="ep-query-error-code ep-query-response-code">
 						<?php
 						echo wp_kses_post(
