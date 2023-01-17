@@ -32,10 +32,12 @@ class EP_Debug_Bar_Query_Output {
 		$log['result'] = json_decode( $result, true );
 
 		if ( class_exists( 'ElasticPress\StatusReport\FailedQueries' ) && class_exists( 'ElasticPress\QueryLogger' ) ) {
-			$query_logger   = apply_filters( 'ep_query_logger', new \ElasticPress\QueryLogger() );
-			$failed_queries = new ElasticPress\StatusReport\FailedQueries( $query_logger );
-			$error          = $failed_queries->analyze_log( $log );
-			$error          = array_filter( $error );
+			$query_logger = apply_filters( 'ep_query_logger', new \ElasticPress\QueryLogger() );
+			if ( $query_logger ) {
+				$failed_queries = new ElasticPress\StatusReport\FailedQueries( $query_logger );
+				$error          = $failed_queries->analyze_log( $log );
+				$error          = array_filter( $error );
+			}
 		}
 
 		$curl_request = 'curl -X' . strtoupper( $query['args']['method'] );
