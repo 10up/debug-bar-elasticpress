@@ -151,10 +151,6 @@ class EP_Debug_Bar_Query_Output {
 			<?php endif; ?>
 
 			<?php if ( ! is_wp_error( $query['request'] ) ) : ?>
-				<div class="ep-query-result">
-					<strong><?php esc_html_e( 'Query Result:', 'debug-bar-elasticpress' ); ?> <div class="query-result-toggle dashicons"></div></strong>
-					<pre class="query-results"><?php echo esc_html( stripslashes( wp_json_encode( json_decode( $result, true ), JSON_PRETTY_PRINT ) ) ); ?></pre>
-				</div>
 				<div class="ep-query-response-code">
 					<?php
 					echo wp_kses_post(
@@ -162,6 +158,10 @@ class EP_Debug_Bar_Query_Output {
 						sprintf( __( '<strong>Query Response Code:</strong> HTTP %d', 'debug-bar-elasticpress' ), (int) $response )
 					);
 					?>
+				</div>
+				<div class="ep-query-result">
+					<strong><?php esc_html_e( 'Query Result:', 'debug-bar-elasticpress' ); ?> <div class="query-result-toggle dashicons"></div></strong>
+					<pre class="query-results"><?php echo esc_html( stripslashes( wp_json_encode( json_decode( $result, true ), JSON_PRETTY_PRINT ) ) ); ?></pre>
 				</div>
 			<?php else : ?>
 				<div class="ep-query-response-code">
