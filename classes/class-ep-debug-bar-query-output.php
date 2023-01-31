@@ -139,8 +139,6 @@ class EP_Debug_Bar_Query_Output {
 					<pre class="query-errors"><?php echo esc_html( stripslashes( wp_json_encode( $query['request']->errors, JSON_PRETTY_PRINT ) ) ); ?></pre>
 				</div>
 			<?php endif; ?>
-
-			<a class="copy-curl" data-request="<?php echo esc_attr( addcslashes( $curl_request, '"' ) ); ?>">Copy cURL Request</a>
 		</li>
 		<?php
 	}

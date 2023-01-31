@@ -1,6 +1,26 @@
 wp.domReady(() => {
 	let queries = document.querySelectorAll('.ep-queries-debug');
 
+	const copyBtn = document.querySelector('.copy-curl');
+	const successMessage = document.querySelector('.ep-copy-button-wrapper__success');
+
+	copyBtn.addEventListener('click', function(event) {
+	const target = document.querySelector('.ep-queries-debug');
+	const text = target.textContent;
+
+	navigator.clipboard.writeText(text)
+		.then(function() {
+			successMessage.style.display = 'inline-block';
+			setTimeout(() => {
+				successMessage.style.display = 'none';
+			}, 3000);
+		})
+		.catch(function(err) {
+			console.error('Failed to copy to clipboard: ', err);
+		});
+	});
+
+
 	if (queries.length > 0) {
 		queries = queries[0];
 
@@ -64,14 +84,6 @@ wp.domReady(() => {
 						}
 					}
 
-					break;
-				} else if (
-					queryWrapper.nodeName === 'A' &&
-					queryWrapper.classList.contains('copy-curl')
-				) {
-					navigator.clipboard.writeText(
-						queryWrapper.getAttribute('data-request').replace(/\\"/g, '"'),
-					);
 					break;
 				} else {
 					queryWrapper = queryWrapper.parentNode;
