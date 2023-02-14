@@ -3,17 +3,14 @@ wp.domReady(() => {
 
 	const copyBtn = document.querySelector('.copy-curl');
 	const successMessage = document.querySelector('.ep-copy-button-wrapper__success');
+	const request = copyBtn.getAttribute('data-request');
 
-	copyBtn.addEventListener('click', function (event) {
-		const target = document.querySelector('.ep-queries-debug');
-		const text = target.textContent;
-
-		navigator.clipboard.writeText(text).then(function () {
+	copyBtn.addEventListener('click', function () {
+		navigator.clipboard.writeText(request).then(function () {
 			successMessage.style.display = 'inline-block';
 			setTimeout(() => {
 				successMessage.style.display = 'none';
 			}, 3000);
-			event.clearSelection();
 		});
 	});
 
@@ -80,6 +77,14 @@ wp.domReady(() => {
 						}
 					}
 
+					break;
+				} else if (
+					queryWrapper.nodeName === 'A' &&
+					queryWrapper.classList.contains('copy-curl')
+				) {
+					navigator.clipboard.writeText(
+						queryWrapper.getAttribute('data-request').replace(/\\"/g, '"'),
+					);
 					break;
 				} else {
 					queryWrapper = queryWrapper.parentNode;

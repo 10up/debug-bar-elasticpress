@@ -107,10 +107,14 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 			<ol class="wpd-queries">
 				<li><?php esc_html_e( 'No queries to show', 'debug-bar-elasticpress' ); ?></li>
 			</ol>
-		<?php else : ?>
+			<?php
+		else :
+			$debug_bar_output  = new EP_Debug_Bar_Query_Output();
+			$copy_paste_output = $debug_bar_output->get_formatted_reports();
+			?>
 			<div class="ep-queries-debug-container">
-				<button class="copy-curl button" data-request="<?php echo esc_attr( addcslashes( $curl_request, '"' ) ); ?>">
-					<?php esc_html_e( 'Copy cURL Requests!', 'debug-bar-elasticpress' ); ?>
+				<button class="copy-curl button" data-request="<?php echo esc_attr( implode( "\n\n", $copy_paste_output ) ); ?>">
+					<?php esc_html_e( 'Copy Requests Info', 'debug-bar-elasticpress' ); ?>
 				</button>
 				<span class="ep-copy-button-wrapper__success" style="display: none;">
 					<?php esc_html_e( 'Copied!', 'debug-bar-elasticpress' ); ?>
@@ -118,7 +122,7 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 				<ol class="wpd-queries ep-queries-debug">
 					<?php
 					foreach ( $queries as $query ) {
-						EP_Debug_Bar_Query_Output::render_query( $query );
+						$debug_bar_output->render_query( $query );
 					}
 					?>
 				</ol>

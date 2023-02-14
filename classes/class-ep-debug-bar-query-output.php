@@ -172,4 +172,82 @@ class EP_Debug_Bar_Query_Output {
 		</li>
 		<?php
 	}
+
+	/**
+	 * Process and format the reports, then store them in the `formatted_reports` attribute.
+	 *
+	 * @since 2.2
+	 * @return array
+	 */
+	public function get_formatted_reports() : array {
+		$formatted_reports = '';
+		if ( class_exists( 'ElasticPress\StatusReport\FailedQueries' ) && class_exists( 'ElasticPress\QueryLogger' ) ) {
+			$query_logger = apply_filters( 'ep_query_logger', new \ElasticPress\QueryLogger() );
+			if ( $query_logger ) {
+				$failed_queries    = new ElasticPress\StatusReport\FailedQueries( $query_logger );
+				$formatted_reports = array_map(
+					function( $report ) {
+						return [
+							'actions' => $report->get_actions(),
+							'groups'  => $report->get_groups(),
+							'title'   => $report->get_title(),
+						];
+					},
+					array( $failed_queries )
+				);
+			}
+		}
+		$copy_paste_output = [];
+
+		foreach ( $formatted_reports as $report ) {
+			$title  = $report['title'];
+			$groups = $report['groups'];
+
+			$copy_paste_output[] = $this->render_copy_paste_report( $title, $groups );
+		}
+		return $copy_paste_output;
+	}
+
+	/**
+	 * Render the copy & paste report
+	 *
+	 * @param string $title  Report title
+	 * @param array  $groups Report groups
+	 * @return string
+	 */
+	protected function render_copy_paste_report( string $title, array $groups ) : string {
+		$output = "## {$title} ##\n\n";
+
+		foreach ( $groups as $group ) {
+			$output .= "### {$group['title']} ###\n";
+			foreach ( $group['fields'] as $slug => $field ) {
+				$value = $field['value'] ?? '';
+
+				$output .= "{$slug}: ";
+				$output .= $this->render_value( $value );
+				$output .= "\n";
+			}
+			$output .= "\n";
+		}
+
+		return $output;
+	}
+
+	/**
+	 * Render a value based on its type
+	 *
+	 * @param mixed $value The value
+	 * @return string
+	 */
+	protected function render_value( $value ) {
+		if ( is_array( $value ) || is_object( $value ) ) {
+			return var_export( $value, true ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
+		}
+
+		if ( is_bool( $value ) ) {
+			return $value ? 'true' : 'false';
+		}
+
+		return (string) $value;
+	}
 }
