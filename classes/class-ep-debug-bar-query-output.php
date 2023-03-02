@@ -177,26 +177,22 @@ class EP_Debug_Bar_Query_Output {
 	 * Process and format the reports, then store them in the `formatted_reports` attribute.
 	 *
 	 * @since 2.2
+	 * @param array $queries Array of queries
 	 * @return array
 	 */
-	public function get_formatted_reports() : array {
+	public function get_formatted_reports( $queries ) : array {
+		$queries_info      = new QueriesInfo( $queries );
 		$formatted_reports = '';
-		if ( class_exists( 'ElasticPress\StatusReport\FailedQueries' ) && class_exists( 'ElasticPress\QueryLogger' ) ) {
-			$query_logger = apply_filters( 'ep_query_logger', new \ElasticPress\QueryLogger() );
-			if ( $query_logger ) {
-				$failed_queries    = new ElasticPress\StatusReport\FailedQueries( $query_logger );
-				$formatted_reports = array_map(
-					function( $report ) {
+		$formatted_reports = array_map(
+			function( $report ) {
 						return [
-							'actions' => $report->get_actions(),
-							'groups'  => $report->get_groups(),
-							'title'   => $report->get_title(),
+							'groups' => $report->get_groups(),
+							'title'  => $report->get_title(),
 						];
-					},
-					array( $failed_queries )
-				);
-			}
-		}
+			},
+			array( $queries_info )
+		);
+
 		$copy_paste_output = [];
 
 		foreach ( $formatted_reports as $report ) {

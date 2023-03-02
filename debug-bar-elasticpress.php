@@ -80,6 +80,7 @@ add_filter( 'ep_formatted_args', 'ep_add_explain_args', 10, 2 );
 require_once __DIR__ . '/classes/class-ep-query-log.php';
 require_once __DIR__ . '/classes/class-ep-debug-bar-query-output.php';
 
+
 /**
  * Set up error log
  *
@@ -87,5 +88,6 @@ require_once __DIR__ . '/classes/class-ep-debug-bar-query-output.php';
  */
 function ep_setup_query_log() {
 	EP_Debug_Bar_Query_Log::factory();
+	require_once __DIR__ . '/classes/class-ep-debug-bar-queries-info.php';
 }
 add_action( 'plugins_loaded', 'ep_setup_query_log' );

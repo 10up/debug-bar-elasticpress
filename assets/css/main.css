@@ -57,6 +57,22 @@
 	text-decoration: none;
 }
 
+#querylist .ep-queries-debug-container a#ep-download-requests-info {
+	background: #2271b1;
+	border-color: #2271b1;
+	border-radius: 3px;
+	border-style: solid;
+	border-width: 1px;
+	color: #fff !important;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 13px;
+	line-height: 2.15384615;
+	padding: 0 10px;
+	text-decoration: none !important;
+	text-shadow: none;
+}
+
 .ep-queries-debug-container {
 	clear: left;
 }
