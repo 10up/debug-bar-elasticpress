@@ -116,7 +116,7 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 				<a download="debug-bar-elasticpress-report.txt" href="data:text/plain;charset=utf-8,<?php echo rawurlencode( implode( "\n\n", $copy_paste_output ) ); ?>"  class="button-primary" id="ep-download-requests-info">
 					<?php esc_html_e( 'Download Requests Info', 'debug-bar-elasticpress' ); ?>
 				</a>
-				<button class="copy-curl button" data-request="<?php echo esc_attr( implode( "\n\n", $copy_paste_output ) ); ?>">
+				<button class="copy-curl button qm-button" data-request="<?php echo esc_attr( implode( "\n\n", $copy_paste_output ) ); ?>">
 					<?php esc_html_e( 'Copy Requests Info to Clipboard', 'debug-bar-elasticpress' ); ?>
 				</button>
 				<span class="ep-copy-button-wrapper__success" style="display: none;">

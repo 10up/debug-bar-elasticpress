@@ -76,3 +76,16 @@
 .ep-queries-debug-container {
 	clear: left;
 }
+
+#query-monitor-main a#ep-download-requests-info {
+	background: #007cba !important;
+	border: 1px solid #007cba !important;
+	border-radius: 3px !important;
+	color: #fff !important;
+	margin-right: 5px !important;
+	padding: 5px 10px !important;
+}
+
+#query-monitor-main .qm-debug-bar {
+	margin: 20px;
+}
