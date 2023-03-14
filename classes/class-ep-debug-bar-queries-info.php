@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @package DebugBarElasticPress
  */
-class QueriesInfo extends \ElasticPress\StatusReport\Report {
+class QueriesInfo extends QueryLogger {
 
 	/**
 	 * The array of queries
@@ -103,53 +103,5 @@ class QueriesInfo extends \ElasticPress\StatusReport\Report {
 		}
 
 		return $groups;
-	}
-
-	/**
-	 * Given a query, return a formatted log entry
-	 *
-	 * @param array  $query The given query
-	 * @param string $type  The query type
-	 * @return array
-	 */
-	protected function format_log_entry( array $query, string $type ) : array {
-		global $wp;
-
-		$query_time = ( ! empty( $query['time_start'] ) && ! empty( $query['time_finish'] ) ) ?
-			( $query['time_finish'] - $query['time_start'] ) * 1000 :
-			false;
-
-		// If the body is too big, trim it down to avoid storing a too big log entry
-		$body = ! empty( $query['args']['body'] ) ? $query['args']['body'] : '';
-		if ( strlen( $body ) > 200 * KB_IN_BYTES ) {
-			$body = substr( $body, 0, 1000 ) . ' (trimmed)';
-		} else {
-			$json_body = json_decode( $body, true );
-			// Bulk indexes are not "valid" JSON, for example.
-			if ( json_last_error() === JSON_ERROR_NONE ) {
-				$body = wp_json_encode( $json_body );
-			}
-		}
-
-		$request_id = ( ! empty( $query['args']['headers'] ) && ! empty( $query['args']['headers']['X-ElasticPress-Request-ID'] ) ) ?
-			$query['args']['headers']['X-ElasticPress-Request-ID'] :
-			null;
-
-		$status = wp_remote_retrieve_response_code( $query['request'] );
-		$result = json_decode( wp_remote_retrieve_body( $query['request'] ), true );
-
-		$formatted_log = [
-			'wp_url'      => home_url( add_query_arg( [ $_GET ], $wp->request ) ), // phpcs:ignore WordPress.Security.NonceVerification
-			'es_req'      => $query['args']['method'] . ' ' . $query['url'],
-			'request_id'  => $request_id ?? '',
-			'timestamp'   => current_time( 'timestamp' ),
-			'query_time'  => $query_time,
-			'wp_args'     => $query['query_args'] ?? [],
-			'status_code' => $status,
-			'body'        => $body,
-			'result'      => $result,
-		];
-
-		return $formatted_log;
 	}
 }
