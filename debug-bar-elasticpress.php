@@ -15,6 +15,7 @@
 
 define( 'EP_DEBUG_VERSION', '2.1.1' );
 define( 'EP_DEBUG_URL', plugin_dir_url( __FILE__ ) );
+define( 'EP_DEBUG_MIN_EP_VERSION', '4.3.0' );
 
 /**
  * Register panel
@@ -89,3 +90,37 @@ function ep_setup_query_log() {
 	EP_Debug_Bar_Query_Log::factory();
 }
 add_action( 'plugins_loaded', 'ep_setup_query_log' );
+
+/**
+ * Display an admin notice if the minimum ElasticPress plugin version is not met.
+ *
+ * @return void
+ */
+function maybe_display_admin_notice() {
+	if ( ! defined( 'EP_VERSION' ) || version_compare( EP_VERSION, EP_DEBUG_MIN_EP_VERSION, '<' ) ) {
+		add_action( 'admin_notices', __NAMESPACE__ . '\\admin_notice_min_ep_version' );
+		return;
+	}
+}
+add_action( 'plugins_loaded', 'maybe_display_admin_notice' );
+
+/**
+ * Render an admin notice about the absence of the minimum ElasticPress plugin version.
+ *
+ * @return void
+ */
+function admin_notice_min_ep_version() {
+	?>
+	<div class="notice notice-error">
+		<p>
+			<?php
+			printf(
+				/* translators: Min. EP version */
+				esc_html__( 'Debug Bar ElasticPress needs at least ElasticPress %s to work properly.', 'debug-bar-elasticpress' ),
+				esc_html( EP_DEBUG_MIN_EP_VERSION )
+			);
+			?>
+		</p>
+	</div>
+	<?php
+}
