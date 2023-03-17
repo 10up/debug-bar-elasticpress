@@ -6,7 +6,7 @@
  * Author:       10up
  * Version:      2.1.1
  * Author URI:   https://10up.com
- * Requires PHP: 5.4
+ * Requires PHP: 7.0
  * License:      GPLv2
  * License URI:  https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
