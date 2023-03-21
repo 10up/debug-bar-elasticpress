@@ -24,7 +24,7 @@ define( 'EP_DEBUG_MIN_EP_VERSION', '4.4.0' );
  *
  * @since 3.0.0
  */
-function setup() : void {
+function setup() {
 	$n = function( $function ) {
 		return __NAMESPACE__ . "\\$function";
 	};
@@ -107,7 +107,7 @@ function add_explain_args( $formatted_args, $args ) {
  *
  * @since 3.0.0
  */
-function admin_notice_min_ep_version() : void {
+function admin_notice_min_ep_version() {
 	?>
 	<div class="notice notice-error">
 		<p>
