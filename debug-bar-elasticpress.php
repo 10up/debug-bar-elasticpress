@@ -13,9 +13,36 @@
  * @package DebugBarElasticPress
  */
 
+namespace EP_DEBUG_BAR;
+
 define( 'EP_DEBUG_VERSION', '2.1.1' );
 define( 'EP_DEBUG_URL', plugin_dir_url( __FILE__ ) );
 define( 'EP_DEBUG_MIN_EP_VERSION', '4.4.0' );
+
+/**
+ * Setup plugin
+ *
+ * @since 3.0.0
+ */
+function setup() : void {
+	$n = function( $function ) {
+		return __NAMESPACE__ . "\\$function";
+	};
+
+	if ( ! defined( 'EP_VERSION' ) || version_compare( EP_VERSION, EP_DEBUG_MIN_EP_VERSION, '<' ) ) {
+		add_action( 'admin_notices', $n( 'admin_notice_min_ep_version' ) );
+		return;
+	}
+
+	require_once __DIR__ . '/classes/class-ep-query-log.php';
+	require_once __DIR__ . '/classes/class-ep-debug-bar-query-output.php';
+
+	add_filter( 'debug_bar_panels', $n( 'add_debug_bar_panel' ) );
+	add_filter( 'debug_bar_statuses', $n( 'add_debug_bar_stati' ) );
+	add_filter( 'ep_formatted_args', $n( 'add_explain_args' ), 10, 2 );
+
+	\EP_Debug_Bar_Query_Log::factory();
+}
 
 /**
  * Register panel
@@ -23,12 +50,11 @@ define( 'EP_DEBUG_MIN_EP_VERSION', '4.4.0' );
  * @param  array $panels Debug Bar Panels
  * @return array
  */
-function ep_add_debug_bar_panel( $panels ) {
+function add_debug_bar_panel( $panels ) {
 	include_once __DIR__ . '/classes/class-ep-debug-bar-elasticpress.php';
-	$panels[] = new EP_Debug_Bar_ElasticPress();
+	$panels[] = new \EP_Debug_Bar_ElasticPress();
 	return $panels;
 }
-add_filter( 'debug_bar_panels', 'ep_add_debug_bar_panel' );
 
 /**
  * Register status
@@ -37,7 +63,7 @@ add_filter( 'debug_bar_panels', 'ep_add_debug_bar_panel' );
  * @param array $stati Debug Bar Stati
  * @return array
  */
-function ep_add_debug_bar_stati( $stati ) {
+function add_debug_bar_stati( $stati ) {
 	$stati[] = array(
 		'ep_version',
 		esc_html__( 'ElasticPress Version', 'debug-bar-elasticpress' ),
@@ -61,7 +87,6 @@ function ep_add_debug_bar_stati( $stati ) {
 	);
 	return $stati;
 }
-add_filter( 'debug_bar_statuses', 'ep_add_debug_bar_stati' );
 
 /**
  * Add explain=true to elastic post query
@@ -70,42 +95,19 @@ add_filter( 'debug_bar_statuses', 'ep_add_debug_bar_stati' );
  * @param  array $args           Query variables
  * @return array
  */
-function ep_add_explain_args( $formatted_args, $args ) {
+function add_explain_args( $formatted_args, $args ) {
 	if ( isset( $_GET['explain'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 		$formatted_args['explain'] = true;
 	}
 	return $formatted_args;
 }
-add_filter( 'ep_formatted_args', 'ep_add_explain_args', 10, 2 );
-
-require_once __DIR__ . '/classes/class-ep-query-log.php';
-require_once __DIR__ . '/classes/class-ep-debug-bar-query-output.php';
-
-/**
- * Set up error log
- *
- * @since 1.3
- */
-function ep_setup_query_log() {
-	EP_Debug_Bar_Query_Log::factory();
-}
-add_action( 'plugins_loaded', 'ep_setup_query_log' );
-
-/**
- * Display an admin notice if the minimum ElasticPress plugin version is not met.
- */
-function maybe_display_admin_notice() {
-	if ( ! defined( 'EP_VERSION' ) || version_compare( EP_VERSION, EP_DEBUG_MIN_EP_VERSION, '<' ) ) {
-		add_action( 'admin_notices', __NAMESPACE__ . '\\admin_notice_min_ep_version' );
-		return;
-	}
-}
-add_action( 'plugins_loaded', 'maybe_display_admin_notice' );
 
 /**
  * Render an admin notice about the absence of the minimum ElasticPress plugin version.
+ *
+ * @since 3.0.0
  */
-function admin_notice_min_ep_version() {
+function admin_notice_min_ep_version() : void {
 	?>
 	<div class="notice notice-error">
 		<p>
@@ -120,3 +122,8 @@ function admin_notice_min_ep_version() {
 	</div>
 	<?php
 }
+
+/**
+ * Initialize the plugin
+ */
+add_action( 'plugins_loaded', __NAMESPACE__ . '\\setup' );
