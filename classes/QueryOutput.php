@@ -9,12 +9,14 @@
  * @package DebugBarElasticPress
  */
 
+namespace DebugBarElasticPress;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Query Output class.
  */
-class EP_Debug_Bar_Query_Output {
+class QueryOutput {
 	/**
 	 * Queries
 	 *
@@ -101,10 +103,10 @@ class EP_Debug_Bar_Query_Output {
 		$class         = $response < 200 || $response >= 300 ? 'ep-query-failed' : '';
 		$log['result'] = json_decode( $result, true );
 
-		if ( class_exists( 'ElasticPress\StatusReport\FailedQueries' ) && class_exists( 'ElasticPress\QueryLogger' ) ) {
+		if ( class_exists( '\ElasticPress\StatusReport\FailedQueries' ) && class_exists( 'ElasticPress\QueryLogger' ) ) {
 			$query_logger = apply_filters( 'ep_query_logger', new \ElasticPress\QueryLogger() );
 			if ( $query_logger ) {
-				$failed_queries = new ElasticPress\StatusReport\FailedQueries( $query_logger );
+				$failed_queries = new \ElasticPress\StatusReport\FailedQueries( $query_logger );
 				$error          = $failed_queries->analyze_log( $log );
 				$error          = array_filter( $error );
 			}

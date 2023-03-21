@@ -19,6 +19,32 @@ define( 'EP_DEBUG_VERSION', '2.1.1' );
 define( 'EP_DEBUG_URL', plugin_dir_url( __FILE__ ) );
 define( 'EP_DEBUG_MIN_EP_VERSION', '4.4.0' );
 
+spl_autoload_register(
+	function( $class ) {
+		// project-specific namespace prefix.
+		$prefix = 'DebugBarElasticPress\\';
+
+		// base directory for the namespace prefix.
+		$base_dir = __DIR__ . '/classes/';
+
+		// does the class use the namespace prefix?
+		$len = strlen( $prefix );
+
+		if ( strncmp( $prefix, $class, $len ) !== 0 ) {
+			return;
+		}
+
+		$relative_class = substr( $class, $len );
+
+		$file = $base_dir . str_replace( '\\', '/', $relative_class ) . '.php';
+
+		// if the file exists, require it.
+		if ( file_exists( $file ) ) {
+			require_once $file;
+		}
+	}
+);
+
 /**
  * Setup plugin
  *
@@ -34,16 +60,13 @@ function setup() {
 		return;
 	}
 
-	require_once __DIR__ . '/classes/class-ep-query-log.php';
-	require_once __DIR__ . '/classes/class-ep-debug-bar-query-output.php';
-	require_once __DIR__ . '/classes/class-ep-debug-bar-query-formatter.php';
-
 	add_filter( 'debug_bar_panels', $n( 'add_debug_bar_panel' ) );
 	add_filter( 'debug_bar_statuses', $n( 'add_debug_bar_stati' ) );
 	add_filter( 'ep_formatted_args', $n( 'add_explain_args' ), 10, 2 );
 
-	\EP_Debug_Bar_Query_Log::factory();
+	QueryLog::factory();
 }
+add_action( 'plugins_loaded', __NAMESPACE__ . '\\setup' );
 
 /**
  * Register panel
@@ -52,8 +75,7 @@ function setup() {
  * @return array
  */
 function add_debug_bar_panel( $panels ) {
-	include_once __DIR__ . '/classes/class-ep-debug-bar-elasticpress.php';
-	$panels[] = new \EP_Debug_Bar_ElasticPress();
+	$panels[] = new DebugBarPanel();
 	return $panels;
 }
 
@@ -124,8 +146,3 @@ function admin_notice_min_ep_version() {
 	</div>
 	<?php
 }
-
-/**
- * Initialize the plugin
- */
-add_action( 'plugins_loaded', __NAMESPACE__ . '\\setup' );

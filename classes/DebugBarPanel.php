@@ -7,13 +7,14 @@
  * @package DebugBarElasticPress
  */
 
+namespace DebugBarElasticPress;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
  * New Debug Bar Panel class.
  */
-class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
-
+class DebugBarPanel extends \Debug_Bar_Panel {
 
 	/**
 	 * Panel menu title
@@ -99,7 +100,7 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 		<?php endif; ?>
 
 		<?php
-		$debug_bar_output = new EP_Debug_Bar_Query_Output( $queries );
+		$debug_bar_output = new QueryOutput( $queries );
 		$debug_bar_output->render_buttons();
 		$debug_bar_output->render_queries();
 	}

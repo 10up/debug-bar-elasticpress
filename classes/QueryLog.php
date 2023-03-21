@@ -7,13 +7,14 @@
  * @package DebugBarElasticPress
  */
 
+namespace DebugBarElasticPress;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Query Log class.
  */
-class EP_Debug_Bar_Query_Log {
-
+class QueryLog {
 
 	/**
 	 * Setup the logging page
@@ -271,7 +272,7 @@ class EP_Debug_Bar_Query_Log {
 				$log
 			);
 
-			$debug_bar_output = new EP_Debug_Bar_Query_Output( $queries );
+			$debug_bar_output = new QueryOutput( $queries );
 			$debug_bar_output->render_buttons();
 			$debug_bar_output->render_queries();
 			?>
