@@ -75,7 +75,8 @@ add_action( 'plugins_loaded', __NAMESPACE__ . '\\setup' );
  * @return array
  */
 function add_debug_bar_panel( $panels ) {
-	$panels[] = new DebugBarPanel();
+	include_once __DIR__ . '/classes/EP_Debug_Bar_ElasticPress.php';
+	$panels[] = new \EP_Debug_Bar_ElasticPress();
 	return $panels;
 }
 

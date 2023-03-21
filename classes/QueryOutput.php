@@ -49,7 +49,7 @@ class QueryOutput {
 		$copy_paste_output = $this->get_copy_paste_report();
 		?>
 		<div class="ep-queries-buttons-wrapper">
-			<a download="debug-bar-elasticpress-report.txt" href="data:text/plain;charset=utf-8,<?php echo rawurlencode( $copy_paste_output ); ?>"  class="button-primary" id="ep-download-requests-info">
+			<a download="debug-bar-elasticpress-report.txt" href="data:text/plain;charset=utf-8,<?php echo rawurlencode( $copy_paste_output ); ?>"  class="button button-primary" id="ep-download-requests-info">
 				<?php esc_html_e( 'Download Requests Info', 'debug-bar-elasticpress' ); ?>
 			</a>
 			<button class="ep-copy-button button qm-button" data-request="<?php echo esc_attr( $copy_paste_output ); ?>">
