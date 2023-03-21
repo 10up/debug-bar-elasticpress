@@ -13,7 +13,7 @@
  * @package DebugBarElasticPress
  */
 
-namespace EP_DEBUG_BAR;
+namespace DebugBarElasticPress;
 
 define( 'EP_DEBUG_VERSION', '2.1.1' );
 define( 'EP_DEBUG_URL', plugin_dir_url( __FILE__ ) );
@@ -36,7 +36,7 @@ function setup() {
 
 	require_once __DIR__ . '/classes/class-ep-query-log.php';
 	require_once __DIR__ . '/classes/class-ep-debug-bar-query-output.php';
-	require_once __DIR__ . '/classes/class-ep-debug-bar-queries-info.php';
+	require_once __DIR__ . '/classes/class-ep-debug-bar-query-formatter.php';
 
 	add_filter( 'debug_bar_panels', $n( 'add_debug_bar_panel' ) );
 	add_filter( 'debug_bar_statuses', $n( 'add_debug_bar_stati' ) );

@@ -1,7 +1,5 @@
 wp.domReady(() => {
-	let queries = document.querySelectorAll('.ep-queries-debug');
-
-	const copyBtn = document.querySelector('.copy-curl');
+	const copyBtn = document.querySelector('.ep-copy-button');
 	const successMessage = document.querySelector('.ep-copy-button-wrapper__success');
 	const request = copyBtn.getAttribute('data-request');
 
@@ -13,6 +11,8 @@ wp.domReady(() => {
 			}, 3000);
 		});
 	});
+
+	let queries = document.querySelectorAll('.ep-queries-debug');
 
 	if (queries.length > 0) {
 		queries = queries[0];

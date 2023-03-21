@@ -263,18 +263,18 @@ class EP_Debug_Bar_Query_Log {
 				</p>
 			</form>
 
-			<?php if ( empty( $log ) ) : ?>
-				<p><?php esc_html_e( 'No queries to show', 'debug-bar-elasticpress' ); ?></p>
-			<?php else : ?>
+			<?php
+			$queries = array_map(
+				function( $query ) {
+					return $query['query'];
+				},
+				$log
+			);
 
-				<ol class="wpd-queries ep-queries-debug">
-				<?php
-				foreach ( $log as $log_entry ) {
-					EP_Debug_Bar_Query_Output::render_query( $log_entry['query'], $log_entry['type'] );
-				}
-				?>
-				</ol>
-			<?php endif; ?>
+			$debug_bar_output = new EP_Debug_Bar_Query_Output( $queries );
+			$debug_bar_output->render_buttons();
+			$debug_bar_output->render_queries();
+			?>
 		</div>
 		<?php
 	}
