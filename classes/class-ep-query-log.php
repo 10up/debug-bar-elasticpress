@@ -234,7 +234,7 @@ class EP_Debug_Bar_Query_Log {
 		<div class="wrap">
 			<h2><?php esc_html_e( 'ElasticPress Query Log', 'debug-bar-elasticpress' ); ?></h2>
 
-			<form action="<?php echo esc_attr( $action ); ?>" method="post">
+			<form action="<?php echo esc_url( $action ); ?>" method="post">
 				<?php settings_fields( 'ep-debug' ); ?>
 				<?php settings_errors(); ?>
 
