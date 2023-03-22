@@ -52,7 +52,7 @@ class QueryOutput {
 			<a download="debug-bar-elasticpress-report.txt" href="data:text/plain;charset=utf-8,<?php echo rawurlencode( $copy_paste_output ); ?>"  class="button button-primary" id="ep-download-requests-info">
 				<?php esc_html_e( 'Download Requests Info', 'debug-bar-elasticpress' ); ?>
 			</a>
-			<button class="ep-copy-button button qm-button" data-request="<?php echo esc_attr( $copy_paste_output ); ?>">
+			<button class="ep-copy-button button qm-button" data-clipboard-text="<?php echo esc_attr( $copy_paste_output ); ?>">
 				<?php esc_html_e( 'Copy Requests Info to Clipboard', 'debug-bar-elasticpress' ); ?>
 			</button>
 			<span class="ep-copy-button-wrapper__success" style="display: none;">
@@ -240,7 +240,7 @@ class QueryOutput {
 					<strong><?php esc_html_e( 'Query Response Code:', 'debug-bar-elasticpress' ); ?></strong> <?php esc_html_e( 'Request Error', 'debug-bar-elasticpress' ); ?>
 				</div>
 			<?php endif; ?>
-			<a class="copy-curl" data-request="<?php echo esc_attr( addcslashes( $curl_request, '"' ) ); ?>">Copy cURL Request</a>
+			<a class="copy-curl" data-clipboard-text="<?php echo esc_attr( addcslashes( $curl_request, '"' ) ); ?>">Copy cURL Request</a>
 		</li>
 		<?php
 	}
