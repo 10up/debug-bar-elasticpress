@@ -1,8 +1,7 @@
 /* global ClipboardJS */
 
 wp.domReady(() => {
-	const copyBtn = document.querySelector('.ep-copy-button');
-	const successMessage = document.querySelector('.ep-copy-button-wrapper__success');
+	const copyBtn = document.querySelectorAll('.ep-copy-button');
 	const clipboard = new ClipboardJS(copyBtn);
 
 	/**
@@ -12,9 +11,9 @@ wp.domReady(() => {
 	 * @returns {void}
 	 */
 	const onSuccess = (event) => {
-		successMessage.style.display = 'initial';
+		event.trigger.nextElementSibling.style.display = 'initial';
 		setTimeout(() => {
-			successMessage.style.display = 'none';
+			event.trigger.nextElementSibling.style.display = 'none';
 		}, 3000);
 		event.clearSelection();
 	};
@@ -23,9 +22,6 @@ wp.domReady(() => {
 	 * Bind copy button events.
 	 */
 	clipboard.on('success', onSuccess);
-
-	// eslint-disable-next-line no-new
-	new ClipboardJS(document.querySelectorAll('.ep-query-debug .copy-curl'));
 
 	let queries = document.querySelectorAll('.ep-queries-debug');
 
