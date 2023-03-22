@@ -151,7 +151,7 @@ class QueryOutput {
 			<?php else : ?>
 				<div class="ep-query-errors">
 					<strong><?php esc_html_e( 'Errors:', 'debug-bar-elasticpress' ); ?> <div class="query-errors-toggle dashicons"></div></strong>
-					<pre class="query-errors"><?php echo esc_html( stripslashes( wp_json_encode( $query['request']->errors, JSON_PRETTY_PRINT ) ) ); ?></pre>
+					<pre class="query-errors"><?php echo esc_html( wp_json_encode( $query['request']->errors, JSON_PRETTY_PRINT ) ); ?></pre>
 				</div>
 			<?php endif; ?>
 
@@ -218,7 +218,7 @@ class QueryOutput {
 						$body = $query['args']['body'];
 					}
 					?>
-					<pre class="query-body"><?php echo esc_html( stripslashes( $body ) ); ?></pre>
+					<pre class="query-body"><?php echo esc_html( $body ); ?></pre>
 				</div>
 			<?php endif; ?>
 
@@ -233,7 +233,7 @@ class QueryOutput {
 				</div>
 				<div class="ep-query-result">
 					<strong><?php esc_html_e( 'Query Result:', 'debug-bar-elasticpress' ); ?> <div class="query-result-toggle dashicons"></div></strong>
-					<pre class="query-results"><?php echo esc_html( stripslashes( wp_json_encode( json_decode( $result, true ), JSON_PRETTY_PRINT ) ) ); ?></pre>
+					<pre class="query-results"><?php echo esc_html( wp_json_encode( json_decode( $result, true ), JSON_PRETTY_PRINT ) ); ?></pre>
 				</div>
 			<?php else : ?>
 				<div class="ep-query-response-code">
