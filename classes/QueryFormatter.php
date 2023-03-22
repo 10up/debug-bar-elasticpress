@@ -28,15 +28,15 @@ class QueryFormatter extends QueryLogger {
 		$formatted_queries = [];
 
 		$labels = [
-			'wp_url'      => esc_html__( 'Page URL', 'elasticpress' ),
-			'es_req'      => esc_html__( 'Elasticsearch Request', 'elasticpress' ),
-			'request_id'  => esc_html__( 'Request ID', 'elasticpress' ),
-			'timestamp'   => esc_html__( 'Time', 'elasticpress' ),
-			'query_time'  => esc_html__( 'Time Spent (ms)', 'elasticpress' ),
-			'wp_args'     => esc_html__( 'WP Query Args', 'elasticpress' ),
-			'status_code' => esc_html__( 'HTTP Status Code', 'elasticpress' ),
-			'body'        => esc_html__( 'Query Body', 'elasticpress' ),
-			'result'      => esc_html__( 'Query Result', 'elasticpress' ),
+			'wp_url'      => esc_html__( 'Page URL', 'debug-bar-elasticpress' ),
+			'es_req'      => esc_html__( 'Elasticsearch Request', 'debug-bar-elasticpress' ),
+			'request_id'  => esc_html__( 'Request ID', 'debug-bar-elasticpress' ),
+			'timestamp'   => esc_html__( 'Time', 'debug-bar-elasticpress' ),
+			'query_time'  => esc_html__( 'Time Spent (ms)', 'debug-bar-elasticpress' ),
+			'wp_args'     => esc_html__( 'WP Query Args', 'debug-bar-elasticpress' ),
+			'status_code' => esc_html__( 'HTTP Status Code', 'debug-bar-elasticpress' ),
+			'body'        => esc_html__( 'Query Body', 'debug-bar-elasticpress' ),
+			'result'      => esc_html__( 'Query Result', 'debug-bar-elasticpress' ),
 		];
 
 		$failed_queries_obj = new \ElasticPress\StatusReport\FailedQueries( $this );
@@ -47,11 +47,11 @@ class QueryFormatter extends QueryLogger {
 
 			$fields = [
 				'error'                => [
-					'label' => __( 'Error', 'elasticpress' ),
+					'label' => __( 'Error', 'debug-bar-elasticpress' ),
 					'value' => $error,
 				],
 				'recommended_solution' => [
-					'label' => __( 'Recommended Solution', 'elasticpress' ),
+					'label' => __( 'Recommended Solution', 'debug-bar-elasticpress' ),
 					'value' => $solution,
 				],
 			];
