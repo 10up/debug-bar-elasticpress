@@ -25,6 +25,10 @@ Thank you to all the people who have already contributed to this repository via 
 [Oscar Sanchez S. (@oscarssanchez)](https://github.com/oscarssanchez),
 [Nathaniel (@nathanielks)](https://github.com/nathanielks),
 [Piotr Bajer (@piotr-bajer)](https://github.com/piotr-bajer),
+[Mohammed Razzaq (@MARQAS)](https://github.com/MARQAS),
+[Burhan Nasir (@burhandodhy)](https://github.com/burhandodhy),
+[Nathaniel Taintor (@goldenapples)](https://github.com/goldenapples),
+[Matt Gross (@mattonomics)](https://github.com/mattonomics),
 and
 [Christoph Bratschi (@cbratschi)](https://github.com/cbratschi).
 

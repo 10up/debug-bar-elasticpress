@@ -4,6 +4,34 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased]
 
+<!--
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+-->
+
+## [3.0.0] - 2023-03-XX
+
+### Added
+- Instructions with error code for failed queries. Props [@MARQAS](https://github.com/MARQAS) and [@felipeelia](https://github.com/felipeelia) via [#58](https://github.com/10up/debug-bar-elasticpress/pull/58).
+- Buttons to copy or download all requests info. Props [@MARQAS](https://github.com/MARQAS), [@felipeelia](https://github.com/felipeelia), and [@burhandodhy](https://github.com/burhandodhy) via [#63](https://github.com/10up/debug-bar-elasticpress/pull/63).
+- SECURITY.md file. Props [@felipeelia](https://github.com/felipeelia) via [#56](https://github.com/10up/debug-bar-elasticpress/pull/56).
+
+### Changed
+- Set minimum requirement for PHP to 7.0 and ElasticPress to 4.4.0. Props [@burhandodhy](https://github.com/burhandodhy) and [@felipeelia](https://github.com/felipeelia) via [#66](https://github.com/10up/debug-bar-elasticpress/pull/66).
+- CSS and JS code lint by 10up toolkit. Props [@burhandodhy](https://github.com/burhandodhy) via [#64](https://github.com/10up/debug-bar-elasticpress/pull/64).
+
+### Fixed
+- Unnecessary `stripslashes()` call when outputting JSON objects. Props [@felipeelia](https://github.com/felipeelia), [@goldenapples](https://github.com/goldenapples), and [@mattonomics](https://github.com/mattonomics) via [#68](https://github.com/10up/debug-bar-elasticpress/pull/68).
+
+### Security
+- Bumped `minimatch` from 3.0.4 to 3.1.2. Props [@dependabot](https://github.com/dependabot) via [#57](https://github.com/10up/debug-bar-elasticpress/pull/57).
+- Bumped `json5` from 2.2.0 to 2.2.3. Props [@dependabot](https://github.com/dependabot) via [#60](https://github.com/10up/debug-bar-elasticpress/pull/60).
+- Bumped `webpack` from 5.75.0 to 5.76.2. Props [@dependabot](https://github.com/dependabot) via [#67](https://github.com/10up/debug-bar-elasticpress/pull/67).
+
 ## [2.1.1] - 2022-08-04
 
 ### Security
@@ -51,6 +79,7 @@ This release drops the support for older versions of WordPress Core, ElasticPres
 * Initial release
 
 [Unreleased]: https://github.com/10up/debug-bar-elasticpress/compare/trunk...develop
+[3.0.0]: https://github.com/10up/debug-bar-elasticpress/compare/2.1.1...3.0.0
 [2.1.1]: https://github.com/10up/debug-bar-elasticpress/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/10up/debug-bar-elasticpress/compare/2.0.0...2.1.0
 [2.0.0]: https://github.com/10up/debug-bar-elasticpress/compare/1.4...2.0.0

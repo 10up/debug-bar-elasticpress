@@ -27,9 +27,33 @@ Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to the 
 
 == Changelog ==
 
+= [3.0.0] - 2023-03-XX =
+
+__Added:__
+
+* Instructions with error code for failed queries. Props [@MARQAS](https://github.com/MARQAS) and [@felipeelia](https://github.com/felipeelia).
+* Buttons to copy or download all requests info. Props [@MARQAS](https://github.com/MARQAS), [@felipeelia](https://github.com/felipeelia), and [@burhandodhy](https://github.com/burhandodhy).
+* SECURITY.md file. Props [@felipeelia](https://github.com/felipeelia).
+
+__Changed:__
+
+* Set minimum requirement for PHP to 7.0 and ElasticPress to 4.4.0. Props [@burhandodhy](https://github.com/burhandodhy) and [@felipeelia](https://github.com/felipeelia).
+* CSS and JS code lint by 10up toolkit. Props [@burhandodhy](https://github.com/burhandodhy).
+
+__Fixed:__
+
+* Unnecessary `stripslashes()` call when outputting JSON objects. Props [@felipeelia](https://github.com/felipeelia), [@goldenapples](https://github.com/goldenapples), and [@mattonomics](https://github.com/mattonomics).
+
+__Security:__
+
+* Bumped `minimatch` from 3.0.4 to 3.1.2. Props [@dependabot](https://github.com/dependabot).
+* Bumped `json5` from 2.2.0 to 2.2.3. Props [@dependabot](https://github.com/dependabot).
+* Bumped `webpack` from 5.75.0 to 5.76.2. Props [@dependabot](https://github.com/dependabot).
+
+
 = [2.1.1] - 2022-08-04 =
 
-Security:
+__Security:__
 
 * Fix XSS vulnerability. Props [@piotr-bajer](https://github.com/piotr-bajer) and [@felipeelia](https://github.com/felipeelia).
 * Bumped `path-parse` from 1.0.6 to 1.0.7. Props [@dependabot](https://github.com/dependabot).
@@ -39,15 +63,15 @@ Security:
 
 = 2.1.0 =
 
-Added:
+__Added:__
 
-* ElasticPress and Elasticsearch versions. Props to [@oscarssanchez](https://github.com/oscarssanchez) and [@felipeelia](https://github.com/felipeelia) via [#43](https://github.com/10up/debug-bar-elasticpress/pull/43)
-* Log of bulk_index requests. Props [@felipeelia](https://github.com/felipeelia) via [#44](https://github.com/10up/debug-bar-elasticpress/pull/44)
-* Warning when ElasticPress is indexing. Props [@nathanielks](https://github.com/nathanielks) and [@felipeelia](https://github.com/felipeelia) via [#45](https://github.com/10up/debug-bar-elasticpress/pull/45)
+* ElasticPress and Elasticsearch versions. Props to [@oscarssanchez](https://github.com/oscarssanchez) and [@felipeelia](https://github.com/felipeelia).
+* Log of bulk_index requests. Props [@felipeelia](https://github.com/felipeelia).
+* Warning when ElasticPress is indexing. Props [@nathanielks](https://github.com/nathanielks) and [@felipeelia](https://github.com/felipeelia).
 
-Changed:
+__Changed:__
 
-* Only load CSS and JS files for logged-in users. Props [@cbratschi](https://github.com/cbratschi) and [@felipeelia](https://github.com/felipeelia) via [#47](https://github.com/10up/debug-bar-elasticpress/pull/47)
+* Only load CSS and JS files for logged-in users. Props [@cbratschi](https://github.com/cbratschi) and [@felipeelia](https://github.com/felipeelia).
 
 = 2.0.0 =
 This release drops the support for older versions of WordPress Core, ElasticPress and Debug Bar.
