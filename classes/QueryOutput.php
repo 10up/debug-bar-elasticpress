@@ -9,12 +9,84 @@
  * @package DebugBarElasticPress
  */
 
+namespace DebugBarElasticPress;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Query Output class.
  */
-class EP_Debug_Bar_Query_Output {
+class QueryOutput {
+	/**
+	 * Queries
+	 *
+	 * @since 3.0.0
+	 * @var array
+	 */
+	protected $queries = [];
+
+	/**
+	 * Class constructor
+	 *
+	 * @since 3.0.0
+	 * @param array $queries Queries
+	 */
+	public function __construct( $queries ) {
+		$this->queries = $queries;
+	}
+
+	/**
+	 * Render the download and copy&paste buttons
+	 *
+	 * @since 3.0.0
+	 * @return void
+	 */
+	public function render_buttons() {
+		if ( empty( $this->queries ) ) {
+			return;
+		}
+
+		$copy_paste_output = $this->get_copy_paste_report();
+		?>
+		<div class="ep-queries-buttons-wrapper">
+			<a download="debug-bar-elasticpress-report.txt" href="data:text/plain;charset=utf-8,<?php echo rawurlencode( $copy_paste_output ); ?>"  class="button button-primary" id="ep-download-requests-info">
+				<?php esc_html_e( 'Download Requests Info', 'debug-bar-elasticpress' ); ?>
+			</a>
+			<button class="ep-copy-button button qm-button" data-request="<?php echo esc_attr( $copy_paste_output ); ?>">
+				<?php esc_html_e( 'Copy Requests Info to Clipboard', 'debug-bar-elasticpress' ); ?>
+			</button>
+			<span class="ep-copy-button-wrapper__success" style="display: none;">
+				<?php esc_html_e( 'Copied!', 'debug-bar-elasticpress' ); ?>
+			</span>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Render the queries
+	 *
+	 * @since 3.0.0
+	 * @return void
+	 */
+	public function render_queries() {
+		?>
+		<div class="ep-queries-debug-container">
+			<ol class="wpd-queries ep-queries-debug">
+				<?php
+				if ( empty( $this->queries ) ) {
+					?>
+					<li><?php esc_html_e( 'No queries to show', 'debug-bar-elasticpress' ); ?></li>
+					<?php
+				} else {
+					foreach ( $this->queries as $query ) {
+						$this->render_query( $query );
+					}
+				}
+				?>
+			</ol>
+		</div>
+		<?php
+	}
 
 	/**
 	 * Render a query in a list.
@@ -23,7 +95,7 @@ class EP_Debug_Bar_Query_Output {
 	 * @param string $type The type of the query.
 	 * @return void
 	 */
-	public static function render_query( $query, $type = '' ) {
+	public function render_query( $query, $type = '' ) {
 		$error         = '';
 		$query_time    = ( ! empty( $query['time_start'] ) && ! empty( $query['time_finish'] ) ) ? $query['time_finish'] - $query['time_start'] : false;
 		$result        = wp_remote_retrieve_body( $query['request'] );
@@ -31,10 +103,10 @@ class EP_Debug_Bar_Query_Output {
 		$class         = $response < 200 || $response >= 300 ? 'ep-query-failed' : '';
 		$log['result'] = json_decode( $result, true );
 
-		if ( class_exists( 'ElasticPress\StatusReport\FailedQueries' ) && class_exists( 'ElasticPress\QueryLogger' ) ) {
+		if ( class_exists( '\ElasticPress\StatusReport\FailedQueries' ) && class_exists( 'ElasticPress\QueryLogger' ) ) {
 			$query_logger = apply_filters( 'ep_query_logger', new \ElasticPress\QueryLogger() );
 			if ( $query_logger ) {
-				$failed_queries = new ElasticPress\StatusReport\FailedQueries( $query_logger );
+				$failed_queries = new \ElasticPress\StatusReport\FailedQueries( $query_logger );
 				$error          = $failed_queries->analyze_log( $log );
 				$error          = array_filter( $error );
 			}
@@ -171,5 +243,54 @@ class EP_Debug_Bar_Query_Output {
 			<a class="copy-curl" data-request="<?php echo esc_attr( addcslashes( $curl_request, '"' ) ); ?>">Copy cURL Request</a>
 		</li>
 		<?php
+	}
+
+	/**
+	 * Return the copy & paste queries report
+	 *
+	 * @since 3.0.0
+	 * @return string
+	 */
+	protected function get_copy_paste_report() : string {
+		$output = sprintf(
+			"## %s ##\n\n",
+			__( 'Queries info', 'debug-bar-elasticpress' )
+		);
+
+		$query_formatter   = new \DebugBarElasticPress\QueryFormatter();
+		$formatted_queries = $query_formatter->format_queries_for_display( $this->queries );
+
+		foreach ( $formatted_queries as $query ) {
+			$output .= "### {$query['title']} ###\n";
+			foreach ( $query['fields'] as $slug => $field ) {
+				$value = $field['value'] ?? '';
+
+				$output .= "{$slug}: ";
+				$output .= $this->render_value( $value );
+				$output .= "\n";
+			}
+			$output .= "\n";
+		}
+
+		return $output;
+	}
+
+	/**
+	 * Render a value based on its type
+	 *
+	 * @since 3.0.0
+	 * @param mixed $value The value
+	 * @return string
+	 */
+	protected function render_value( $value ) {
+		if ( is_array( $value ) || is_object( $value ) ) {
+			return var_export( $value, true ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
+		}
+
+		if ( is_bool( $value ) ) {
+			return $value ? 'true' : 'false';
+		}
+
+		return (string) $value;
 	}
 }

@@ -2,6 +2,9 @@
 /**
  * New Debug Bar Panel class file.
  *
+ * This class can not be in a namespace or Debug Bar won't be able to generate a correct HTML ID for its panel.
+ * Also, Query Monitor has a special CSS rule just for this plugin with this class name.
+ *
  * phpcs:disable WordPress.PHP.DevelopmentFunctions
  *
  * @package DebugBarElasticPress
@@ -12,8 +15,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * New Debug Bar Panel class.
  */
-class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
-
+class EP_Debug_Bar_ElasticPress extends \Debug_Bar_Panel {
 
 	/**
 	 * Panel menu title
@@ -55,16 +57,7 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 	 * Show the contents of the panel
 	 */
 	public function render() {
-		if ( function_exists( 'ep_get_query_log' ) ) {
-			$queries = ep_get_query_log();
-		} else {
-			if ( class_exists( '\ElasticPress\Elasticsearch' ) ) {
-				$queries = \ElasticPress\Elasticsearch::factory()->get_query_log();
-			} else {
-				esc_html_e( 'ElasticPress not at least version 1.8.', 'debug-bar-elasticpress' );
-				return;
-			}
-		}
+		$queries          = \ElasticPress\Elasticsearch::factory()->get_query_log();
 		$total_query_time = 0;
 
 		foreach ( $queries as $query ) {
@@ -98,19 +91,9 @@ class EP_Debug_Bar_ElasticPress extends Debug_Bar_Panel {
 			</div>
 		<?php endif; ?>
 
-		<?php if ( empty( $queries ) ) : ?>
-			<ol class="wpd-queries">
-				<li><?php esc_html_e( 'No queries to show', 'debug-bar-elasticpress' ); ?></li>
-			</ol>
-		<?php else : ?>
-			<ol class="wpd-queries ep-queries-debug">
-				<?php
-				foreach ( $queries as $query ) {
-					EP_Debug_Bar_Query_Output::render_query( $query );
-				}
-				?>
-			</ol>
-			<?php
-		endif;
+		<?php
+		$debug_bar_output = new \DebugBarElasticPress\QueryOutput( $queries );
+		$debug_bar_output->render_buttons();
+		$debug_bar_output->render_queries();
 	}
 }

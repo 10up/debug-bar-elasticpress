@@ -1,4 +1,17 @@
 wp.domReady(() => {
+	const copyBtn = document.querySelector('.ep-copy-button');
+	const successMessage = document.querySelector('.ep-copy-button-wrapper__success');
+	const request = copyBtn.getAttribute('data-request');
+
+	copyBtn.addEventListener('click', function () {
+		navigator.clipboard.writeText(request).then(function () {
+			successMessage.style.display = 'inline-block';
+			setTimeout(() => {
+				successMessage.style.display = 'none';
+			}, 3000);
+		});
+	});
+
 	let queries = document.querySelectorAll('.ep-queries-debug');
 
 	if (queries.length > 0) {

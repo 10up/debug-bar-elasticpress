@@ -42,7 +42,90 @@
 	font-weight: bold;
 }
 
-
-.ep-queries-debug .copy-curl {
-	cursor: pointer;
+.ep-queries-buttons-wrapper {
+	clear: both;
+	padding: 1em 0;
 }
+
+.ep-queries-debug-container .copy-curl {
+	border-color: #000;
+	border-radius: 3px;
+	border-style: solid;
+	border-width: 1px;
+	color: #000;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 13px;
+	line-height: 2.15384615;
+	min-height: 30px;
+	padding: 0 10px;
+	text-decoration: none;
+}
+
+.ep-queries-debug-container {
+	clear: left;
+}
+
+#query-monitor-main .qm-debug-bar {
+	margin: 20px;
+}
+
+/* stylelint-disable selector-id-pattern */
+
+/* The giant list of selectors here is needed to
+ * override QM's important rules
+ */
+#debug-menu-target-EP_Debug_Bar_ElasticPress .button,
+#debug-menu-target-EP_Debug_Bar_ElasticPress a.button,
+#debug-menu-target-EP_Debug_Bar_ElasticPress button.ep-copy-button.button.qm-button {
+	background: #f6f7f7 !important;
+	border-color: #2271b1 !important;
+	border-radius: 3px !important;
+	border-width: 1px;
+	
+	/* Overriding some Debug Bar "important" rules */
+	color: #2271b1 !important;
+	cursor: pointer;
+	display: inline-block;
+	font-family: inherit;
+	font-size: 13px;
+	line-height: 2.15384615 !important;
+	padding: 0 10px !important;
+	text-decoration: none !important;
+	text-shadow: none;
+}
+
+#debug-menu-target-EP_Debug_Bar_ElasticPress .button:hover {
+	background: #f0f0f1;
+	border-color: #0a4b78;
+	color: #0a4b78;
+	text-decoration: none;
+}
+
+#debug-menu-target-EP_Debug_Bar_ElasticPress .button:active {
+	background: #f6f7f7;
+	border-color: #8c8f94;
+	box-shadow: none;
+}
+
+#debug-menu-target-EP_Debug_Bar_ElasticPress .button:focus {
+	outline: none;
+}
+
+/* Overriding some Debug Bar "important" rules */
+#debug-menu-target-EP_Debug_Bar_ElasticPress .button-primary,
+#debug-menu-target-EP_Debug_Bar_ElasticPress a.button-primary,
+#debug-menu-target-EP_Debug_Bar_ElasticPress button.button-primary {
+	background: #007cba !important;
+	border: 1px solid #007cba !important;
+	color: #fff !important;
+	margin-right: 5px !important;
+}
+
+#debug-menu-target-EP_Debug_Bar_ElasticPress a.button-primary:hover,
+#debug-menu-target-EP_Debug_Bar_ElasticPress a.button-primary:focus {
+	color: #fff !important;
+	text-decoration: none !important;
+}
+
+/* stylelint-enable selector-id-pattern */
