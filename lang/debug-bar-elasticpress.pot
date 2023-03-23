@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Debug Bar ElasticPress 2.1.1\n"
+"Project-Id-Version: Debug Bar ElasticPress 3.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/debug-bar-elasticpress\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-03-23T09:17:25+00:00\n"
+"POT-Creation-Date: 2023-03-23T12:56:23+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: debug-bar-elasticpress\n"
@@ -137,6 +137,7 @@ msgid "Copy Requests Info to Clipboard"
 msgstr ""
 
 #: classes/QueryOutput.php:59
+#: classes/QueryOutput.php:247
 msgid "Copied!"
 msgstr ""
 
@@ -212,23 +213,27 @@ msgstr ""
 msgid "Request Error"
 msgstr ""
 
-#: classes/QueryOutput.php:257
+#: classes/QueryOutput.php:244
+msgid "Copy cURL Request"
+msgstr ""
+
+#: classes/QueryOutput.php:262
 msgid "Queries info"
 msgstr ""
 
-#: debug-bar-elasticpress.php:95
+#: debug-bar-elasticpress.php:98
 msgid "ElasticPress Version"
 msgstr ""
 
-#: debug-bar-elasticpress.php:107
+#: debug-bar-elasticpress.php:110
 msgid "ElasticPress.io Managed Platform"
 msgstr ""
 
-#: debug-bar-elasticpress.php:111
+#: debug-bar-elasticpress.php:114
 msgid "Elasticsearch Version"
 msgstr ""
 
 #. translators: Min. EP version
-#: debug-bar-elasticpress.php:144
+#: debug-bar-elasticpress.php:147
 msgid "Debug Bar ElasticPress needs at least ElasticPress %s to work properly."
 msgstr ""
