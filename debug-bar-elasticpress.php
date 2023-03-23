@@ -1,14 +1,17 @@
 <?php
 /**
- * Plugin Name:  Debug Bar ElasticPress
- * Plugin URI:   https://wordpress.org/plugins/debug-bar-elasticpress
- * Description:  Extends the debug bar plugin for ElasticPress queries.
- * Author:       10up
- * Version:      2.1.1
- * Author URI:   https://10up.com
- * Requires PHP: 7.0
- * License:      GPLv2
- * License URI:  https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * Plugin Name:       Debug Bar ElasticPress
+ * Plugin URI:        https://wordpress.org/plugins/debug-bar-elasticpress
+ * Description:       Extends the debug bar plugin for ElasticPress queries.
+ * Author:            10up
+ * Version:           2.1.1
+ * Author URI:        https://10up.com
+ * Requires PHP:      7.0
+ * Requires at least: 5.6
+ * Text Domain:       debug-bar-elasticpress
+ * Domain Path:       /lang
+ * License:           GPLv2
+ * License URI:       https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * @package DebugBarElasticPress
  */
