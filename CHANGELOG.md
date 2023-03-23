@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 ### Added
 - Instructions with error code for failed queries. Props [@MARQAS](https://github.com/MARQAS) and [@felipeelia](https://github.com/felipeelia) via [#58](https://github.com/10up/debug-bar-elasticpress/pull/58).
 - Buttons to copy or download all requests info. Props [@MARQAS](https://github.com/MARQAS), [@felipeelia](https://github.com/felipeelia), and [@burhandodhy](https://github.com/burhandodhy) via [#63](https://github.com/10up/debug-bar-elasticpress/pull/63).
+- Compatibility with the WordPress localization system. Props [@burhandodhy](https://github.com/burhandodhy) and [@felipeelia](https://github.com/felipeelia) via [#73](https://github.com/10up/debug-bar-elasticpress/pull/73).
 - SECURITY.md file. Props [@felipeelia](https://github.com/felipeelia) via [#56](https://github.com/10up/debug-bar-elasticpress/pull/56).
 
 ### Changed
@@ -26,6 +27,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ### Fixed
 - Unnecessary `stripslashes()` call when outputting JSON objects. Props [@felipeelia](https://github.com/felipeelia), [@goldenapples](https://github.com/goldenapples), and [@mattonomics](https://github.com/mattonomics) via [#68](https://github.com/10up/debug-bar-elasticpress/pull/68).
+- JS error on copy action. Props [@burhandodhy](https://github.com/burhandodhy) via [#72](https://github.com/10up/debug-bar-elasticpress/pull/72).
 
 ### Security
 - Bumped `minimatch` from 3.0.4 to 3.1.2. Props [@dependabot](https://github.com/dependabot) via [#57](https://github.com/10up/debug-bar-elasticpress/pull/57).

@@ -33,6 +33,7 @@ __Added:__
 
 * Instructions with error code for failed queries. Props [@MARQAS](https://github.com/MARQAS) and [@felipeelia](https://github.com/felipeelia).
 * Buttons to copy or download all requests info. Props [@MARQAS](https://github.com/MARQAS), [@felipeelia](https://github.com/felipeelia), and [@burhandodhy](https://github.com/burhandodhy).
+* Compatibility with the WordPress localization system. Props [@burhandodhy](https://github.com/burhandodhy) and [@felipeelia](https://github.com/felipeelia).
 * SECURITY.md file. Props [@felipeelia](https://github.com/felipeelia).
 
 __Changed:__
@@ -43,6 +44,7 @@ __Changed:__
 __Fixed:__
 
 * Unnecessary `stripslashes()` call when outputting JSON objects. Props [@felipeelia](https://github.com/felipeelia), [@goldenapples](https://github.com/goldenapples), and [@mattonomics](https://github.com/mattonomics).
+* JS error on copy action. Props [@burhandodhy](https://github.com/burhandodhy).
 
 __Security:__
 
