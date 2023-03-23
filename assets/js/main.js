@@ -1,4 +1,28 @@
+/* global ClipboardJS */
+
 wp.domReady(() => {
+	const copyBtn = document.querySelectorAll('.ep-copy-button');
+	const clipboard = new ClipboardJS(copyBtn);
+
+	/**
+	 * Handle successful copy.
+	 *
+	 * @param {Event} event Copy event.
+	 * @returns {void}
+	 */
+	const onSuccess = (event) => {
+		event.trigger.nextElementSibling.style.display = 'initial';
+		setTimeout(() => {
+			event.trigger.nextElementSibling.style.display = 'none';
+		}, 3000);
+		event.clearSelection();
+	};
+
+	/**
+	 * Bind copy button events.
+	 */
+	clipboard.on('success', onSuccess);
+
 	let queries = document.querySelectorAll('.ep-queries-debug');
 
 	if (queries.length > 0) {
@@ -64,14 +88,6 @@ wp.domReady(() => {
 						}
 					}
 
-					break;
-				} else if (
-					queryWrapper.nodeName === 'A' &&
-					queryWrapper.classList.contains('copy-curl')
-				) {
-					navigator.clipboard.writeText(
-						queryWrapper.getAttribute('data-request').replace(/\\"/g, '"'),
-					);
 					break;
 				} else {
 					queryWrapper = queryWrapper.parentNode;

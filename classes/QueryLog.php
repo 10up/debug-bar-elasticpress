@@ -7,13 +7,14 @@
  * @package DebugBarElasticPress
  */
 
+namespace DebugBarElasticPress;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Query Log class.
  */
-class EP_Debug_Bar_Query_Log {
-
+class QueryLog {
 
 	/**
 	 * Setup the logging page
@@ -234,7 +235,7 @@ class EP_Debug_Bar_Query_Log {
 		<div class="wrap">
 			<h2><?php esc_html_e( 'ElasticPress Query Log', 'debug-bar-elasticpress' ); ?></h2>
 
-			<form action="<?php echo esc_attr( $action ); ?>" method="post">
+			<form action="<?php echo esc_url( $action ); ?>" method="post">
 				<?php settings_fields( 'ep-debug' ); ?>
 				<?php settings_errors(); ?>
 
@@ -263,18 +264,18 @@ class EP_Debug_Bar_Query_Log {
 				</p>
 			</form>
 
-			<?php if ( empty( $log ) ) : ?>
-				<p><?php esc_html_e( 'No queries to show', 'debug-bar-elasticpress' ); ?></p>
-			<?php else : ?>
+			<?php
+			$queries = array_map(
+				function( $query ) {
+					return $query['query'];
+				},
+				$log
+			);
 
-				<ol class="wpd-queries ep-queries-debug">
-				<?php
-				foreach ( $log as $log_entry ) {
-					EP_Debug_Bar_Query_Output::render_query( $log_entry['query'], $log_entry['type'] );
-				}
-				?>
-				</ol>
-			<?php endif; ?>
+			$debug_bar_output = new QueryOutput( $queries );
+			$debug_bar_output->render_buttons();
+			$debug_bar_output->render_queries();
+			?>
 		</div>
 		<?php
 	}

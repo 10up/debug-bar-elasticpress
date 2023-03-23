@@ -1,0 +1,239 @@
+# Copyright (C) 2023 10up
+# This file is distributed under the GPLv2.
+msgid ""
+msgstr ""
+"Project-Id-Version: Debug Bar ElasticPress 3.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/debug-bar-elasticpress\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2023-03-23T12:56:23+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: debug-bar-elasticpress\n"
+
+#. Plugin Name of the plugin
+msgid "Debug Bar ElasticPress"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://wordpress.org/plugins/debug-bar-elasticpress"
+msgstr ""
+
+#. Description of the plugin
+msgid "Extends the debug bar plugin for ElasticPress queries."
+msgstr ""
+
+#. Author of the plugin
+msgid "10up"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://10up.com"
+msgstr ""
+
+#: classes/EP_Debug_Bar_ElasticPress.php:31
+msgid "ElasticPress"
+msgstr ""
+
+#. translators: queries count.
+#: classes/EP_Debug_Bar_ElasticPress.php:75
+msgid "<span>Total ElasticPress Queries:</span> %d"
+msgstr ""
+
+#. translators: blocking query time.
+#: classes/EP_Debug_Bar_ElasticPress.php:83
+msgid "<span>Total Blocking ElasticPress Query Time:</span> %d ms"
+msgstr ""
+
+#: classes/EP_Debug_Bar_ElasticPress.php:90
+msgid "ElasticPress is currently indexing."
+msgstr ""
+
+#: classes/QueryFormatter.php:31
+msgid "Page URL"
+msgstr ""
+
+#: classes/QueryFormatter.php:32
+msgid "Elasticsearch Request"
+msgstr ""
+
+#: classes/QueryFormatter.php:33
+msgid "Request ID"
+msgstr ""
+
+#: classes/QueryFormatter.php:34
+msgid "Time"
+msgstr ""
+
+#: classes/QueryFormatter.php:35
+msgid "Time Spent (ms)"
+msgstr ""
+
+#: classes/QueryFormatter.php:36
+msgid "WP Query Args"
+msgstr ""
+
+#: classes/QueryFormatter.php:37
+msgid "HTTP Status Code"
+msgstr ""
+
+#: classes/QueryFormatter.php:38
+msgid "Query Body"
+msgstr ""
+
+#: classes/QueryFormatter.php:39
+msgid "Query Result"
+msgstr ""
+
+#: classes/QueryFormatter.php:50
+msgid "Error"
+msgstr ""
+
+#: classes/QueryFormatter.php:54
+msgid "Recommended Solution"
+msgstr ""
+
+#: classes/QueryLog.php:90
+msgid "Query Log"
+msgstr ""
+
+#: classes/QueryLog.php:236
+msgid "ElasticPress Query Log"
+msgstr ""
+
+#: classes/QueryLog.php:245
+msgid "Enable or disable query logging:"
+msgstr ""
+
+#: classes/QueryLog.php:248
+msgid "Disable"
+msgstr ""
+
+#: classes/QueryLog.php:249
+msgid "Enable"
+msgstr ""
+
+#: classes/QueryLog.php:252
+msgid "Note that query logging can have <strong>severe</strong> performance implications on your website. We generally recommend only enabling logging during dashboard indexing and disabling after."
+msgstr ""
+
+#: classes/QueryLog.php:259
+msgid "Save Changes"
+msgstr ""
+
+#: classes/QueryLog.php:262
+msgid "Empty Log"
+msgstr ""
+
+#: classes/QueryOutput.php:53
+msgid "Download Requests Info"
+msgstr ""
+
+#: classes/QueryOutput.php:56
+msgid "Copy Requests Info to Clipboard"
+msgstr ""
+
+#: classes/QueryOutput.php:59
+#: classes/QueryOutput.php:247
+msgid "Copied!"
+msgstr ""
+
+#: classes/QueryOutput.php:78
+msgid "No queries to show"
+msgstr ""
+
+#. translators: Debug bar elasticpress error message
+#: classes/QueryOutput.php:138
+msgid "<strong>Error:</strong> %s"
+msgstr ""
+
+#. translators: Debug bar elasticpress recommended solution for the error
+#: classes/QueryOutput.php:146
+msgid "<strong>Recommended Solution:</strong> %s"
+msgstr ""
+
+#: classes/QueryOutput.php:153
+msgid "Errors:"
+msgstr ""
+
+#: classes/QueryOutput.php:160
+msgid "Type:"
+msgstr ""
+
+#: classes/QueryOutput.php:166
+msgid "Host:"
+msgstr ""
+
+#. translators: time spent running the query.
+#: classes/QueryOutput.php:175
+msgid "<strong>Time Taken:</strong> %d ms"
+msgstr ""
+
+#: classes/QueryOutput.php:179
+msgid "<strong>Time Taken:</strong> -"
+msgstr ""
+
+#: classes/QueryOutput.php:186
+msgid "URL:"
+msgstr ""
+
+#: classes/QueryOutput.php:191
+msgid "Method:"
+msgstr ""
+
+#: classes/QueryOutput.php:197
+msgid "Headers:"
+msgstr ""
+
+#: classes/QueryOutput.php:204
+msgid "Query Args:"
+msgstr ""
+
+#: classes/QueryOutput.php:211
+msgid "Query Body:"
+msgstr ""
+
+#. translators: Query HTTP Code response
+#: classes/QueryOutput.php:230
+msgid "<strong>Query Response Code:</strong> HTTP %d"
+msgstr ""
+
+#: classes/QueryOutput.php:235
+msgid "Query Result:"
+msgstr ""
+
+#: classes/QueryOutput.php:240
+msgid "Query Response Code:"
+msgstr ""
+
+#: classes/QueryOutput.php:240
+msgid "Request Error"
+msgstr ""
+
+#: classes/QueryOutput.php:244
+msgid "Copy cURL Request"
+msgstr ""
+
+#: classes/QueryOutput.php:262
+msgid "Queries info"
+msgstr ""
+
+#: debug-bar-elasticpress.php:98
+msgid "ElasticPress Version"
+msgstr ""
+
+#: debug-bar-elasticpress.php:110
+msgid "ElasticPress.io Managed Platform"
+msgstr ""
+
+#: debug-bar-elasticpress.php:114
+msgid "Elasticsearch Version"
+msgstr ""
+
+#. translators: Min. EP version
+#: debug-bar-elasticpress.php:147
+msgid "Debug Bar ElasticPress needs at least ElasticPress %s to work properly."
+msgstr ""

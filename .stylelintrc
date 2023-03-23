@@ -1,7 +1,7 @@
 {
-	"extends": "@10up/stylelint-config",
+  "extends": "@10up/stylelint-config",
   "rules": {
-    "sh-waqar/declaration-use-variable": null,
+    "scale-unlimited/declaration-strict-value": null,
     "color-named": null,
     "font-weight-notation": null
   }
