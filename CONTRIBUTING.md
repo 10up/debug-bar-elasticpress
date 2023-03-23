@@ -34,14 +34,15 @@ The `develop` branch is the development branch which means it contains the next 
 4. Props: Update `CREDITS.md` file with any new contributors, confirm maintainers are accurate.
 5. Readme updates: Make any other readme changes as necessary.  `README.md` is geared toward GitHub and `readme.txt` contains WordPress.org-specific content.  The two are slightly different.
 6. New files: Check to be sure any new files/paths that are unnecessary in the production version are included in `.gitattributes`.
-7. Merge: Merge the release branch/PR into `develop`, then make a non-fast-forward merge from `develop` into `trunk` (`git checkout trunk && git merge --no-ff develop`).  `trunk` contains the stable development version.
-8. Test: While still on the `trunk` branch, test for functionality locally.
-9. Push: Push your `trunk` branch to GitHub (e.g. `git push origin trunk`).
-10. Release: Create a [new release](https://github.com/10up/debug-bar-elasticpress/releases/new), naming the tag and the release with the new version number, and targeting the `trunk` branch.  Paste the release changelog from `CHANGELOG.md` into the body of the release and include a link to the closed issues on the [milestone](https://github.com/10up/debug-bar-elasticpress/milestone/#?closed=1).
-11. SVN: Wait for the [GitHub Action](https://github.com/10up/debug-bar-elasticpress/actions?query=workflow%3A%22Deploy+to+WordPress.org%22) to finish deploying to the WordPress.org repository.  If all goes well, users with SVN commit access for that plugin will receive an emailed diff of changes.
-12. Check WordPress.org: Ensure that the changes are live on https://wordpress.org/plugins/debug-bar-elasticpress/.  This may take a few minutes.
-13. Close milestone: Edit the [milestone](https://github.com/10up/debug-bar-elasticpress/milestone/#) with release date (in the `Due date (optional)` field) and link to GitHub release (in the `Description` field), then close the milestone.
-14. Punt incomplete items: If any open issues or PRs which were milestoned for `X.Y.Z` do not make it into the release, update their milestone to `X.Y.Z+1`, `X.Y+1.0`, `X+1.0.0` or `Future Release`.
+7. POT file: Run `wp i18n make-pot . lang/debug-bar-elasticpress.pot` and commit the file.
+8. Merge: Merge the release branch/PR into `develop`, then make a non-fast-forward merge from `develop` into `trunk` (`git checkout trunk && git merge --no-ff develop`).  `trunk` contains the stable development version.
+9. Test: While still on the `trunk` branch, test for functionality locally.
+10. Push: Push your `trunk` branch to GitHub (e.g. `git push origin trunk`).
+11. Release: Create a [new release](https://github.com/10up/debug-bar-elasticpress/releases/new), naming the tag and the release with the new version number, and targeting the `trunk` branch.  Paste the release changelog from `CHANGELOG.md` into the body of the release and include a link to the closed issues on the [milestone](https://github.com/10up/debug-bar-elasticpress/milestone/#?closed=1).
+12. SVN: Wait for the [GitHub Action](https://github.com/10up/debug-bar-elasticpress/actions?query=workflow%3A%22Deploy+to+WordPress.org%22) to finish deploying to the WordPress.org repository.  If all goes well, users with SVN commit access for that plugin will receive an emailed diff of changes.
+13. Check WordPress.org: Ensure that the changes are live on https://wordpress.org/plugins/debug-bar-elasticpress/.  This may take a few minutes.
+14. Close milestone: Edit the [milestone](https://github.com/10up/debug-bar-elasticpress/milestone/#) with release date (in the `Due date (optional)` field) and link to GitHub release (in the `Description` field), then close the milestone.
+15. Punt incomplete items: If any open issues or PRs which were milestoned for `X.Y.Z` do not make it into the release, update their milestone to `X.Y.Z+1`, `X.Y+1.0`, `X+1.0.0` or `Future Release`.
 
 ## Hotfix release instructions
 
@@ -53,6 +54,7 @@ There may be cases where we have an urgent/important fix that ideally gets into 
 1. Props: Update `CREDITS.md` file with any new contributors, confirm maintainers are accurate.
 1. Readme updates: Make any other readme changes as necessary.  `README.md` is geared toward GitHub and `readme.txt` contains WordPress.org-specific content.  The two are slightly different.
 1. New files: Check to be sure any new files/paths that are unnecessary in the production version are included in `.gitattributes`.
+1. POT file: Run `wp i18n make-pot . lang/debug-bar-elasticpress.pot` and commit the file.
 1. Merge: Merge the release branch/PR into `trunk`.  `trunk` contains the stable development version.
 1. Test: While still on the `trunk` branch, test for functionality locally.
 1. Push: Push your `trunk` branch to GitHub (e.g. `git push origin trunk`).

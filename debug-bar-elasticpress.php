@@ -64,6 +64,8 @@ function setup() {
 	add_filter( 'debug_bar_statuses', $n( 'add_debug_bar_stati' ) );
 	add_filter( 'ep_formatted_args', $n( 'add_explain_args' ), 10, 2 );
 
+	load_plugin_textdomain( 'debug-bar-elasticpress', false, basename( __DIR__ ) . '/lang' );
+
 	QueryLog::factory();
 }
 add_action( 'plugins_loaded', __NAMESPACE__ . '\\setup' );
