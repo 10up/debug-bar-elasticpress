@@ -19,7 +19,7 @@ This release drops the support for older versions of ElasticPress and PHP.
 
 ### Added
 - Instructions with error code for failed queries. Props [@MARQAS](https://github.com/MARQAS) and [@felipeelia](https://github.com/felipeelia) via [#58](https://github.com/10up/debug-bar-elasticpress/pull/58).
-- Buttons to copy or download all requests info. Props [@MARQAS](https://github.com/MARQAS), [@felipeelia](https://github.com/felipeelia), and [@burhandodhy](https://github.com/burhandodhy) via [#63](https://github.com/10up/debug-bar-elasticpress/pull/63).
+- Buttons to copy or download all requests info. Props [@MARQAS](https://github.com/MARQAS), [@felipeelia](https://github.com/felipeelia), and [@burhandodhy](https://github.com/burhandodhy) via [#63](https://github.com/10up/debug-bar-elasticpress/pull/63) and [#74](https://github.com/10up/ElasticPress/pull/74).
 - Compatibility with the WordPress localization system. Props [@burhandodhy](https://github.com/burhandodhy) and [@felipeelia](https://github.com/felipeelia) via [#73](https://github.com/10up/debug-bar-elasticpress/pull/73).
 - SECURITY.md file. Props [@felipeelia](https://github.com/felipeelia) via [#56](https://github.com/10up/debug-bar-elasticpress/pull/56).
 
