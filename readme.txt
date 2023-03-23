@@ -27,7 +27,9 @@ Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to the 
 
 == Changelog ==
 
-= [3.0.0] - 2023-03-XX =
+= [3.0.0] - 2023-03-23 =
+
+This release drops the support for older versions of ElasticPress and PHP.
 
 __Added:__
 

@@ -13,7 +13,9 @@ All notable changes to this project will be documented in this file, per [the Ke
 ### Security
 -->
 
-## [3.0.0] - 2023-03-XX
+## [3.0.0] - 2023-03-23
+
+This release drops the support for older versions of ElasticPress and PHP.
 
 ### Added
 - Instructions with error code for failed queries. Props [@MARQAS](https://github.com/MARQAS) and [@felipeelia](https://github.com/felipeelia) via [#58](https://github.com/10up/debug-bar-elasticpress/pull/58).
