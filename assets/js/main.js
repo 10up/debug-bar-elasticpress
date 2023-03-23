@@ -1,16 +1,27 @@
-wp.domReady(() => {
-	const copyBtn = document.querySelector('.ep-copy-button');
-	const successMessage = document.querySelector('.ep-copy-button-wrapper__success');
-	const request = copyBtn.getAttribute('data-request');
+/* global ClipboardJS */
 
-	copyBtn.addEventListener('click', function () {
-		navigator.clipboard.writeText(request).then(function () {
-			successMessage.style.display = 'inline-block';
-			setTimeout(() => {
-				successMessage.style.display = 'none';
-			}, 3000);
-		});
-	});
+wp.domReady(() => {
+	const copyBtn = document.querySelectorAll('.ep-copy-button');
+	const clipboard = new ClipboardJS(copyBtn);
+
+	/**
+	 * Handle successful copy.
+	 *
+	 * @param {Event} event Copy event.
+	 * @returns {void}
+	 */
+	const onSuccess = (event) => {
+		event.trigger.nextElementSibling.style.display = 'initial';
+		setTimeout(() => {
+			event.trigger.nextElementSibling.style.display = 'none';
+		}, 3000);
+		event.clearSelection();
+	};
+
+	/**
+	 * Bind copy button events.
+	 */
+	clipboard.on('success', onSuccess);
 
 	let queries = document.querySelectorAll('.ep-queries-debug');
 
@@ -77,14 +88,6 @@ wp.domReady(() => {
 						}
 					}
 
-					break;
-				} else if (
-					queryWrapper.nodeName === 'A' &&
-					queryWrapper.classList.contains('copy-curl')
-				) {
-					navigator.clipboard.writeText(
-						queryWrapper.getAttribute('data-request').replace(/\\"/g, '"'),
-					);
 					break;
 				} else {
 					queryWrapper = queryWrapper.parentNode;
