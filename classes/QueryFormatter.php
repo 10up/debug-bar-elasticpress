@@ -45,16 +45,17 @@ class QueryFormatter extends QueryLogger {
 			$query                    = $this->format_log_entry( $query, 'query' );
 			list( $error, $solution ) = $failed_queries_obj->analyze_log( $query );
 
-			$fields = [
-				'error'                => [
+			$fields = [];
+			if ( ! empty( $error ) ) {
+				$fields['error']                = [
 					'label' => __( 'Error', 'debug-bar-elasticpress' ),
 					'value' => $error,
-				],
-				'recommended_solution' => [
+				];
+				$fields['recommended_solution'] = [
 					'label' => __( 'Recommended Solution', 'debug-bar-elasticpress' ),
 					'value' => $solution,
-				],
-			];
+				];
+			}
 
 			foreach ( $query as $field => $value ) {
 				// Already outputted in the title
