@@ -298,4 +298,105 @@ class QueryOutput {
 
 		return (string) $value;
 	}
+
+	/**
+	 * Render the additional buttons.
+	 *
+	 * @since 3.1.0
+	 * @return void
+	 */
+	public function render_additional_buttons() {
+		$buttons = [
+			$this->get_explain_query_button(),
+			$this->get_retrieve_raw_document_button(),
+		];
+
+		/**
+		 * Filter the additional buttons.
+		 *
+		 * @since 3.1.0
+		 * @hook ep_debug_bar_additional_buttons
+		 * @param array $buttons Buttons.
+		 * @return array
+		 */
+		apply_filters( 'ep_debug_bar_additional_buttons', $buttons );
+
+		$buttons = array_filter( $buttons );
+
+		if ( empty( $buttons ) ) {
+			return;
+		}
+
+		?>
+		<div class="ep-queries-buttons-wrapper">
+			<?php
+			foreach ( $buttons as $button ) {
+				echo wp_kses_post( $button );
+			}
+			?>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Get the explain query button
+	 *
+	 * @since 3.1.0
+	 * @return string
+	 */
+	public function get_explain_query_button() : string {
+		if ( empty( $this->queries ) ) {
+			return '';
+		}
+
+		$button_link = add_query_arg(
+			[
+				'explain' => '1',
+			],
+			isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : ''
+		);
+
+		return sprintf(
+			'<a href="%s" class="button button-primary" id="ep-explain-query">
+				%s
+			</a>',
+			esc_url( $button_link ),
+			esc_html__( 'Explain queries', 'debug-bar-elasticpress' )
+		);
+	}
+
+	/**
+	 * Get the retrieve raw document button.
+	 *
+	 * @since 3.1.0
+	 * @return string
+	 */
+	public function get_retrieve_raw_document_button() : string {
+		if ( ! is_singular() ) {
+			return '';
+		}
+
+		$post_type      = get_post_type();
+		$post_indexable = \ElasticPress\Indexables::factory()->get( 'post' );
+
+		$indexable_post_types = $post_indexable->get_indexable_post_types();
+		if ( ! in_array( $post_type, $indexable_post_types, true ) ) {
+			return '';
+		}
+
+		$button_link = add_query_arg(
+			[
+				'retrieve-raw-es-document' => '1',
+			],
+			isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : ''
+		);
+
+		return sprintf(
+			'<a href="%s" class="button button-primary" id="ep-retrieve-raw-es-document">
+				%s
+			</a>',
+			esc_url( $button_link ),
+			esc_html__( 'Reload and retrieve raw ES document', 'debug-bar-elasticpress' )
+		);
+	}
 }

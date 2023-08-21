@@ -67,6 +67,8 @@ function setup() {
 	add_filter( 'debug_bar_statuses', $n( 'add_debug_bar_stati' ) );
 	add_filter( 'ep_formatted_args', $n( 'add_explain_args' ), 10, 2 );
 
+	add_action( 'wp', $n( 'retrieve_raw_document_from_es' ) );
+
 	load_plugin_textdomain( 'debug-bar-elasticpress', false, basename( __DIR__ ) . '/lang' );
 
 	QueryLog::factory();
@@ -151,4 +153,33 @@ function admin_notice_min_ep_version() {
 		</p>
 	</div>
 	<?php
+}
+
+/**
+ * Get document from Elasticsearch.
+ *
+ * @since 3.1.0
+ *
+ * @return void
+ */
+function retrieve_raw_document_from_es() {
+	if ( empty( $_GET['retrieve-raw-es-document'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+		return;
+	}
+
+	if ( ! is_singular() ) {
+		return;
+	}
+
+	$id        = get_the_ID();
+	$post_type = get_post_type( $id );
+
+	$post_indexable       = \ElasticPress\Indexables::factory()->get( 'post' );
+	$indexable_post_types = $post_indexable->get_indexable_post_types();
+
+	if ( ! in_array( $post_type, $indexable_post_types, true ) ) {
+		return;
+	}
+
+	$post_indexable->get( $id );
 }
