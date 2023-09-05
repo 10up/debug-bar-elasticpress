@@ -43,7 +43,10 @@
 }
 
 .ep-queries-buttons-wrapper {
+	align-items: center;
 	clear: both;
+	display: flex;
+	gap: 10px;
 	padding: 1em 0;
 }
 
@@ -76,12 +79,10 @@
  * override QM's important rules
  */
 #debug-menu-target-EP_Debug_Bar_ElasticPress .button,
-#debug-menu-target-EP_Debug_Bar_ElasticPress a.button,
-#debug-menu-target-EP_Debug_Bar_ElasticPress button.ep-copy-button.button.qm-button {
+#debug-menu-target-EP_Debug_Bar_ElasticPress a.button {
 	background: #f6f7f7 !important;
-	border-color: #2271b1 !important;
+	border: 1px solid #2271b1 !important;
 	border-radius: 3px !important;
-	border-width: 1px;
 	
 	/* Overriding some Debug Bar "important" rules */
 	color: #2271b1 !important;
@@ -95,16 +96,18 @@
 	text-shadow: none;
 }
 
-#debug-menu-target-EP_Debug_Bar_ElasticPress .button:hover {
+#debug-menu-target-EP_Debug_Bar_ElasticPress .button:hover,
+#query-monitor-main #qm-debug_bar_ep_debug_bar_elasticpress .button:hover {
 	background: #f0f0f1;
 	border-color: #0a4b78;
-	color: #0a4b78;
-	text-decoration: none;
+	color: #0a4b78 !important;
+	text-decoration: none !important;
 }
 
-#debug-menu-target-EP_Debug_Bar_ElasticPress .button:active {
-	background: #f6f7f7;
-	border-color: #8c8f94;
+#debug-menu-target-EP_Debug_Bar_ElasticPress .button:active,
+#query-monitor-main #qm-debug_bar_ep_debug_bar_elasticpress .button:hover {
+	background: #f6f7f7 !important;
+	border-color: #8c8f94 !important;
 	box-shadow: none;
 }
 
@@ -119,7 +122,6 @@
 	background: #007cba !important;
 	border: 1px solid #007cba !important;
 	color: #fff !important;
-	margin-right: 5px !important;
 }
 
 #debug-menu-target-EP_Debug_Bar_ElasticPress a.button-primary:hover,

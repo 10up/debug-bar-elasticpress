@@ -94,6 +94,7 @@ class EP_Debug_Bar_ElasticPress extends \Debug_Bar_Panel {
 		<?php
 		$debug_bar_output = new \DebugBarElasticPress\QueryOutput( $queries );
 		$debug_bar_output->render_buttons();
+		$debug_bar_output->render_additional_buttons();
 		$debug_bar_output->render_queries();
 	}
 }

@@ -67,6 +67,8 @@ function setup() {
 	add_filter( 'debug_bar_statuses', $n( 'add_debug_bar_stati' ) );
 	add_filter( 'ep_formatted_args', $n( 'add_explain_args' ), 10, 2 );
 
+	add_action( 'wp', $n( 'retrieve_raw_document_from_es' ) );
+
 	load_plugin_textdomain( 'debug-bar-elasticpress', false, basename( __DIR__ ) . '/lang' );
 
 	QueryLog::factory();
@@ -151,4 +153,42 @@ function admin_notice_min_ep_version() {
 		</p>
 	</div>
 	<?php
+}
+
+/**
+ * Check if the current page is an indexable singular of an ES document or not.
+ *
+ * @since 3.1.0
+ * @return boolean
+ */
+function is_indexable_singular() {
+	if ( ! is_singular() ) {
+		return false;
+	}
+
+	$id        = get_the_ID();
+	$post_type = get_post_type( $id );
+
+	$post_indexable       = \ElasticPress\Indexables::factory()->get( 'post' );
+	$indexable_post_types = $post_indexable->get_indexable_post_types();
+
+	return in_array( $post_type, $indexable_post_types, true );
+}
+
+/**
+ * Get document from Elasticsearch.
+ *
+ * @since 3.1.0
+ * @return void
+ */
+function retrieve_raw_document_from_es() {
+	if ( empty( $_GET['ep-retrieve-es-document'] ) || empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'ep-retrieve-es-document' ) ) {
+		return;
+	}
+
+	if ( ! is_indexable_singular() ) {
+		return;
+	}
+
+	\ElasticPress\Indexables::factory()->get( 'post' )->get( get_the_ID() );
 }
