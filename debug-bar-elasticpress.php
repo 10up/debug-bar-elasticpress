@@ -156,19 +156,14 @@ function admin_notice_min_ep_version() {
 }
 
 /**
- * Get document from Elasticsearch.
+ * Check if the current page is an indexable singular of an ES document or not.
  *
  * @since 3.1.0
- *
- * @return void
+ * @return boolean
  */
-function retrieve_raw_document_from_es() {
-	if ( empty( $_GET['retrieve-raw-es-document'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
-		return;
-	}
-
+function is_indexable_singular() {
 	if ( ! is_singular() ) {
-		return;
+		return false;
 	}
 
 	$id        = get_the_ID();
@@ -177,9 +172,23 @@ function retrieve_raw_document_from_es() {
 	$post_indexable       = \ElasticPress\Indexables::factory()->get( 'post' );
 	$indexable_post_types = $post_indexable->get_indexable_post_types();
 
-	if ( ! in_array( $post_type, $indexable_post_types, true ) ) {
+	return in_array( $post_type, $indexable_post_types, true );
+}
+
+/**
+ * Get document from Elasticsearch.
+ *
+ * @since 3.1.0
+ * @return void
+ */
+function retrieve_raw_document_from_es() {
+	if ( empty( $_GET['ep-retrieve-es-document'] ) || empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'ep-retrieve-es-document' ) ) {
 		return;
 	}
 
-	$post_indexable->get( $id );
+	if ( ! is_indexable_singular() ) {
+		return;
+	}
+
+	\ElasticPress\Indexables::factory()->get( 'post' )->get( get_the_ID() );
 }

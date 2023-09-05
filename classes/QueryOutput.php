@@ -52,7 +52,7 @@ class QueryOutput {
 			<a download="debug-bar-elasticpress-report.txt" href="data:text/plain;charset=utf-8,<?php echo rawurlencode( $copy_paste_output ); ?>"  class="button button-primary" id="ep-download-requests-info">
 				<?php esc_html_e( 'Download Requests Info', 'debug-bar-elasticpress' ); ?>
 			</a>
-			<button class="ep-copy-button button qm-button" data-clipboard-text="<?php echo esc_attr( $copy_paste_output ); ?>">
+			<button class="ep-copy-button button bordered-button" data-clipboard-text="<?php echo esc_attr( $copy_paste_output ); ?>">
 				<?php esc_html_e( 'Copy Requests Info to Clipboard', 'debug-bar-elasticpress' ); ?>
 			</button>
 			<span class="ep-copy-button-wrapper__success" style="display: none;">
@@ -357,7 +357,7 @@ class QueryOutput {
 		);
 
 		return sprintf(
-			'<a href="%s" class="button button-primary" id="ep-explain-query">
+			'<a href="%s" class="ep-explain-query button bordered-button">
 				%s
 			</a>',
 			esc_url( $button_link ),
@@ -372,27 +372,20 @@ class QueryOutput {
 	 * @return string
 	 */
 	public function get_retrieve_raw_document_button() : string {
-		if ( ! is_singular() ) {
-			return '';
-		}
-
-		$post_type      = get_post_type();
-		$post_indexable = \ElasticPress\Indexables::factory()->get( 'post' );
-
-		$indexable_post_types = $post_indexable->get_indexable_post_types();
-		if ( ! in_array( $post_type, $indexable_post_types, true ) ) {
+		if ( ! is_indexable_singular() ) {
 			return '';
 		}
 
 		$button_link = add_query_arg(
 			[
-				'retrieve-raw-es-document' => '1',
+				'ep-retrieve-es-document' => '1',
+				'_wpnonce'                => wp_create_nonce( 'ep-retrieve-es-document' ),
 			],
 			isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : ''
 		);
 
 		return sprintf(
-			'<a href="%s" class="button button-primary" id="ep-retrieve-raw-es-document">
+			'<a href="%s" class="ep-retrieve-es-document button bordered-button">
 				%s
 			</a>',
 			esc_url( $button_link ),
