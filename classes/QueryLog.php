@@ -41,6 +41,10 @@ class QueryLog {
 		add_filter( 'pre_update_option_ep_query_log', array( $this, 'json_encode_query_log' ) );
 		add_filter( 'option_ep_query_log', array( $this, 'json_decode_query_log' ) );
 		add_filter( 'site_option_ep_query_log', array( $this, 'json_decode_query_log' ) );
+
+		add_filter( 'ep_query_request_args', [ $this, 'maybe_add_request_query_type' ], 10, 7 );
+		add_filter( 'ep_pre_request_args', [ $this, 'maybe_add_request_type' ], 10, 4 );
+		add_filter( 'ep_pre_request_args', [ $this, 'maybe_add_request_context' ] );
 	}
 
 	/**
@@ -49,7 +53,6 @@ class QueryLog {
 	 * @since 1.3
 	 */
 	public function action_admin_init() {
-
 		// Save options for multisite
 		if ( defined( 'EP_IS_NETWORK' ) && EP_IS_NETWORK && isset( $_POST['ep_enable_logging'] ) ) {
 			check_admin_referer( 'ep-debug-options' );
@@ -274,7 +277,7 @@ class QueryLog {
 
 			$debug_bar_output = new QueryOutput( $queries );
 			$debug_bar_output->render_buttons();
-			$debug_bar_output->render_queries();
+			$debug_bar_output->render_queries( [ 'display_context' => true ] );
 			?>
 		</div>
 		<?php
@@ -317,5 +320,112 @@ class QueryLog {
 	 */
 	public function json_decode_query_log( $value ) {
 		return ( is_string( $value ) ) ? json_decode( $value, true ) : $value;
+	}
+
+	/**
+	 * Conditionally add the request type to the request args
+	 *
+	 * @since 3.1.0
+	 * @param array       $args       Request args
+	 * @param string      $path       Site URL to retrieve
+	 * @param array       $query_args The query args originally passed to WP_Query.
+	 * @param string|null $type       Type of request, used for debugging.
+	 * @return array New request args
+	 */
+	public function maybe_add_request_type( array $args, string $path, array $query_args, $type ) : array {
+		if ( ! empty( $args['ep_query_type'] ) ) {
+			return $args;
+		}
+
+		if ( ! empty( $type ) ) {
+			$args['ep_query_type'] = $type;
+
+			if ( 'get' === $type ) {
+				$args['ep_query_type'] = esc_html__( 'Raw ES document', 'debug-bar-elasticpress' );
+			}
+		}
+
+		if ( '_nodes/plugins' === $path ) {
+			$args['ep_query_type'] = esc_html__( 'Elasticsearch check', 'debug-bar-elasticpress' );
+		}
+
+		return $args;
+	}
+
+	/**
+	 * Conditionally add the context of the query
+	 *
+	 * @param array $args Request args
+	 * @return array
+	 */
+	public function maybe_add_request_context( array $args ) : array {
+		$args['ep_context'] = 'public';
+
+		if ( is_admin() ) {
+			$args['ep_context'] = 'admin';
+		}
+
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			$args['ep_context'] = 'ajax';
+		}
+
+		if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+			$args['ep_context'] = 'rest';
+		}
+
+		return $args;
+	}
+
+	/**
+	 * Conditionally add the request type to the request args (for query requests)
+	 *
+	 * @since 3.1.0
+	 * @param array  $request_args Request arguments
+	 * @param string $path         Request path
+	 * @param string $index        Index name
+	 * @param string $type         Index type
+	 * @param array  $query        Prepared Elasticsearch query
+	 * @param array  $query_args   Query arguments
+	 * @param mixed  $query_object Could be WP_Query, WP_User_Query, etc.
+	 * @return array New request arguments
+	 */
+	public function maybe_add_request_query_type( array $request_args, string $path, string $index, string $type, array $query, array $query_args, $query_object ) : array {
+		$request_args['ep_query_type'] = $this->determine_request_query_type( $request_args, $path, $index, $type, $query, $query_args, $query_object );
+		return $request_args;
+	}
+
+	/**
+	 * Conditionally add the request type to the request args (for query requests)
+	 *
+	 * @since 3.1.0
+	 * @param array  $request_args Request arguments
+	 * @param string $path         Request path
+	 * @param string $index        Index name
+	 * @param string $type         Index type
+	 * @param array  $query        Prepared Elasticsearch query
+	 * @param array  $query_args   Query arguments
+	 * @param mixed  $query_object Could be WP_Query, WP_User_Query, etc.
+	 * @return string Request type
+	 */
+	protected function determine_request_query_type( array $request_args, string $path, string $index, string $type, array $query, array $query_args, $query_object ) : string {
+		if ( $query_object instanceof \WP_Query && $query_object->is_main_query() ) {
+			return esc_html__( 'Main query', 'debug-bar-elasticpress' );
+		}
+
+		if ( empty( $query['query'] ) && ! empty( $query['aggs'] ) ) {
+			return esc_html__( 'Possible values for EP filter', 'debug-bar-elasticpress' );
+		}
+
+		$search_term = $query_args['s'] ?? '';
+		if ( '' !== $search_term ) {
+			$type = 'Search';
+			if ( apply_filters( 'ep_autosuggest_query_placeholder', 'ep_autosuggest_placeholder' ) === $search_term ) {
+				return esc_html__( 'Autosuggest template', 'debug-bar-elasticpress' );
+			}
+
+			return esc_html__( 'Search', 'debug-bar-elasticpress' );
+		}
+
+		return $type;
 	}
 }
