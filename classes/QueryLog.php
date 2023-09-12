@@ -58,8 +58,36 @@ class QueryLog {
 			check_admin_referer( 'ep-debug-options' );
 
 			update_site_option( 'ep_enable_logging', (int) $_POST['ep_enable_logging'] );
+			update_site_option( 'ep_query_log_by_status', sanitize_text_field( $_POST['ep_query_log_by_status'] ) );
+			if ( ! empty( $_POST['ep_query_log_by_context'] ) ) {
+				update_site_option( 'ep_query_log_by_context', array_map( 'sanitize_text_field', $_POST['ep_query_log_by_context'] ) );
+			} else {
+				update_site_option( 'ep_query_log_by_context', [] );
+			}
 		} else {
-			register_setting( 'ep-debug', 'ep_enable_logging', 'intval' );
+			register_setting(
+				'ep-debug',
+				'ep_enable_logging',
+				[ 'sanitize_callback' => 'intval' ]
+			);
+			register_setting(
+				'ep-debug',
+				'ep_query_log_by_status',
+				[
+					'type'              => 'string',
+					'sanitize_callback' => 'sanitize_text_field',
+				]
+			);
+			register_setting(
+				'ep-debug',
+				'ep_query_log_by_context',
+				[
+					'type'              => 'array',
+					'sanitize_callback' => function ( $value ) {
+						return ! empty( $value ) ? array_map( 'sanitize_text_field', $value ) : [];
+					},
+				]
+			);
 		}
 	}
 
@@ -147,48 +175,15 @@ class QueryLog {
 	 * @since 1.3
 	 */
 	public function log_query( $query, $type ) {
-		if ( defined( 'EP_IS_NETWORK' ) && EP_IS_NETWORK ) {
-			$enabled = get_site_option( 'ep_enable_logging' );
-		} else {
-			$enabled = get_option( 'ep_enable_logging' );
-		}
-
-		if ( empty( $enabled ) ) {
+		if ( ! $this->is_enabled() ) {
 			return;
 		}
 
-		/**
-		 * This filter allows you to map query types to callables. If the callable returns true,
-		 * that query will be logged.
-		 *
-		 * @var   array
-		 * @since 1.3
-		 * @since 2.1.0 Added `bulk_index`
-		 */
-		$allowed_log_types = apply_filters(
-			'ep_debug_bar_allowed_log_types',
-			array(
-				'put_mapping'          => array( $this, 'is_query_error' ),
-				'delete_network_alias' => array( $this, 'is_query_error' ),
-				'create_network_alias' => array( $this, 'is_query_error' ),
-				'bulk_index'           => array( $this, 'is_bulk_index_error' ),
-				'bulk_index_posts'     => array( $this, 'is_query_error' ),
-				'delete_index'         => array( $this, 'maybe_log_delete_index' ),
-				'create_pipeline'      => array( $this, 'is_query_error' ),
-				'get_pipeline'         => array( $this, 'is_query_error' ),
-				'query'                => array( $this, 'is_query_error' ),
-			),
-			$query,
-			$type
-		);
+		if ( ! $this->should_log_by_context() ) {
+			return;
+		}
 
-		if ( isset( $allowed_log_types[ $type ] ) ) {
-			$do_log = call_user_func( $allowed_log_types[ $type ], $query );
-
-			if ( ! $do_log ) {
-				return;
-			}
-		} else {
+		if ( ! $this->should_log_by_status( $query, $type ) ) {
 			return;
 		}
 
@@ -217,11 +212,15 @@ class QueryLog {
 	 */
 	public function screen_options() {
 		if ( defined( 'EP_IS_NETWORK' ) && EP_IS_NETWORK ) {
-			$log     = get_site_option( 'ep_query_log', array() );
-			$enabled = get_site_option( 'ep_enable_logging' );
+			$log        = get_site_option( 'ep_query_log', array() );
+			$enabled    = get_site_option( 'ep_enable_logging' );
+			$by_status  = get_site_option( 'ep_query_log_by_status', 'failed' );
+			$by_context = get_site_option( 'ep_query_log_by_context', [] );
 		} else {
-			$log     = get_option( 'ep_query_log', array() );
-			$enabled = get_option( 'ep_enable_logging' );
+			$log        = get_option( 'ep_query_log', array() );
+			$enabled    = get_option( 'ep_enable_logging' );
+			$by_status  = get_option( 'ep_query_log_by_status', 'failed' );
+			$by_context = get_option( 'ep_query_log_by_context', [] );
 		}
 
 		if ( is_array( $log ) ) {
@@ -253,6 +252,36 @@ class QueryLog {
 								</select>
 								<br>
 								<span class="description"><?php echo wp_kses_post( __( 'Note that query logging can have <strong>severe</strong> performance implications on your website. We generally recommend only enabling logging during dashboard indexing and disabling after.', 'debug-bar-elasticpress' ) ); ?></span>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row"><label for="ep_query_log_by_status"><?php esc_html_e( 'Log by status:', 'debug-bar-elasticpress' ); ?></label></th>
+							<td>
+								<select name="ep_query_log_by_status" id="ep_query_log_by_status">
+									<option <?php selected( 'failed', $by_status ); ?> value="failed"><?php esc_html_e( 'Only failed queries', 'debug-bar-elasticpress' ); ?></option>
+									<option <?php selected( 'all', $by_status ); ?> value="all"><?php esc_html_e( 'All queries', 'debug-bar-elasticpress' ); ?></option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row"><?php esc_html_e( 'Log by context:', 'debug-bar-elasticpress' ); ?></th>
+							<td>
+								<label>
+									<input type="checkbox" name="ep_query_log_by_context[]" value="public" <?php checked( empty( $by_context ) || in_array( 'public', $by_context, true ) ); ?>>
+									<?php esc_html_e( 'Public', 'debug-bar-elasticpress' ); ?>
+								</label><br>
+								<label>
+									<input type="checkbox" name="ep_query_log_by_context[]" value="admin" <?php checked( empty( $by_context ) || in_array( 'admin', $by_context, true ) ); ?>>
+									<?php esc_html_e( 'Admin', 'debug-bar-elasticpress' ); ?>
+								</label><br>
+								<label>
+									<input type="checkbox" name="ep_query_log_by_context[]" value="ajax" <?php checked( empty( $by_context ) || in_array( 'ajax', $by_context, true ) ); ?>>
+									<?php esc_html_e( 'AJAX', 'debug-bar-elasticpress' ); ?>
+								</label><br>
+								<label>
+									<input type="checkbox" name="ep_query_log_by_context[]" value="rest" <?php checked( empty( $by_context ) || in_array( 'rest', $by_context, true ) ); ?>>
+									<?php esc_html_e( 'REST API', 'debug-bar-elasticpress' ); ?>
+								</label>
 							</td>
 						</tr>
 					</tbody>
@@ -359,21 +388,33 @@ class QueryLog {
 	 * @return array
 	 */
 	public function maybe_add_request_context( array $args ) : array {
-		$args['ep_context'] = 'public';
+		$args['ep_context'] = $this->get_current_context();
+
+		return $args;
+	}
+
+	/**
+	 * Get the current context
+	 *
+	 * @since 3.1.0
+	 * @return string
+	 */
+	protected function get_current_context() : string {
+		$context = 'public';
 
 		if ( is_admin() ) {
-			$args['ep_context'] = 'admin';
+			$context = 'admin';
 		}
 
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			$args['ep_context'] = 'ajax';
+			$context = 'ajax';
 		}
 
 		if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
-			$args['ep_context'] = 'rest';
+			$context = 'rest';
 		}
 
-		return $args;
+		return $context;
 	}
 
 	/**
@@ -427,5 +468,88 @@ class QueryLog {
 		}
 
 		return $type;
+	}
+
+	/**
+	 * Whether logging is enabled or not
+	 *
+	 * @since 3.1.0
+	 * @return boolean
+	 */
+	protected function is_enabled() : bool {
+		if ( defined( 'EP_IS_NETWORK' ) && EP_IS_NETWORK ) {
+			$enabled = get_site_option( 'ep_enable_logging' );
+		} else {
+			$enabled = get_option( 'ep_enable_logging' );
+		}
+
+		return ! empty( $enabled );
+	}
+
+	/**
+	 * Whether the current context should or not be logged
+	 *
+	 * @since 3.1.0
+	 * @return boolean
+	 */
+	protected function should_log_by_context() {
+		if ( defined( 'EP_IS_NETWORK' ) && EP_IS_NETWORK ) {
+			$by_context = get_site_option( 'ep_query_log_by_context', [] );
+		} else {
+			$by_context = get_option( 'ep_query_log_by_context', [] );
+		}
+
+		return empty( $by_context ) || in_array( $this->get_current_context(), $by_context, true );
+	}
+
+	/**
+	 * Whether a query (and a type) should be logged or not
+	 *
+	 * @since 3.1.0
+	 * @param array  $query Remote request arguments
+	 * @param string $type  Query type
+	 * @return boolean
+	 */
+	protected function should_log_by_status( array $query, string $type ) : bool {
+		if ( defined( 'EP_IS_NETWORK' ) && EP_IS_NETWORK ) {
+			$by_status = get_site_option( 'ep_query_log_by_status', 'failed' );
+		} else {
+			$by_status = get_option( 'ep_query_log_by_status', 'failed' );
+		}
+
+		if ( 'all' === $by_status ) {
+			return true;
+		}
+
+		/**
+		 * This filter allows you to map query types to callables. If the callable returns true,
+		 * that query will be logged.
+		 *
+		 * @var   array
+		 * @since 1.3
+		 * @since 2.1.0 Added `bulk_index`
+		 */
+		$allowed_log_types = apply_filters(
+			'ep_debug_bar_allowed_log_types',
+			array(
+				'put_mapping'          => array( $this, 'is_query_error' ),
+				'delete_network_alias' => array( $this, 'is_query_error' ),
+				'create_network_alias' => array( $this, 'is_query_error' ),
+				'bulk_index'           => array( $this, 'is_bulk_index_error' ),
+				'bulk_index_posts'     => array( $this, 'is_query_error' ),
+				'delete_index'         => array( $this, 'maybe_log_delete_index' ),
+				'create_pipeline'      => array( $this, 'is_query_error' ),
+				'get_pipeline'         => array( $this, 'is_query_error' ),
+				'query'                => array( $this, 'is_query_error' ),
+			),
+			$query,
+			$type
+		);
+
+		if ( ! isset( $allowed_log_types[ $type ] ) ) {
+			return false;
+		}
+
+		return call_user_func( $allowed_log_types[ $type ], $query );
 	}
 }
