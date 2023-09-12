@@ -169,7 +169,7 @@ class QueryOutput {
 			<?php endif; ?>
 
 			<?php if ( $context ) : ?>
-				<div class="ep-query-type">
+				<div class="ep-query-context">
 					<strong><?php esc_html_e( 'Context:', 'debug-bar-elasticpress' ); ?></strong>
 					<?php echo esc_html( $context ); ?>
 				</div>
