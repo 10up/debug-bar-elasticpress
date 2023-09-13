@@ -66,9 +66,10 @@ class QueryOutput {
 	 * Render the queries
 	 *
 	 * @since 3.0.0
+	 * @param array $args Arguments to adjust the queries list
 	 * @return void
 	 */
-	public function render_queries() {
+	public function render_queries( $args = [] ) {
 		?>
 		<div class="ep-queries-debug-container">
 			<ol class="wpd-queries ep-queries-debug">
@@ -79,7 +80,11 @@ class QueryOutput {
 					<?php
 				} else {
 					foreach ( $this->queries as $query ) {
-						$this->render_query( $query );
+						$type    = $query['args']['ep_query_type'] ?? '';
+						$context = ( ! empty( $args['display_context'] ) && ! empty( $query['args']['ep_context'] ) ) ?
+							$query['args']['ep_context'] :
+							'';
+						$this->render_query( $query, $type, $context );
 					}
 				}
 				?>
@@ -91,11 +96,12 @@ class QueryOutput {
 	/**
 	 * Render a query in a list.
 	 *
-	 * @param array  $query The query info.
-	 * @param string $type The type of the query.
+	 * @param array  $query   The query info.
+	 * @param string $type    The type of the query.
+	 * @param string $context Context of the query (public, admin, ajax, or rest).
 	 * @return void
 	 */
-	public function render_query( $query, $type = '' ) {
+	public function render_query( $query, $type = '', $context = '' ) {
 		$error         = '';
 		$query_time    = ( ! empty( $query['time_start'] ) && ! empty( $query['time_finish'] ) ) ? $query['time_finish'] - $query['time_start'] : false;
 		$result        = wp_remote_retrieve_body( $query['request'] );
@@ -159,6 +165,13 @@ class QueryOutput {
 				<div class="ep-query-type">
 					<strong><?php esc_html_e( 'Type:', 'debug-bar-elasticpress' ); ?></strong>
 					<?php echo esc_html( $type ); ?>
+				</div>
+			<?php endif; ?>
+
+			<?php if ( $context ) : ?>
+				<div class="ep-query-context">
+					<strong><?php esc_html_e( 'Context:', 'debug-bar-elasticpress' ); ?></strong>
+					<?php echo esc_html( $context ); ?>
 				</div>
 			<?php endif; ?>
 
