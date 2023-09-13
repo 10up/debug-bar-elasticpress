@@ -49,6 +49,22 @@ spl_autoload_register(
 );
 
 /**
+ * Get the panel common to both Query Monitor and Debug Bar.
+ *
+ * @since 3.1.0
+ * @return CommonPanel
+ */
+function get_common_panel() {
+	static $common_panel = null;
+
+	if ( ! $common_panel ) {
+		$common_panel = new CommonPanel();
+	}
+
+	return $common_panel;
+}
+
+/**
  * Setup plugin
  *
  * @since 3.0.0
@@ -63,8 +79,16 @@ function setup() {
 		return;
 	}
 
-	add_filter( 'debug_bar_panels', $n( 'add_debug_bar_panel' ) );
-	add_filter( 'debug_bar_statuses', $n( 'add_debug_bar_stati' ) );
+	// If Query Monitor is active, do not add the Debug Bar panel (it will be potentially duplicated otherwise)
+	if ( class_exists( '\QM_Collectors' ) ) {
+		\QM_Collectors::add( new QueryMonitorCollector() );
+		add_filter( 'qm/outputter/html', $n( 'register_qm_output' ) );
+		add_action( 'qm/output/enqueued-assets', [ get_common_panel(), 'enqueue_assets' ] );
+	} else {
+		add_filter( 'debug_bar_panels', $n( 'add_debug_bar_panel' ) );
+		add_filter( 'debug_bar_statuses', $n( 'add_debug_bar_stati' ) );
+	}
+
 	add_filter( 'ep_formatted_args', $n( 'add_explain_args' ), 10, 2 );
 
 	add_action( 'wp', $n( 'retrieve_raw_document_from_es' ) );
@@ -191,4 +215,21 @@ function retrieve_raw_document_from_es() {
 	}
 
 	\ElasticPress\Indexables::factory()->get( 'post' )->get( get_the_ID() );
+}
+
+/**
+ * Include our QM Output
+ *
+ * @since 3.1.0
+ * @param array $output Array of registered output
+ * @return array
+ */
+function register_qm_output( $output ) {
+	$collector = \QM_Collectors::get( 'elasticpress' );
+
+	if ( $collector ) {
+		$output['elasticpress'] = new QueryMonitorOutput( $collector );
+	}
+
+	return $output;
 }
