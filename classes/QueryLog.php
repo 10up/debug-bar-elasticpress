@@ -9,6 +9,8 @@
 
 namespace DebugBarElasticPress;
 
+use ElasticPress\Utils;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -31,6 +33,7 @@ class QueryLog {
 		add_action( 'ep_remote_request', array( $this, 'log_query' ), 10, 2 );
 		add_action( 'admin_init', array( $this, 'action_admin_init' ) );
 		add_action( 'admin_init', array( $this, 'maybe_clear_log' ) );
+		add_action( 'init', array( $this, 'maybe_disable' ) );
 
 		/**
 		 * Handle query storage as JSON strings.
@@ -57,7 +60,7 @@ class QueryLog {
 		if ( defined( 'EP_IS_NETWORK' ) && EP_IS_NETWORK && isset( $_POST['ep_enable_logging'] ) ) {
 			check_admin_referer( 'ep-debug-options' );
 
-			update_site_option( 'ep_enable_logging', (int) $_POST['ep_enable_logging'] );
+			update_site_option( 'ep_enable_logging', $this->sanitize_enable_logging( $_POST['ep_enable_logging'] ) );
 			update_site_option( 'ep_query_log_by_status', sanitize_text_field( $_POST['ep_query_log_by_status'] ) );
 			if ( ! empty( $_POST['ep_query_log_by_context'] ) ) {
 				update_site_option( 'ep_query_log_by_context', array_map( 'sanitize_text_field', $_POST['ep_query_log_by_context'] ) );
@@ -68,21 +71,17 @@ class QueryLog {
 			register_setting(
 				'ep-debug',
 				'ep_enable_logging',
-				[ 'sanitize_callback' => 'intval' ]
+				[ 'sanitize_callback' => [ $this, 'sanitize_enable_logging' ] ]
 			);
 			register_setting(
 				'ep-debug',
 				'ep_query_log_by_status',
-				[
-					'type'              => 'string',
-					'sanitize_callback' => 'sanitize_text_field',
-				]
+				[ 'sanitize_callback' => 'sanitize_text_field' ]
 			);
 			register_setting(
 				'ep-debug',
 				'ep_query_log_by_context',
 				[
-					'type'              => 'array',
 					'sanitize_callback' => function ( $value ) {
 						return ! empty( $value ) ? array_map( 'sanitize_text_field', $value ) : [];
 					},
@@ -101,11 +100,7 @@ class QueryLog {
 			return;
 		}
 
-		if ( defined( 'EP_IS_NETWORK' ) && EP_IS_NETWORK ) {
-			delete_site_option( 'ep_query_log' );
-		} else {
-			delete_option( 'ep_query_log' );
-		}
+		Utils\delete_option( 'ep_query_log' );
 
 		wp_safe_redirect( remove_query_arg( 'ep_clear_query_log' ) );
 		exit();
@@ -187,22 +182,19 @@ class QueryLog {
 			return;
 		}
 
-		if ( defined( 'EP_IS_NETWORK' ) && EP_IS_NETWORK ) {
-			$log = get_site_option( 'ep_query_log', array() );
-		} else {
-			$log = get_option( 'ep_query_log', array() );
-		}
+		$log = Utils\get_option( 'ep_query_log', [] );
 
 		$log[] = array(
 			'query' => $query,
 			'type'  => $type,
 		);
 
-		if ( defined( 'EP_IS_NETWORK' ) && EP_IS_NETWORK ) {
-			update_site_option( 'ep_query_log', $log );
-		} else {
-			update_option( 'ep_query_log', $log );
+		// Storing this log would exceed the limit
+		if ( mb_strlen( maybe_serialize( $log ) ) > $this->get_logging_storage_limit() ) {
+			return;
 		}
+
+		Utils\update_option( 'ep_query_log', $log );
 	}
 
 	/**
@@ -211,17 +203,10 @@ class QueryLog {
 	 * @since 1.3
 	 */
 	public function screen_options() {
-		if ( defined( 'EP_IS_NETWORK' ) && EP_IS_NETWORK ) {
-			$log        = get_site_option( 'ep_query_log', array() );
-			$enabled    = get_site_option( 'ep_enable_logging' );
-			$by_status  = get_site_option( 'ep_query_log_by_status', 'failed' );
-			$by_context = get_site_option( 'ep_query_log_by_context', [] );
-		} else {
-			$log        = get_option( 'ep_query_log', array() );
-			$enabled    = get_option( 'ep_enable_logging' );
-			$by_status  = get_option( 'ep_query_log_by_status', 'failed' );
-			$by_context = get_option( 'ep_query_log_by_context', [] );
-		}
+		$log        = Utils\get_option( 'ep_query_log', array() );
+		$enabled    = Utils\get_option( 'ep_enable_logging' );
+		$by_status  = Utils\get_option( 'ep_query_log_by_status', 'failed' );
+		$by_context = Utils\get_option( 'ep_query_log_by_context', [] );
 
 		if ( is_array( $log ) ) {
 			$log = array_reverse( $log );
@@ -232,6 +217,8 @@ class QueryLog {
 		if ( defined( 'EP_IS_NETWORK' ) && EP_IS_NETWORK ) {
 			$action = '';
 		}
+
+		$is_time_limit = ! empty( $enabled ) && ! in_array( $enabled, [ '0', 0, '-1' ], true );
 		?>
 
 		<div class="wrap">
@@ -244,14 +231,32 @@ class QueryLog {
 				<table class="form-table">
 					<tbody>
 						<tr>
-							<th scope="row"><label for="ep_enable_logging"><?php esc_html_e( 'Enable or disable query logging:', 'debug-bar-elasticpress' ); ?></label></th>
+							<th scope="row">
+								<label for="ep_enable_logging">
+									<?php esc_html_e( 'Enable or disable query logging:', 'debug-bar-elasticpress' ); ?>
+								</label>
+							</th>
 							<td>
 								<select name="ep_enable_logging" id="ep_enable_logging">
 									<option value="0"><?php esc_html_e( 'Disable', 'debug-bar-elasticpress' ); ?></option>
-									<option <?php selected( 1, $enabled ); ?> value="1"><?php esc_html_e( 'Enable', 'debug-bar-elasticpress' ); ?></option>
+									<option <?php selected( $is_time_limit ); ?> value="time_limit"><?php esc_html_e( 'Enable for 5 minutes', 'debug-bar-elasticpress' ); ?></option>
+									<option <?php selected( '-1', $enabled ); ?> value="-1"><?php esc_html_e( 'Keep enabled', 'debug-bar-elasticpress' ); ?></option>
 								</select>
 								<br>
-								<span class="description"><?php echo wp_kses_post( __( 'Note that query logging can have <strong>severe</strong> performance implications on your website. We generally recommend only enabling logging during dashboard indexing and disabling after.', 'debug-bar-elasticpress' ) ); ?></span>
+								<span class="description">
+									<?php
+									echo wp_kses_post( __( 'Note that query logging can have <strong>severe</strong> performance implications on your website.', 'debug-bar-elasticpress' ) );
+									if ( $is_time_limit ) {
+										echo ' ' . wp_kses_post(
+											sprintf(
+												/* translators: date */
+												__( 'Logging queries until <strong>%s</strong>.', 'debug-bar-elasticpress' ),
+												wp_date( 'Y-m-d H:i:s', $enabled )
+											)
+										);
+									}
+									?>
+								</span>
 							</td>
 						</tr>
 						<tr>
@@ -286,6 +291,18 @@ class QueryLog {
 						</tr>
 					</tbody>
 				</table>
+
+				<p>
+					<?php
+					echo wp_kses_post(
+						sprintf(
+							/* translators: Current limit */
+							__( 'Please note that logs are stored until the storage limit is reached. The current limit is: <strong>%s</strong>', 'debug-bar-elasticpress' ),
+							size_format( $this->get_logging_storage_limit() )
+						)
+					);
+					?>
+				</p>
 
 				<p class="submit">
 					<input type="submit" name="submit" id="submit" class="button button-primary" value="<?php esc_attr_e( 'Save Changes', 'debug-bar-elasticpress' ); ?>">
@@ -477,11 +494,7 @@ class QueryLog {
 	 * @return boolean
 	 */
 	protected function is_enabled() : bool {
-		if ( defined( 'EP_IS_NETWORK' ) && EP_IS_NETWORK ) {
-			$enabled = get_site_option( 'ep_enable_logging' );
-		} else {
-			$enabled = get_option( 'ep_enable_logging' );
-		}
+		$enabled = Utils\get_option( 'ep_enable_logging' );
 
 		return ! empty( $enabled );
 	}
@@ -493,11 +506,7 @@ class QueryLog {
 	 * @return boolean
 	 */
 	protected function should_log_by_context() {
-		if ( defined( 'EP_IS_NETWORK' ) && EP_IS_NETWORK ) {
-			$by_context = get_site_option( 'ep_query_log_by_context', [] );
-		} else {
-			$by_context = get_option( 'ep_query_log_by_context', [] );
-		}
+		$by_context = Utils\get_option( 'ep_query_log_by_context', [] );
 
 		return empty( $by_context ) || in_array( $this->get_current_context(), $by_context, true );
 	}
@@ -510,12 +519,8 @@ class QueryLog {
 	 * @param string $type  Query type
 	 * @return boolean
 	 */
-	protected function should_log_by_status( array $query, string $type ) : bool {
-		if ( defined( 'EP_IS_NETWORK' ) && EP_IS_NETWORK ) {
-			$by_status = get_site_option( 'ep_query_log_by_status', 'failed' );
-		} else {
-			$by_status = get_option( 'ep_query_log_by_status', 'failed' );
-		}
+	protected function should_log_by_status( array $query, $type ) : bool {
+		$by_status = Utils\get_option( 'ep_query_log_by_status', 'failed' );
 
 		if ( 'all' === $by_status ) {
 			return true;
@@ -551,5 +556,58 @@ class QueryLog {
 		}
 
 		return call_user_func( $allowed_log_types[ $type ], $query );
+	}
+
+	/**
+	 * Return the size limit for stored logs
+	 *
+	 * @since 3.1.0
+	 * @return integer
+	 */
+	protected function get_logging_storage_limit() : int {
+		/**
+		 * Filter the log size limit
+		 *
+		 * @since  3.1.0
+		 * @hook ep_debug_bar_log_size_limit
+		 * @param  {int} $number Log size limit
+		 * @return {int} New limit
+		 */
+		return apply_filters( 'ep_debug_bar_log_size_limit', MB_IN_BYTES );
+	}
+
+	/**
+	 * Conditionally disable logging based on period
+	 *
+	 * @since 3.1.0
+	 */
+	public function maybe_disable() {
+		$enabled = Utils\get_option( 'ep_enable_logging' );
+
+		$is_time_limit = ! empty( $enabled ) && ! in_array( $enabled, [ '0', 0, '-1' ], true );
+		if ( ! $is_time_limit || $enabled > wp_date( 'U' ) ) {
+			return;
+		}
+
+		Utils\update_option( 'ep_enable_logging', 0 );
+	}
+
+	/**
+	 * Sanitize the ep_enable_logging option, conditionally setting it as a time limit
+	 *
+	 * @since 3.1.0
+	 * @param mixed $value Value sent
+	 * @return mixed
+	 */
+	public function sanitize_enable_logging( $value ) {
+		$value = sanitize_text_field( $_POST['ep_enable_logging'] );
+
+		if ( 'time_limit' === $value ) {
+			$value = wp_date( 'U', strtotime( '+5 minutes' ) );
+		} else {
+			$value = (int) ! empty( $value );
+		}
+
+		return $value;
 	}
 }
