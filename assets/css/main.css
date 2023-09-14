@@ -5,6 +5,10 @@
 	padding: 0.5em 10px;
 }
 
+.ep-queries-debug pre {
+	padding: 10px;
+}
+
 .ep-queries-debug .dashicons {
 	cursor: pointer;
 }
