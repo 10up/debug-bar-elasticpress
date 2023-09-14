@@ -27,7 +27,22 @@ Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to the 
 
 == Changelog ==
 
-= [3.0.0] - 2023-03-23 =
+= 3.1.0 - 2023-09-XX =
+
+__Added:__
+
+* New button to explain ES queries. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), and [@brandwaffle](https://github.com/brandwaffle).
+* New button to Reload and retrieve raw ES document. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), and [@brandwaffle](https://github.com/brandwaffle).
+* Query types (and context when listing queries in the Query Log admin screen.) Props [@felipeelia](https://github.com/felipeelia) and [@burhandodhy](https://github.com/burhandodhy).
+* Log query by context, status, and fixed time. Props [@felipeelia](https://github.com/felipeelia).
+* Official support to Query Monitor. Props [@felipeelia](https://github.com/felipeelia).
+
+__Security:__
+
+* Bumped `tough-cookie` from 4.1.2 to 4.1.3. Props [@dependabot](https://github.com/dependabot).
+* Bumped `word-wrap` from 1.2.3 to 1.2.4. Props [@dependabot](https://github.com/dependabot).
+
+= 3.0.0 - 2023-03-23 =
 
 This release drops the support for older versions of ElasticPress and PHP.
 
@@ -55,7 +70,7 @@ __Security:__
 * Bumped `webpack` from 5.75.0 to 5.76.2. Props [@dependabot](https://github.com/dependabot).
 
 
-= [2.1.1] - 2022-08-04 =
+= 2.1.1 - 2022-08-04 =
 
 __Security:__
 
