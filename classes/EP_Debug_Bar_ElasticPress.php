@@ -38,7 +38,7 @@ class EP_Debug_Bar_ElasticPress extends \Debug_Bar_Panel {
 		$this->title( esc_html__( 'ElasticPress', 'debug-bar-elasticpress' ) );
 
 		$this->common_panel = \DebugBarElasticPress\get_common_panel();
-		$this->common_panel->enqueue_assets();
+		$this->common_panel->enqueue_scripts_styles();
 	}
 
 	/**

@@ -29,14 +29,6 @@ class CommonPanel {
 	}
 
 	/**
-	 * Enqueue assets
-	 */
-	public function enqueue_assets() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts_styles' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts_styles' ) );
-	}
-
-	/**
 	 * Return the panel title
 	 *
 	 * @return string
