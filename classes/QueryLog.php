@@ -34,6 +34,7 @@ class QueryLog {
 		add_action( 'admin_init', array( $this, 'action_admin_init' ) );
 		add_action( 'admin_init', array( $this, 'maybe_clear_log' ) );
 		add_action( 'init', array( $this, 'maybe_disable' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
 		/**
 		 * Handle query storage as JSON strings.
@@ -109,11 +110,18 @@ class QueryLog {
 	/**
 	 * Add options page
 	 *
-	 * @since  1.3
+	 * @since 1.3
 	 * @return void
 	 */
 	public function action_admin_menu() {
-		add_submenu_page( 'elasticpress', esc_html__( 'Query Log', 'debug-bar-elasticpress' ), esc_html__( 'Query Log', 'debug-bar-elasticpress' ), 'manage_options', 'ep-query-log', array( $this, 'screen_options' ) );
+		add_submenu_page(
+			'elasticpress',
+			esc_html__( 'Query Log', 'debug-bar-elasticpress' ),
+			esc_html__( 'Query Log', 'debug-bar-elasticpress' ),
+			'manage_options',
+			'ep-query-log',
+			array( $this, 'screen_options' )
+		);
 	}
 
 	/**
@@ -450,6 +458,21 @@ class QueryLog {
 	public function maybe_add_request_query_type( array $request_args, string $path, string $index, string $type, array $query, array $query_args, $query_object ) : array {
 		$request_args['ep_query_type'] = $this->determine_request_query_type( $request_args, $path, $index, $type, $query, $query_args, $query_object );
 		return $request_args;
+	}
+
+	/**
+	 * Enqueue assets if we are in the correct admin screen
+	 *
+	 * @since 3.1.0
+	 */
+	public function admin_enqueue_scripts() {
+		$current_screen = get_current_screen();
+
+		if ( ! isset( $current_screen->id ) || 'elasticpress_page_ep-query-log' !== $current_screen->id ) {
+			return;
+		}
+
+		( new CommonPanel() )->enqueue_scripts_styles();
 	}
 
 	/**
