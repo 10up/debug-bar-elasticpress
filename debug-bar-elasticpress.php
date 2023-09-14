@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       Debug Bar ElasticPress
+ * Plugin Name:       ElasticPress Debugging Add-On
  * Plugin URI:        https://wordpress.org/plugins/debug-bar-elasticpress
- * Description:       Extends the debug bar plugin for ElasticPress queries.
+ * Description:       Extends the Query Monitor and Debug Bar plugins for ElasticPress queries.
  * Author:            10up
  * Version:           3.1.0
  * Author URI:        https://10up.com

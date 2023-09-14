@@ -1,4 +1,4 @@
-=== Debug Bar ElasticPress ===
+=== ElasticPress Debugging Add-On ===
 Contributors: tlovett1, 10up
 Tags: debug, debug bar, elasticpress, elasticsearch
 Requires at least: 4.6
@@ -8,11 +8,11 @@ Stable tag: 3.1.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Extends the Debug Bar plugin for ElasticPress queries.
+Extends the Query Monitor and Debug Bar plugins for ElasticPress queries.
 
 == Description ==
 
-Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to the [Debug Bar](https://wordpress.org/plugins/debug-bar/) plugin. Allows you to examine every ElasticPress query running on any given request.
+Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to [Debug Bar](https://wordpress.org/plugins/debug-bar/) and/or [Query Monitor](https://wordpress.org/plugins/query-monitor/) plugins. Allows you to examine every ElasticPress query running on any given request.
 
 = Requirements: =
 
