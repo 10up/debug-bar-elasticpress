@@ -414,7 +414,7 @@ class QueryLog {
 			return;
 		}
 
-		get_common_panel()->enqueue_scripts_styles();
+		( new CommonPanel() )->enqueue_scripts_styles();
 	}
 
 	/**

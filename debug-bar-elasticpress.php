@@ -49,22 +49,6 @@ spl_autoload_register(
 );
 
 /**
- * Get the panel common to both Query Monitor and Debug Bar.
- *
- * @since 3.1.0
- * @return CommonPanel
- */
-function get_common_panel() {
-	static $common_panel = null;
-
-	if ( ! $common_panel ) {
-		$common_panel = new CommonPanel();
-	}
-
-	return $common_panel;
-}
-
-/**
  * Setup plugin
  *
  * @since 3.0.0
@@ -83,7 +67,7 @@ function setup() {
 	if ( class_exists( '\QM_Collectors' ) ) {
 		\QM_Collectors::add( new QueryMonitorCollector() );
 		add_filter( 'qm/outputter/html', $n( 'register_qm_output' ) );
-		add_action( 'qm/output/enqueued-assets', [ get_common_panel(), 'enqueue_scripts_styles' ] );
+		add_action( 'qm/output/enqueued-assets', [ new CommonPanel(), 'enqueue_scripts_styles' ] );
 	} else {
 		add_filter( 'debug_bar_panels', $n( 'add_debug_bar_panel' ) );
 		add_filter( 'debug_bar_statuses', $n( 'add_debug_bar_stati' ) );

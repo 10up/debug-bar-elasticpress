@@ -29,7 +29,7 @@ class QueryMonitorOutput extends \QM_Output_Html {
 	public function __construct( QueryMonitorCollector $collector ) {
 		parent::__construct( $collector );
 
-		$this->common_panel = \DebugBarElasticPress\get_common_panel();
+		$this->common_panel = new CommonPanel();
 
 		add_filter( 'qm/output/menus', [ $this, 'admin_menu' ] );
 	}
