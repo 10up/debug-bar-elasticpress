@@ -4,7 +4,7 @@
  * Plugin URI:        https://wordpress.org/plugins/debug-bar-elasticpress
  * Description:       Extends the debug bar plugin for ElasticPress queries.
  * Author:            10up
- * Version:           3.0.0
+ * Version:           3.1.0
  * Author URI:        https://10up.com
  * Requires PHP:      7.0
  * Requires at least: 5.6
@@ -18,7 +18,7 @@
 
 namespace DebugBarElasticPress;
 
-define( 'EP_DEBUG_VERSION', '3.0.0' );
+define( 'EP_DEBUG_VERSION', '3.1.0' );
 define( 'EP_DEBUG_URL', plugin_dir_url( __FILE__ ) );
 define( 'EP_DEBUG_MIN_EP_VERSION', '4.4.0' );
 
