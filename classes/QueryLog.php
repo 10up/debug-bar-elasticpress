@@ -226,7 +226,7 @@ class QueryLog {
 			$action = '';
 		}
 
-		$is_time_limit = ! empty( $enabled ) && ! in_array( $enabled, [ '0', 0, '-1' ], true );
+		$is_time_limit = ! empty( $enabled ) && ! in_array( $enabled, [ '0', 0, '-1', -1 ], true );
 		?>
 
 		<div class="wrap">
@@ -628,7 +628,7 @@ class QueryLog {
 		if ( 'time_limit' === $value ) {
 			$value = wp_date( 'U', strtotime( '+5 minutes' ) );
 		} else {
-			$value = (int) ! empty( $value );
+			$value = ! empty( $value ) ? -1 : 0;
 		}
 
 		return $value;
