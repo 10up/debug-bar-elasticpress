@@ -80,7 +80,8 @@
  */
 #debug-menu-target-EP_Debug_Bar_ElasticPress .button,
 #debug-menu-target-EP_Debug_Bar_ElasticPress a.button,
-#qm-elasticpress .button {
+#qm-elasticpress .button,
+#qm-elasticpress a.button {
 	background: #f6f7f7 !important;
 	border: 1px solid #2271b1 !important;
 	border-radius: 3px !important;
