@@ -5,6 +5,10 @@
 	padding: 0.5em 10px;
 }
 
+.ep-queries-debug pre {
+	padding: 10px;
+}
+
 .ep-queries-debug .dashicons {
 	cursor: pointer;
 }
@@ -43,7 +47,10 @@
 }
 
 .ep-queries-buttons-wrapper {
+	align-items: center;
 	clear: both;
+	display: flex;
+	gap: 10px;
 	padding: 1em 0;
 }
 
@@ -66,10 +73,6 @@
 	clear: left;
 }
 
-#query-monitor-main .qm-debug-bar {
-	margin: 20px;
-}
-
 /* stylelint-disable selector-id-pattern */
 
 /* The giant list of selectors here is needed to
@@ -77,11 +80,11 @@
  */
 #debug-menu-target-EP_Debug_Bar_ElasticPress .button,
 #debug-menu-target-EP_Debug_Bar_ElasticPress a.button,
-#debug-menu-target-EP_Debug_Bar_ElasticPress button.ep-copy-button.button.qm-button {
+#qm-elasticpress .button,
+#qm-elasticpress a.button {
 	background: #f6f7f7 !important;
-	border-color: #2271b1 !important;
+	border: 1px solid #2271b1 !important;
 	border-radius: 3px !important;
-	border-width: 1px;
 	
 	/* Overriding some Debug Bar "important" rules */
 	color: #2271b1 !important;
@@ -95,37 +98,56 @@
 	text-shadow: none;
 }
 
-#debug-menu-target-EP_Debug_Bar_ElasticPress .button:hover {
+#debug-menu-target-EP_Debug_Bar_ElasticPress .button:hover,
+#query-monitor-main #qm-elasticpress .button:hover {
 	background: #f0f0f1;
 	border-color: #0a4b78;
-	color: #0a4b78;
-	text-decoration: none;
+	color: #0a4b78 !important;
+	text-decoration: none !important;
 }
 
-#debug-menu-target-EP_Debug_Bar_ElasticPress .button:active {
-	background: #f6f7f7;
-	border-color: #8c8f94;
+#debug-menu-target-EP_Debug_Bar_ElasticPress .button:active,
+#query-monitor-main #qm-elasticpress .button:hover {
+	background: #f6f7f7 !important;
+	border-color: #8c8f94 !important;
 	box-shadow: none;
 }
 
-#debug-menu-target-EP_Debug_Bar_ElasticPress .button:focus {
+#debug-menu-target-EP_Debug_Bar_ElasticPress .button:focus,
+#query-monitor-main #qm-elasticpress .button:focus {
 	outline: none;
 }
 
 /* Overriding some Debug Bar "important" rules */
 #debug-menu-target-EP_Debug_Bar_ElasticPress .button-primary,
 #debug-menu-target-EP_Debug_Bar_ElasticPress a.button-primary,
-#debug-menu-target-EP_Debug_Bar_ElasticPress button.button-primary {
+#debug-menu-target-EP_Debug_Bar_ElasticPress button.button-primary,
+#query-monitor-main #qm-elasticpress .button-primary {
 	background: #007cba !important;
 	border: 1px solid #007cba !important;
 	color: #fff !important;
-	margin-right: 5px !important;
 }
 
 #debug-menu-target-EP_Debug_Bar_ElasticPress a.button-primary:hover,
-#debug-menu-target-EP_Debug_Bar_ElasticPress a.button-primary:focus {
+#debug-menu-target-EP_Debug_Bar_ElasticPress a.button-primary:focus,
+#query-monitor-main #qm-elasticpress a.button-primary:hover,
+#query-monitor-main #qm-elasticpress a.button-primary:focus {
+	background: #007cba !important;
 	color: #fff !important;
 	text-decoration: none !important;
+}
+
+#query-monitor-main #qm-elasticpress h3,
+#query-monitor-main #qm-elasticpress p {
+	margin: 0 !important;
+	padding: 0 !important;
+	text-align: center !important;
+}
+
+#query-monitor-main #qm-elasticpress li {
+	border-top: 1px solid var(--qm-panel-separator) !important;
+	line-height: 20px !important;
+	padding: 20px 0 !important;
 }
 
 /* stylelint-enable selector-id-pattern */

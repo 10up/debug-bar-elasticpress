@@ -13,6 +13,19 @@ All notable changes to this project will be documented in this file, per [the Ke
 ### Security
 -->
 
+## [3.1.0] - 2023-09-20
+
+### Added
+- New button to explain ES queries. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), [@MARQAS](https://github.com/MARQAS), and [@brandwaffle](https://github.com/brandwaffle) via [#79](https://github.com/10up/ElasticPress/pull/79) and [#88](https://github.com/10up/ElasticPress/pull/88).
+- New button to Reload and retrieve raw ES document. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), and [@brandwaffle](https://github.com/brandwaffle) via [#79](https://github.com/10up/ElasticPress/pull/79).
+- Query types (and context when listing queries in the Query Log admin screen.) Props [@felipeelia](https://github.com/felipeelia) and [@burhandodhy](https://github.com/burhandodhy) via [#82](https://github.com/10up/ElasticPress/pull/82).
+- Log query by context, status, and fixed time. Props [@felipeelia](https://github.com/felipeelia) via [#83](https://github.com/10up/ElasticPress/pull/83) and [#86](https://github.com/10up/ElasticPress/pull/86).
+- Official support to Query Monitor. Props [@felipeelia](https://github.com/felipeelia) via [#84](https://github.com/10up/ElasticPress/pull/84).
+
+### Security
+- Bumped `tough-cookie` from 4.1.2 to 4.1.3. Props [@dependabot](https://github.com/dependabot) via [#75](https://github.com/10up/debug-bar-elasticpress/pull/75).
+- Bumped `word-wrap` from 1.2.3 to 1.2.4. Props [@dependabot](https://github.com/dependabot) via [#76](https://github.com/10up/debug-bar-elasticpress/pull/76).
+
 ## [3.0.0] - 2023-03-23
 
 This release drops the support for older versions of ElasticPress and PHP.
@@ -83,6 +96,7 @@ This release drops the support for older versions of WordPress Core, ElasticPres
 * Initial release
 
 [Unreleased]: https://github.com/10up/debug-bar-elasticpress/compare/trunk...develop
+[3.1.0]: https://github.com/10up/debug-bar-elasticpress/compare/3.0.0...3.1.0
 [3.0.0]: https://github.com/10up/debug-bar-elasticpress/compare/2.1.1...3.0.0
 [2.1.1]: https://github.com/10up/debug-bar-elasticpress/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/10up/debug-bar-elasticpress/compare/2.0.0...2.1.0
