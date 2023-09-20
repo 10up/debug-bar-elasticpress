@@ -27,11 +27,11 @@ Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to [Deb
 
 == Changelog ==
 
-= 3.1.0 - 2023-09-XX =
+= 3.1.0 - 2023-09-20 =
 
 __Added:__
 
-* New button to explain ES queries. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), and [@brandwaffle](https://github.com/brandwaffle).
+* New button to explain ES queries. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), [@MARQAS](https://github.com/MARQAS), and [@brandwaffle](https://github.com/brandwaffle).
 * New button to Reload and retrieve raw ES document. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), and [@brandwaffle](https://github.com/brandwaffle).
 * Query types (and context when listing queries in the Query Log admin screen.) Props [@felipeelia](https://github.com/felipeelia) and [@burhandodhy](https://github.com/burhandodhy).
 * Log query by context, status, and fixed time. Props [@felipeelia](https://github.com/felipeelia).

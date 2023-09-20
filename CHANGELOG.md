@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 ### Security
 -->
 
-## [3.1.0] - 2023-09-XX
+## [3.1.0] - 2023-09-20
 
 ### Added
 - New button to explain ES queries. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), [@MARQAS](https://github.com/MARQAS), and [@brandwaffle](https://github.com/brandwaffle) via [#79](https://github.com/10up/ElasticPress/pull/79) and [#88](https://github.com/10up/ElasticPress/pull/88).
@@ -96,7 +96,7 @@ This release drops the support for older versions of WordPress Core, ElasticPres
 * Initial release
 
 [Unreleased]: https://github.com/10up/debug-bar-elasticpress/compare/trunk...develop
-[3.0.0]: https://github.com/10up/debug-bar-elasticpress/compare/3.0.0...3.1.0
+[3.1.0]: https://github.com/10up/debug-bar-elasticpress/compare/3.0.0...3.1.0
 [3.0.0]: https://github.com/10up/debug-bar-elasticpress/compare/2.1.1...3.0.0
 [2.1.1]: https://github.com/10up/debug-bar-elasticpress/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/10up/debug-bar-elasticpress/compare/2.0.0...2.1.0
