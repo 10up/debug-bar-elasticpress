@@ -16,7 +16,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 ## [3.1.0] - 2023-09-XX
 
 ### Added
-- New button to explain ES queries. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), and [@brandwaffle](https://github.com/brandwaffle) via [#79](https://github.com/10up/ElasticPress/pull/79).
+- New button to explain ES queries. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), [@MARQAS](https://github.com/MARQAS), and [@brandwaffle](https://github.com/brandwaffle) via [#79](https://github.com/10up/ElasticPress/pull/79) and [#88](https://github.com/10up/ElasticPress/pull/88).
 - New button to Reload and retrieve raw ES document. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), and [@brandwaffle](https://github.com/brandwaffle) via [#79](https://github.com/10up/ElasticPress/pull/79).
 - Query types (and context when listing queries in the Query Log admin screen.) Props [@felipeelia](https://github.com/felipeelia) and [@burhandodhy](https://github.com/burhandodhy) via [#82](https://github.com/10up/ElasticPress/pull/82).
 - Log query by context, status, and fixed time. Props [@felipeelia](https://github.com/felipeelia) via [#83](https://github.com/10up/ElasticPress/pull/83) and [#86](https://github.com/10up/ElasticPress/pull/86).
