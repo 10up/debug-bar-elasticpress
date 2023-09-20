@@ -1,18 +1,18 @@
-=== Debug Bar ElasticPress ===
+=== ElasticPress Debugging Add-On ===
 Contributors: tlovett1, 10up
 Tags: debug, debug bar, elasticpress, elasticsearch
 Requires at least: 4.6
 Tested up to: 6.1
 Requires PHP: 7.0
-Stable tag: 3.0.0
+Stable tag: 3.1.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Extends the Debug Bar plugin for ElasticPress queries.
+Extends the Query Monitor and Debug Bar plugins for ElasticPress queries.
 
 == Description ==
 
-Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to the [Debug Bar](https://wordpress.org/plugins/debug-bar/) plugin. Allows you to examine every ElasticPress query running on any given request.
+Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to [Debug Bar](https://wordpress.org/plugins/debug-bar/) and/or [Query Monitor](https://wordpress.org/plugins/query-monitor/) plugins. Allows you to examine every ElasticPress query running on any given request.
 
 = Requirements: =
 
@@ -27,7 +27,22 @@ Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to the 
 
 == Changelog ==
 
-= [3.0.0] - 2023-03-23 =
+= 3.1.0 - 2023-09-20 =
+
+__Added:__
+
+* New button to explain ES queries. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), [@MARQAS](https://github.com/MARQAS), and [@brandwaffle](https://github.com/brandwaffle).
+* New button to Reload and retrieve raw ES document. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), and [@brandwaffle](https://github.com/brandwaffle).
+* Query types (and context when listing queries in the Query Log admin screen.) Props [@felipeelia](https://github.com/felipeelia) and [@burhandodhy](https://github.com/burhandodhy).
+* Log query by context, status, and fixed time. Props [@felipeelia](https://github.com/felipeelia).
+* Official support to Query Monitor. Props [@felipeelia](https://github.com/felipeelia).
+
+__Security:__
+
+* Bumped `tough-cookie` from 4.1.2 to 4.1.3. Props [@dependabot](https://github.com/dependabot).
+* Bumped `word-wrap` from 1.2.3 to 1.2.4. Props [@dependabot](https://github.com/dependabot).
+
+= 3.0.0 - 2023-03-23 =
 
 This release drops the support for older versions of ElasticPress and PHP.
 
@@ -55,7 +70,7 @@ __Security:__
 * Bumped `webpack` from 5.75.0 to 5.76.2. Props [@dependabot](https://github.com/dependabot).
 
 
-= [2.1.1] - 2022-08-04 =
+= 2.1.1 - 2022-08-04 =
 
 __Security:__
 

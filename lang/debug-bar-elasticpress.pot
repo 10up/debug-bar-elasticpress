@@ -2,20 +2,20 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Debug Bar ElasticPress 3.0.0\n"
+"Project-Id-Version: ElasticPress Debugging Add-On 3.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/debug-bar-elasticpress\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-03-23T12:56:23+00:00\n"
+"POT-Creation-Date: 2023-09-20T11:47:36+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.7.1\n"
+"X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: debug-bar-elasticpress\n"
 
 #. Plugin Name of the plugin
-msgid "Debug Bar ElasticPress"
+msgid "ElasticPress Debugging Add-On"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -23,7 +23,7 @@ msgid "https://wordpress.org/plugins/debug-bar-elasticpress"
 msgstr ""
 
 #. Description of the plugin
-msgid "Extends the debug bar plugin for ElasticPress queries."
+msgid "Extends the Query Monitor and Debug Bar plugins for ElasticPress queries."
 msgstr ""
 
 #. Author of the plugin
@@ -34,22 +34,23 @@ msgstr ""
 msgid "https://10up.com"
 msgstr ""
 
-#: classes/EP_Debug_Bar_ElasticPress.php:31
+#: classes/CommonPanel.php:28
+#: classes/EP_Debug_Bar_ElasticPress.php:38
 msgid "ElasticPress"
 msgstr ""
 
+#: classes/CommonPanel.php:60
+msgid "ElasticPress is currently indexing."
+msgstr ""
+
 #. translators: queries count.
-#: classes/EP_Debug_Bar_ElasticPress.php:75
+#: classes/EP_Debug_Bar_ElasticPress.php:77
 msgid "<span>Total ElasticPress Queries:</span> %d"
 msgstr ""
 
 #. translators: blocking query time.
-#: classes/EP_Debug_Bar_ElasticPress.php:83
+#: classes/EP_Debug_Bar_ElasticPress.php:85
 msgid "<span>Total Blocking ElasticPress Query Time:</span> %d ms"
-msgstr ""
-
-#: classes/EP_Debug_Bar_ElasticPress.php:90
-msgid "ElasticPress is currently indexing."
 msgstr ""
 
 #: classes/QueryFormatter.php:31
@@ -88,44 +89,128 @@ msgstr ""
 msgid "Query Result"
 msgstr ""
 
-#: classes/QueryFormatter.php:50
+#: classes/QueryFormatter.php:51
 msgid "Error"
 msgstr ""
 
-#: classes/QueryFormatter.php:54
+#: classes/QueryFormatter.php:55
 msgid "Recommended Solution"
 msgstr ""
 
-#: classes/QueryLog.php:90
+#: classes/QueryLog.php:119
+#: classes/QueryLog.php:120
 msgid "Query Log"
 msgstr ""
 
-#: classes/QueryLog.php:236
+#: classes/QueryLog.php:233
 msgid "ElasticPress Query Log"
 msgstr ""
 
-#: classes/QueryLog.php:245
+#: classes/QueryLog.php:244
 msgid "Enable or disable query logging:"
 msgstr ""
 
-#: classes/QueryLog.php:248
+#: classes/QueryLog.php:249
 msgid "Disable"
 msgstr ""
 
-#: classes/QueryLog.php:249
-msgid "Enable"
+#: classes/QueryLog.php:250
+msgid "Enable for 5 minutes"
 msgstr ""
 
-#: classes/QueryLog.php:252
-msgid "Note that query logging can have <strong>severe</strong> performance implications on your website. We generally recommend only enabling logging during dashboard indexing and disabling after."
+#: classes/QueryLog.php:251
+msgid "Keep enabled"
 msgstr ""
 
-#: classes/QueryLog.php:259
+#: classes/QueryLog.php:256
+msgid "Note that query logging can have <strong>severe</strong> performance implications on your website."
+msgstr ""
+
+#. translators: date
+#: classes/QueryLog.php:261
+msgid "Logging queries until <strong>%s</strong>."
+msgstr ""
+
+#: classes/QueryLog.php:271
+msgid "Log by status:"
+msgstr ""
+
+#: classes/QueryLog.php:274
+msgid "Only failed queries"
+msgstr ""
+
+#: classes/QueryLog.php:275
+msgid "All queries"
+msgstr ""
+
+#: classes/QueryLog.php:280
+msgid "Log by context:"
+msgstr ""
+
+#: classes/QueryLog.php:284
+msgid "Public"
+msgstr ""
+
+#: classes/QueryLog.php:288
+msgid "Admin"
+msgstr ""
+
+#: classes/QueryLog.php:292
+msgid "AJAX"
+msgstr ""
+
+#: classes/QueryLog.php:296
+msgid "REST API"
+msgstr ""
+
+#. translators: Current limit
+#: classes/QueryLog.php:308
+msgid "Please note that logs are stored until the storage limit is reached. The current limit is: <strong>%s</strong>"
+msgstr ""
+
+#: classes/QueryLog.php:316
 msgid "Save Changes"
 msgstr ""
 
-#: classes/QueryLog.php:262
+#: classes/QueryLog.php:319
 msgid "Empty Log"
+msgstr ""
+
+#: classes/QueryLog.php:398
+msgid "Raw ES document"
+msgstr ""
+
+#: classes/QueryLog.php:403
+msgid "Elasticsearch check"
+msgstr ""
+
+#: classes/QueryLog.php:493
+msgid "Main query"
+msgstr ""
+
+#: classes/QueryLog.php:497
+msgid "Possible values for EP filter"
+msgstr ""
+
+#: classes/QueryLog.php:504
+msgid "Autosuggest template"
+msgstr ""
+
+#: classes/QueryLog.php:507
+msgid "Search"
+msgstr ""
+
+#: classes/QueryMonitorOutput.php:78
+msgid "Total ElasticPress Queries:"
+msgstr ""
+
+#: classes/QueryMonitorOutput.php:84
+msgid "Total Blocking ElasticPress Query Time:"
+msgstr ""
+
+#. translators: time spent
+#: classes/QueryMonitorOutput.php:91
+msgid "%d ms"
 msgstr ""
 
 #: classes/QueryOutput.php:53
@@ -137,103 +222,115 @@ msgid "Copy Requests Info to Clipboard"
 msgstr ""
 
 #: classes/QueryOutput.php:59
-#: classes/QueryOutput.php:247
+#: classes/QueryOutput.php:260
 msgid "Copied!"
 msgstr ""
 
-#: classes/QueryOutput.php:78
+#: classes/QueryOutput.php:79
 msgid "No queries to show"
 msgstr ""
 
 #. translators: Debug bar elasticpress error message
-#: classes/QueryOutput.php:138
+#: classes/QueryOutput.php:144
 msgid "<strong>Error:</strong> %s"
 msgstr ""
 
 #. translators: Debug bar elasticpress recommended solution for the error
-#: classes/QueryOutput.php:146
+#: classes/QueryOutput.php:152
 msgid "<strong>Recommended Solution:</strong> %s"
 msgstr ""
 
-#: classes/QueryOutput.php:153
+#: classes/QueryOutput.php:159
 msgid "Errors:"
 msgstr ""
 
-#: classes/QueryOutput.php:160
+#: classes/QueryOutput.php:166
 msgid "Type:"
 msgstr ""
 
-#: classes/QueryOutput.php:166
+#: classes/QueryOutput.php:173
+msgid "Context:"
+msgstr ""
+
+#: classes/QueryOutput.php:179
 msgid "Host:"
 msgstr ""
 
 #. translators: time spent running the query.
-#: classes/QueryOutput.php:175
+#: classes/QueryOutput.php:188
 msgid "<strong>Time Taken:</strong> %d ms"
 msgstr ""
 
-#: classes/QueryOutput.php:179
+#: classes/QueryOutput.php:192
 msgid "<strong>Time Taken:</strong> -"
 msgstr ""
 
-#: classes/QueryOutput.php:186
+#: classes/QueryOutput.php:199
 msgid "URL:"
 msgstr ""
 
-#: classes/QueryOutput.php:191
+#: classes/QueryOutput.php:204
 msgid "Method:"
 msgstr ""
 
-#: classes/QueryOutput.php:197
+#: classes/QueryOutput.php:210
 msgid "Headers:"
 msgstr ""
 
-#: classes/QueryOutput.php:204
+#: classes/QueryOutput.php:217
 msgid "Query Args:"
 msgstr ""
 
-#: classes/QueryOutput.php:211
+#: classes/QueryOutput.php:224
 msgid "Query Body:"
 msgstr ""
 
 #. translators: Query HTTP Code response
-#: classes/QueryOutput.php:230
+#: classes/QueryOutput.php:243
 msgid "<strong>Query Response Code:</strong> HTTP %d"
 msgstr ""
 
-#: classes/QueryOutput.php:235
+#: classes/QueryOutput.php:248
 msgid "Query Result:"
 msgstr ""
 
-#: classes/QueryOutput.php:240
+#: classes/QueryOutput.php:253
 msgid "Query Response Code:"
 msgstr ""
 
-#: classes/QueryOutput.php:240
+#: classes/QueryOutput.php:253
 msgid "Request Error"
 msgstr ""
 
-#: classes/QueryOutput.php:244
+#: classes/QueryOutput.php:257
 msgid "Copy cURL Request"
 msgstr ""
 
-#: classes/QueryOutput.php:262
+#: classes/QueryOutput.php:275
 msgid "Queries info"
 msgstr ""
 
-#: debug-bar-elasticpress.php:98
+#: classes/QueryOutput.php:377
+msgid "Explain queries"
+msgstr ""
+
+#: classes/QueryOutput.php:405
+msgid "Reload and retrieve raw ES document"
+msgstr ""
+
+#: debug-bar-elasticpress.php:108
 msgid "ElasticPress Version"
 msgstr ""
 
-#: debug-bar-elasticpress.php:110
+#: debug-bar-elasticpress.php:120
 msgid "ElasticPress.io Managed Platform"
 msgstr ""
 
-#: debug-bar-elasticpress.php:114
+#: debug-bar-elasticpress.php:124
 msgid "Elasticsearch Version"
 msgstr ""
 
 #. translators: Min. EP version
-#: debug-bar-elasticpress.php:147
+#: debug-bar-elasticpress.php:157
 msgid "Debug Bar ElasticPress needs at least ElasticPress %s to work properly."
 msgstr ""
