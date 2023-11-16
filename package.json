@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/10up/debug-bar-elasticpress#readme",
   "devDependencies": {
-    "10up-toolkit": "^4.3.1",
+    "10up-toolkit": "^5.2.3",
     "@10up/stylelint-config": "2.0.2"
   },
   "eslintConfig": {
