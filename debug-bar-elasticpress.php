@@ -76,12 +76,20 @@ function setup() {
 	add_filter( 'ep_formatted_args', $n( 'add_explain_args' ), 10, 2 );
 
 	add_action( 'wp', $n( 'retrieve_raw_document_from_es' ) );
-
-	load_plugin_textdomain( 'debug-bar-elasticpress', false, basename( __DIR__ ) . '/lang' );
+	add_action( 'init', $n( 'i18n' ) );
 
 	QueryLog::factory();
 }
 add_action( 'plugins_loaded', __NAMESPACE__ . '\\setup' );
+
+/**
+ * Load translations
+ *
+ * @since 3.1.1
+ */
+function i18n() {
+	load_plugin_textdomain( 'debug-bar-elasticpress', false, basename( __DIR__ ) . '/lang' );
+}
 
 /**
  * Register panel
