@@ -33,7 +33,7 @@ class CommonPanel {
 	 *
 	 * @return string
 	 */
-	public function get_title() : string {
+	public function get_title(): string {
 		return $this->title;
 	}
 	/**

@@ -18,7 +18,7 @@
   },
   "license": ["GPL-2.0-only"],
   "require-dev": {
-    "10up/phpcs-composer": "dev-master",
+    "10up/phpcs-composer": "^3.0.0",
     "phpcompatibility/phpcompatibility-wp": "*"
   },
   "scripts": {
