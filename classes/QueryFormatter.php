@@ -8,7 +8,7 @@
 
 namespace DebugBarElasticPress;
 
-use \ElasticPress\QueryLogger;
+use ElasticPress\QueryLogger;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -24,7 +24,7 @@ class QueryFormatter extends QueryLogger {
 	 * @param array $queries Queries to be displayed
 	 * @return array
 	 */
-	public function format_queries_for_display( $queries ) : array {
+	public function format_queries_for_display( $queries ): array {
 		$formatted_queries = [];
 
 		$labels = [

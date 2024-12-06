@@ -39,7 +39,7 @@ class QueryMonitorOutput extends \QM_Output_Html {
 	 *
 	 * @return string
 	 */
-	public function name() : string {
+	public function name(): string {
 		return $this->common_panel->get_title();
 	}
 
