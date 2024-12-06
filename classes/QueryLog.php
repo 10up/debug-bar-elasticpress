@@ -61,10 +61,13 @@ class QueryLog {
 		if ( defined( 'EP_IS_NETWORK' ) && EP_IS_NETWORK && isset( $_POST['ep_enable_logging'] ) ) {
 			check_admin_referer( 'ep-debug-options' );
 
-			update_site_option( 'ep_enable_logging', $this->sanitize_enable_logging( $_POST['ep_enable_logging'] ) );
-			update_site_option( 'ep_query_log_by_status', sanitize_text_field( $_POST['ep_query_log_by_status'] ) );
+			update_site_option( 'ep_enable_logging', $this->sanitize_enable_logging( $_POST['ep_enable_logging'] ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+			if ( isset( $_POST['ep_query_log_by_status'] ) ) {
+				update_site_option( 'ep_query_log_by_status', sanitize_text_field( wp_unslash( $_POST['ep_query_log_by_status'] ) ) );
+			}
 			if ( ! empty( $_POST['ep_query_log_by_context'] ) ) {
-				update_site_option( 'ep_query_log_by_context', array_map( 'sanitize_text_field', $_POST['ep_query_log_by_context'] ) );
+				$ep_query_log_by_context = array_map( 'sanitize_text_field', wp_unslash( $_POST['ep_query_log_by_context'] ) );
+				update_site_option( 'ep_query_log_by_context', $ep_query_log_by_context );
 			} else {
 				update_site_option( 'ep_query_log_by_context', [] );
 			}
@@ -97,7 +100,10 @@ class QueryLog {
 	 * @since 1.3
 	 */
 	public function maybe_clear_log() {
-		if ( empty( $_GET['ep_clear_query_log'] ) || ! wp_verify_nonce( $_GET['ep_clear_query_log'], 'ep_clear_query_log' ) ) {
+		if (
+			empty( $_GET['ep_clear_query_log'] )
+			|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['ep_clear_query_log'] ) ), 'ep_clear_query_log' )
+		) {
 			return;
 		}
 
@@ -323,7 +329,7 @@ class QueryLog {
 
 			<?php
 			$queries = array_map(
-				function( $query ) {
+				function ( $query ) {
 					return $query['query'];
 				},
 				$log
@@ -386,7 +392,7 @@ class QueryLog {
 	 * @param string|null $type       Type of request, used for debugging.
 	 * @return array New request args
 	 */
-	public function maybe_add_request_type( array $args, string $path, array $query_args, $type ) : array {
+	public function maybe_add_request_type( array $args, string $path, array $query_args, $type ): array {
 		if ( ! empty( $args['ep_query_type'] ) ) {
 			return $args;
 		}
@@ -412,7 +418,7 @@ class QueryLog {
 	 * @param array $args Request args
 	 * @return array
 	 */
-	public function maybe_add_request_context( array $args ) : array {
+	public function maybe_add_request_context( array $args ): array {
 		$args['ep_context'] = $this->get_current_context();
 
 		return $args;
@@ -424,7 +430,7 @@ class QueryLog {
 	 * @since 3.1.0
 	 * @return string
 	 */
-	protected function get_current_context() : string {
+	protected function get_current_context(): string {
 		$context = 'public';
 
 		if ( is_admin() ) {
@@ -455,7 +461,7 @@ class QueryLog {
 	 * @param mixed  $query_object Could be WP_Query, WP_User_Query, etc.
 	 * @return array New request arguments
 	 */
-	public function maybe_add_request_query_type( array $request_args, string $path, string $index, string $type, array $query, array $query_args, $query_object ) : array {
+	public function maybe_add_request_query_type( array $request_args, string $path, string $index, string $type, array $query, array $query_args, $query_object ): array {
 		$request_args['ep_query_type'] = $this->determine_request_query_type( $request_args, $path, $index, $type, $query, $query_args, $query_object );
 		return $request_args;
 	}
@@ -488,7 +494,7 @@ class QueryLog {
 	 * @param mixed  $query_object Could be WP_Query, WP_User_Query, etc.
 	 * @return string Request type
 	 */
-	protected function determine_request_query_type( array $request_args, string $path, string $index, string $type, array $query, array $query_args, $query_object ) : string {
+	protected function determine_request_query_type( array $request_args, string $path, string $index, string $type, array $query, array $query_args, $query_object ): string {
 		if ( $query_object instanceof \WP_Query && $query_object->is_main_query() ) {
 			return esc_html__( 'Main query', 'debug-bar-elasticpress' );
 		}
@@ -516,7 +522,7 @@ class QueryLog {
 	 * @since 3.1.0
 	 * @return boolean
 	 */
-	protected function is_enabled() : bool {
+	protected function is_enabled(): bool {
 		$enabled = Utils\get_option( 'ep_enable_logging' );
 
 		return ! empty( $enabled );
@@ -542,7 +548,7 @@ class QueryLog {
 	 * @param string $type  Query type
 	 * @return boolean
 	 */
-	protected function should_log_by_status( array $query, $type ) : bool {
+	protected function should_log_by_status( array $query, $type ): bool {
 		$by_status = Utils\get_option( 'ep_query_log_by_status', 'failed' );
 
 		if ( 'all' === $by_status ) {
@@ -587,7 +593,7 @@ class QueryLog {
 	 * @since 3.1.0
 	 * @return integer
 	 */
-	protected function get_logging_storage_limit() : int {
+	protected function get_logging_storage_limit(): int {
 		/**
 		 * Filter the log size limit
 		 *
@@ -623,8 +629,6 @@ class QueryLog {
 	 * @return mixed
 	 */
 	public function sanitize_enable_logging( $value ) {
-		$value = sanitize_text_field( $_POST['ep_enable_logging'] );
-
 		if ( 'time_limit' === $value ) {
 			$value = wp_date( 'U', strtotime( '+5 minutes' ) );
 		} else {
