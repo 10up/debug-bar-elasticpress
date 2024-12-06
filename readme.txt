@@ -12,7 +12,9 @@ Extends the Query Monitor and Debug Bar plugins for ElasticPress queries.
 
 == Description ==
 
-Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to [Debug Bar](https://wordpress.org/plugins/debug-bar/) and/or [Query Monitor](https://wordpress.org/plugins/query-monitor/) plugins. Allows you to examine every ElasticPress query running on any given request.
+Allows you to examine every ElasticPress query running on any given request by adding an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to [Debug Bar](https://wordpress.org/plugins/debug-bar/) and/or [Query Monitor](https://wordpress.org/plugins/query-monitor/) plugins.
+
+Alternatively, go to ElasticPress > Query Log and set it to record ElasticPress queries.
 
 = Requirements: =
 
@@ -22,10 +24,25 @@ Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to [Deb
 
 == Installation ==
 1. Install [ElasticPress](https://wordpress.org/plugins/elasticpress).
-2. Install [Debug Bar](https://wordpress.org/plugins/debug-bar/).
+2. Optionally install [Debug Bar](https://wordpress.org/plugins/debug-bar/) or [Query Monitor](https://wordpress.org/plugins/query-monitor/).
 3. Install the plugin in WordPress.
 
 == Changelog ==
+
+= 3.1.1 - 2024-11-XX =
+
+__Added:__
+
+* ElasticPress as a plugin dependency. Props [@jeffpaul](https://github.com/jeffpaul).
+
+__Changed:__
+
+* More modern versions of GitHub Actions, node, and node packages. Props [@felipeelia](https://github.com/felipeelia).
+
+__Fixed:__
+
+* Notices related to i18n calls. Props [@felipeelia](https://github.com/felipeelia) and [@archon810](https://github.com/archon810).
+
 
 = 3.1.0 - 2023-09-20 =
 
