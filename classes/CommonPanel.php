@@ -20,6 +20,16 @@ class CommonPanel {
 	 * @return string
 	 */
 	public function get_title(): string {
+		$queries_count = count( \ElasticPress\Elasticsearch::factory()->get_query_log() );
+
+		if ( $queries_count ) {
+			return sprintf(
+				/* translators: %d: number of queries */
+				esc_html__( 'ElasticPress (%d)', 'debug-bar-elasticpress' ),
+				$queries_count
+			);
+		}
+
 		return esc_html__( 'ElasticPress', 'debug-bar-elasticpress' );
 	}
 
