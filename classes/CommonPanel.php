@@ -19,7 +19,7 @@ class CommonPanel {
 	 *
 	 * @return string
 	 */
-	public function get_title() : string {
+	public function get_title(): string {
 		return esc_html__( 'ElasticPress', 'debug-bar-elasticpress' );
 	}
 
