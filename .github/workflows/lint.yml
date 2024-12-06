@@ -14,22 +14,30 @@ jobs:
     name: Lint JS and CSS
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
+
     - name: npm install
       run: npm install
+
     - name: eslint
       run: npm run lint-js
+
     - name: stylelint
       run: npm run lint-css
+
   phpcs:
     name: PHPCS
     runs-on: ubuntu-latest
     steps:
+
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
+
     - name: composer install
       run: composer install
+
     - name: PHPCS check
-      run: composer run lint
+      run: './vendor/bin/phpcs . -q --report=checkstyle --runtime-set testVersion 7.0- | cs2pr'
+
     - name: PHP Compatibility Check
       run: composer run check-php-compat
