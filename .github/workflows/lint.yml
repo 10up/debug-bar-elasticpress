@@ -36,6 +36,14 @@ jobs:
     - name: composer install
       run: composer install
 
+    - name: Set PHP version
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.4'
+        extensions: :php-psr
+        tools: cs2pr
+        coverage: none
+
     - name: PHPCS check
       run: './vendor/bin/phpcs . -q --report=checkstyle --runtime-set testVersion 7.0- | cs2pr'
 
