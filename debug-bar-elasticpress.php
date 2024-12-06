@@ -23,7 +23,7 @@ define( 'EP_DEBUG_URL', plugin_dir_url( __FILE__ ) );
 define( 'EP_DEBUG_MIN_EP_VERSION', '4.4.0' );
 
 spl_autoload_register(
-	function( $class ) {
+	function ( $class_name ) {
 		// project-specific namespace prefix.
 		$prefix = 'DebugBarElasticPress\\';
 
@@ -33,11 +33,11 @@ spl_autoload_register(
 		// does the class use the namespace prefix?
 		$len = strlen( $prefix );
 
-		if ( strncmp( $prefix, $class, $len ) !== 0 ) {
+		if ( strncmp( $prefix, $class_name, $len ) !== 0 ) {
 			return;
 		}
 
-		$relative_class = substr( $class, $len );
+		$relative_class = substr( $class_name, $len );
 
 		$file = $base_dir . str_replace( '\\', '/', $relative_class ) . '.php';
 
@@ -54,8 +54,8 @@ spl_autoload_register(
  * @since 3.0.0
  */
 function setup() {
-	$n = function( $function ) {
-		return __NAMESPACE__ . "\\$function";
+	$n = function ( $function_name ) {
+		return __NAMESPACE__ . "\\$function_name";
 	};
 
 	if ( ! defined( 'EP_VERSION' ) || version_compare( EP_VERSION, EP_DEBUG_MIN_EP_VERSION, '<' ) ) {
@@ -131,10 +131,9 @@ function add_debug_bar_stati( $stati ) {
  * Add explain=true to elastic post query
  *
  * @param  array $formatted_args Formatted Elasticsearch query
- * @param  array $args           Query variables
  * @return array
  */
-function add_explain_args( $formatted_args, $args ) {
+function add_explain_args( $formatted_args ) {
 	if ( isset( $_GET['explain'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 		$formatted_args['explain'] = true;
 	}
@@ -190,7 +189,7 @@ function is_indexable_singular() {
  * @return void
  */
 function retrieve_raw_document_from_es() {
-	if ( empty( $_GET['ep-retrieve-es-document'] ) || empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'ep-retrieve-es-document' ) ) {
+	if ( empty( $_GET['ep-retrieve-es-document'] ) || empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'ep-retrieve-es-document' ) ) {
 		return;
 	}
 

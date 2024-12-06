@@ -269,7 +269,7 @@ class QueryOutput {
 	 * @since 3.0.0
 	 * @return string
 	 */
-	protected function get_copy_paste_report() : string {
+	protected function get_copy_paste_report(): string {
 		$output = sprintf(
 			"## %s ##\n\n",
 			__( 'Queries info', 'debug-bar-elasticpress' )
@@ -357,7 +357,7 @@ class QueryOutput {
 	 * @since 3.1.0
 	 * @return string
 	 */
-	public function get_explain_query_button() : string {
+	public function get_explain_query_button(): string {
 		if ( empty( $this->queries ) ) {
 			return '';
 		}
@@ -384,7 +384,7 @@ class QueryOutput {
 	 * @since 3.1.0
 	 * @return string
 	 */
-	public function get_retrieve_raw_document_button() : string {
+	public function get_retrieve_raw_document_button(): string {
 		if ( ! is_indexable_singular() ) {
 			return '';
 		}
