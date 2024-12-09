@@ -109,6 +109,7 @@ This release drops the support for older versions of WordPress Core, ElasticPres
 * Initial release
 
 [Unreleased]: https://github.com/10up/debug-bar-elasticpress/compare/trunk...develop
+[3.1.1]: https://github.com/10up/debug-bar-elasticpress/compare/3.1.0...3.1.1
 [3.1.0]: https://github.com/10up/debug-bar-elasticpress/compare/3.0.0...3.1.0
 [3.0.0]: https://github.com/10up/debug-bar-elasticpress/compare/2.1.1...3.0.0
 [2.1.1]: https://github.com/10up/debug-bar-elasticpress/compare/2.1.0...2.1.1
