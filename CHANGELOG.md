@@ -22,12 +22,9 @@ All notable changes to this project will be documented in this file, per [the Ke
 ### Changed
 - More modern versions of GitHub Actions, node, and node packages. Props [@felipeelia](https://github.com/felipeelia) via [#104](https://github.com/10up/ElasticPress/pull/104).
 
-### Deprecated
-### Removed
 ### Fixed
 - Notices related to i18n calls. Props [@felipeelia](https://github.com/felipeelia) and [@archon810](https://github.com/archon810) via [#103](https://github.com/10up/ElasticPress/pull/103).
-
-### Security
+- Use new plugin name in the admin notice. Props [@burhandodhy](https://github.com/burhandodhy) via [#108](https://github.com/10up/ElasticPress/pull/108).
 
 ## [3.1.0] - 2023-09-20
 

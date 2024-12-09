@@ -43,7 +43,7 @@ __Changed:__
 __Fixed:__
 
 * Notices related to i18n calls. Props [@felipeelia](https://github.com/felipeelia) and [@archon810](https://github.com/archon810).
-
+* Use new plugin name in the admin notice. Props [@burhandodhy](https://github.com/burhandodhy).
 
 = 3.1.0 - 2023-09-20 =
 
