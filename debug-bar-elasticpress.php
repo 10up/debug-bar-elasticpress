@@ -162,7 +162,7 @@ function admin_notice_min_ep_version() {
 			<?php
 			printf(
 				/* translators: Min. EP version */
-				esc_html__( 'Debug Bar ElasticPress needs at least ElasticPress %s to work properly.', 'debug-bar-elasticpress' ),
+				esc_html__( 'ElasticPress Debugging Add-On needs at least ElasticPress %s to work properly.', 'debug-bar-elasticpress' ),
 				esc_html( EP_DEBUG_MIN_EP_VERSION )
 			);
 			?>
