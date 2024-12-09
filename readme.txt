@@ -33,6 +33,7 @@ Alternatively, go to ElasticPress > Query Log and set it to record ElasticPress 
 
 __Added:__
 
+* Display the number of queries in Query Monitor's tab title. Props [@felipeelia](https://github.com/felipeelia) and [@burhandodhy](https://github.com/burhandodhy).
 * ElasticPress as a plugin dependency. Props [@jeffpaul](https://github.com/jeffpaul).
 
 __Changed:__
