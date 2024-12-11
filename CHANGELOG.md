@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 ### Security
 -->
 
-## [3.1.1] - 2024-12-XX
+## [3.1.1] - 2024-12-11
 
 ### Added
 - Display the number of queries in Query Monitor's tab title. Props [@felipeelia](https://github.com/felipeelia) and [@burhandodhy](https://github.com/burhandodhy) via [#105](https://github.com/10up/ElasticPress/pull/105).

@@ -29,7 +29,7 @@ Alternatively, go to ElasticPress > Query Log and set it to record ElasticPress 
 
 == Changelog ==
 
-= 3.1.1 - 2024-11-XX =
+= 3.1.1 - 2024-12-11 =
 
 __Added:__
 
