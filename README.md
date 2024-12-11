@@ -7,12 +7,14 @@
 ## Requirements
 
 * [ElasticPress](https://wordpress.org/plugins/elasticpress/) 4.4.0+
-* [Debug Bar](https://wordpress.org/plugins/debug-bar/) 1.0+
 * PHP 7.0+
+* Optional: [Debug Bar](https://wordpress.org/plugins/debug-bar/) 1.0+ or [Query Monitor](https://wordpress.org/plugins/query-monitor/)
 
 ## Usage
 
-After installing and activating, click the `Debug` button in the admin toolbar. Within the Debug Bar Panel, click the ElasticPress panel.
+After installing and activating, click the `Debug` button or the Query Monitor Stats in the admin toolbar. Within Debug Bar/Query Monitor, click the ElasticPress panel.
+
+Alternatively, go to ElasticPress > Query Log and set it to record ElasticPress queries.
 
 ## Issues
 

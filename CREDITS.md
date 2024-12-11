@@ -6,7 +6,7 @@ The following acknowledges the Maintainers for this repository, those who have C
 
 The following individuals are responsible for curating the list of issues, responding to pull requests, and ensuring regular releases happen.
 
-[Vasken Hauri (@brandwaffle)](https://github.com/brandwaffle).
+[Thorsten Ott (@tott)](https://github.com/tott) and [Felipe Elia (@felipeelia)](https://github.com/felipeelia).
 
 ## Contributors
 
@@ -29,6 +29,7 @@ Thank you to all the people who have already contributed to this repository via 
 [Burhan Nasir (@burhandodhy)](https://github.com/burhandodhy),
 [Nathaniel Taintor (@goldenapples)](https://github.com/goldenapples),
 [Matt Gross (@mattonomics)](https://github.com/mattonomics),
+[Artem Russakovskii (@archon810)](https://github.com/archon810),
 and
 [Christoph Bratschi (@cbratschi)](https://github.com/cbratschi).
 
