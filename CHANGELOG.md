@@ -13,6 +13,19 @@ All notable changes to this project will be documented in this file, per [the Ke
 ### Security
 -->
 
+## [3.1.1] - 2024-12-11
+
+### Added
+- Display the number of queries in Query Monitor's tab title. Props [@felipeelia](https://github.com/felipeelia) and [@burhandodhy](https://github.com/burhandodhy) via [#105](https://github.com/10up/ElasticPress/pull/105).
+- ElasticPress as a plugin dependency. Props [@jeffpaul](https://github.com/jeffpaul) via [#99](https://github.com/10up/ElasticPress/pull/99).
+
+### Changed
+- More modern versions of GitHub Actions, node, and node packages. Props [@felipeelia](https://github.com/felipeelia) via [#104](https://github.com/10up/ElasticPress/pull/104).
+
+### Fixed
+- Notices related to i18n calls. Props [@felipeelia](https://github.com/felipeelia) and [@archon810](https://github.com/archon810) via [#103](https://github.com/10up/ElasticPress/pull/103).
+- Use new plugin name in the admin notice. Props [@burhandodhy](https://github.com/burhandodhy) via [#108](https://github.com/10up/ElasticPress/pull/108).
+
 ## [3.1.0] - 2023-09-20
 
 ### Added
@@ -96,6 +109,7 @@ This release drops the support for older versions of WordPress Core, ElasticPres
 * Initial release
 
 [Unreleased]: https://github.com/10up/debug-bar-elasticpress/compare/trunk...develop
+[3.1.1]: https://github.com/10up/debug-bar-elasticpress/compare/3.1.0...3.1.1
 [3.1.0]: https://github.com/10up/debug-bar-elasticpress/compare/3.0.0...3.1.0
 [3.0.0]: https://github.com/10up/debug-bar-elasticpress/compare/2.1.1...3.0.0
 [2.1.1]: https://github.com/10up/debug-bar-elasticpress/compare/2.1.0...2.1.1

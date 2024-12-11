@@ -3,27 +3,28 @@
  * Plugin Name:       ElasticPress Debugging Add-On
  * Plugin URI:        https://wordpress.org/plugins/debug-bar-elasticpress
  * Description:       Extends the Query Monitor and Debug Bar plugins for ElasticPress queries.
- * Author:            10up
- * Version:           3.1.0
- * Author URI:        https://10up.com
- * Requires PHP:      7.0
+ * Version:           3.1.1
+ * Requires Plugins:  elasticpress
  * Requires at least: 5.6
- * Text Domain:       debug-bar-elasticpress
- * Domain Path:       /lang
+ * Requires PHP:      7.0
+ * Author:            10up
+ * Author URI:        https://10up.com
  * License:           GPLv2
  * License URI:       https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * Text Domain:       debug-bar-elasticpress
+ * Domain Path:       /lang
  *
  * @package DebugBarElasticPress
  */
 
 namespace DebugBarElasticPress;
 
-define( 'EP_DEBUG_VERSION', '3.1.0' );
+define( 'EP_DEBUG_VERSION', '3.1.1' );
 define( 'EP_DEBUG_URL', plugin_dir_url( __FILE__ ) );
 define( 'EP_DEBUG_MIN_EP_VERSION', '4.4.0' );
 
 spl_autoload_register(
-	function( $class ) {
+	function ( $class_name ) {
 		// project-specific namespace prefix.
 		$prefix = 'DebugBarElasticPress\\';
 
@@ -33,11 +34,11 @@ spl_autoload_register(
 		// does the class use the namespace prefix?
 		$len = strlen( $prefix );
 
-		if ( strncmp( $prefix, $class, $len ) !== 0 ) {
+		if ( strncmp( $prefix, $class_name, $len ) !== 0 ) {
 			return;
 		}
 
-		$relative_class = substr( $class, $len );
+		$relative_class = substr( $class_name, $len );
 
 		$file = $base_dir . str_replace( '\\', '/', $relative_class ) . '.php';
 
@@ -54,8 +55,8 @@ spl_autoload_register(
  * @since 3.0.0
  */
 function setup() {
-	$n = function( $function ) {
-		return __NAMESPACE__ . "\\$function";
+	$n = function ( $function_name ) {
+		return __NAMESPACE__ . "\\$function_name";
 	};
 
 	if ( ! defined( 'EP_VERSION' ) || version_compare( EP_VERSION, EP_DEBUG_MIN_EP_VERSION, '<' ) ) {
@@ -76,12 +77,20 @@ function setup() {
 	add_filter( 'ep_formatted_args', $n( 'add_explain_args' ), 10, 2 );
 
 	add_action( 'wp', $n( 'retrieve_raw_document_from_es' ) );
-
-	load_plugin_textdomain( 'debug-bar-elasticpress', false, basename( __DIR__ ) . '/lang' );
+	add_action( 'init', $n( 'i18n' ) );
 
 	QueryLog::factory();
 }
 add_action( 'plugins_loaded', __NAMESPACE__ . '\\setup' );
+
+/**
+ * Load translations
+ *
+ * @since 3.1.1
+ */
+function i18n() {
+	load_plugin_textdomain( 'debug-bar-elasticpress', false, basename( __DIR__ ) . '/lang' );
+}
 
 /**
  * Register panel
@@ -131,10 +140,9 @@ function add_debug_bar_stati( $stati ) {
  * Add explain=true to elastic post query
  *
  * @param  array $formatted_args Formatted Elasticsearch query
- * @param  array $args           Query variables
  * @return array
  */
-function add_explain_args( $formatted_args, $args ) {
+function add_explain_args( $formatted_args ) {
 	if ( isset( $_GET['explain'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 		$formatted_args['explain'] = true;
 	}
@@ -154,7 +162,7 @@ function admin_notice_min_ep_version() {
 			<?php
 			printf(
 				/* translators: Min. EP version */
-				esc_html__( 'Debug Bar ElasticPress needs at least ElasticPress %s to work properly.', 'debug-bar-elasticpress' ),
+				esc_html__( 'ElasticPress Debugging Add-On needs at least ElasticPress %s to work properly.', 'debug-bar-elasticpress' ),
 				esc_html( EP_DEBUG_MIN_EP_VERSION )
 			);
 			?>
@@ -190,7 +198,7 @@ function is_indexable_singular() {
  * @return void
  */
 function retrieve_raw_document_from_es() {
-	if ( empty( $_GET['ep-retrieve-es-document'] ) || empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'ep-retrieve-es-document' ) ) {
+	if ( empty( $_GET['ep-retrieve-es-document'] ) || empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'ep-retrieve-es-document' ) ) {
 		return;
 	}
 

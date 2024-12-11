@@ -1,6 +1,6 @@
 {
   "name": "debug-bar-elasticpress",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Extends the Debug Bar plugin for ElasticPress queries.",
   "main": "index.js",
   "scripts": {
@@ -25,11 +25,10 @@
     "url": "https://github.com/10up/debug-bar-elasticpress/issues"
   },
   "homepage": "https://github.com/10up/debug-bar-elasticpress#readme",
-  "devDependencies": {
-    "10up-toolkit": "^4.3.1",
-    "@10up/stylelint-config": "2.0.2"
-  },
   "eslintConfig": {
     "extends": "@10up/eslint-config/wordpress"
+  },
+  "devDependencies": {
+    "10up-toolkit": "^6.3.0"
   }
 }

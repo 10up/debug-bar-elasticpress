@@ -15,27 +15,24 @@ defined( 'ABSPATH' ) || exit;
  */
 class CommonPanel {
 	/**
-	 * Panel menu title
-	 *
-	 * @var string
-	 */
-	public $title = '';
-
-	/**
-	 * Class constructor
-	 */
-	public function __construct() {
-		$this->title = esc_html__( 'ElasticPress', 'debug-bar-elasticpress' );
-	}
-
-	/**
 	 * Return the panel title
 	 *
 	 * @return string
 	 */
-	public function get_title() : string {
-		return $this->title;
+	public function get_title(): string {
+		$queries_count = count( \ElasticPress\Elasticsearch::factory()->get_query_log() );
+
+		if ( $queries_count ) {
+			return sprintf(
+				/* translators: %d: number of queries */
+				esc_html__( 'ElasticPress (%d)', 'debug-bar-elasticpress' ),
+				$queries_count
+			);
+		}
+
+		return esc_html__( 'ElasticPress', 'debug-bar-elasticpress' );
 	}
+
 	/**
 	 * Enqueue scripts for front end and admin
 	 */

@@ -1,18 +1,20 @@
-# Debug Bar ElasticPress
+# ElasticPress Debugging Add-On
 
-> A WordPress plugin that adds a [Debug Bar](https://wordpress.org/plugins/debug-bar/) panel to examine ElasticPress queries.
+> Adds an [ElasticPress](https://wordpress.org/plugins/elasticpress) panel to [Debug Bar](https://wordpress.org/plugins/debug-bar/) and/or [Query Monitor](https://wordpress.org/plugins/query-monitor/) plugins. Allows you to examine every ElasticPress query running on any given request.
 
 [![Support Level](https://img.shields.io/badge/support-active-green.svg)](#support-level) [![Release Version](https://img.shields.io/github/tag/10up/debug-bar-elasticpress.svg?label=release)](https://github.com/10up/debug-bar-elasticpress/releases/latest) ![WordPress tested up to version](https://img.shields.io/wordpress/plugin/tested/debug-bar-elasticpress?label=WordPress) [![GPLv2 License](https://img.shields.io/github/license/10up/debug-bar-elasticpress.svg)](https://github.com/10up/debug-bar-elasticpress/blob/trunk/LICENSE.md)
 
 ## Requirements
 
 * [ElasticPress](https://wordpress.org/plugins/elasticpress/) 4.4.0+
-* [Debug Bar](https://wordpress.org/plugins/debug-bar/) 1.0+
 * PHP 7.0+
+* Optional: [Debug Bar](https://wordpress.org/plugins/debug-bar/) 1.0+ or [Query Monitor](https://wordpress.org/plugins/query-monitor/)
 
 ## Usage
 
-After installing and activating, click the `Debug` button in the admin toolbar. Within the Debug Bar Panel, click the ElasticPress panel.
+After installing and activating, click the `Debug` button or the Query Monitor Stats in the admin toolbar. Within Debug Bar/Query Monitor, click the ElasticPress panel.
+
+Alternatively, go to ElasticPress > Query Log and set it to record ElasticPress queries.
 
 ## Issues
 

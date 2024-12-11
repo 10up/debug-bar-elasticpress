@@ -63,7 +63,7 @@
 	cursor: pointer;
 	display: inline-block;
 	font-size: 13px;
-	line-height: 2.15384615;
+	line-height: 2.1538;
 	min-height: 30px;
 	padding: 0 10px;
 	text-decoration: none;
@@ -92,7 +92,7 @@
 	display: inline-block;
 	font-family: inherit;
 	font-size: 13px;
-	line-height: 2.15384615 !important;
+	line-height: 2.1538 !important;
 	padding: 0 10px !important;
 	text-decoration: none !important;
 	text-shadow: none;
