@@ -16,24 +16,24 @@ All notable changes to this project will be documented in this file, per [the Ke
 ## [3.1.1] - 2024-12-11
 
 ### Added
-- Display the number of queries in Query Monitor's tab title. Props [@felipeelia](https://github.com/felipeelia) and [@burhandodhy](https://github.com/burhandodhy) via [#105](https://github.com/10up/ElasticPress/pull/105).
-- ElasticPress as a plugin dependency. Props [@jeffpaul](https://github.com/jeffpaul) via [#99](https://github.com/10up/ElasticPress/pull/99).
+- Display the number of queries in Query Monitor's tab title. Props [@felipeelia](https://github.com/felipeelia) and [@burhandodhy](https://github.com/burhandodhy) via [#105](https://github.com/10up/debug-bar-elasticpress/pull/105).
+- ElasticPress as a plugin dependency. Props [@jeffpaul](https://github.com/jeffpaul) via [#99](https://github.com/10up/debug-bar-elasticpress/pull/99).
 
 ### Changed
-- More modern versions of GitHub Actions, node, and node packages. Props [@felipeelia](https://github.com/felipeelia) via [#104](https://github.com/10up/ElasticPress/pull/104).
+- More modern versions of GitHub Actions, node, and node packages. Props [@felipeelia](https://github.com/felipeelia) via [#104](https://github.com/10up/debug-bar-elasticpress/pull/104).
 
 ### Fixed
-- Notices related to i18n calls. Props [@felipeelia](https://github.com/felipeelia) and [@archon810](https://github.com/archon810) via [#103](https://github.com/10up/ElasticPress/pull/103).
-- Use new plugin name in the admin notice. Props [@burhandodhy](https://github.com/burhandodhy) via [#108](https://github.com/10up/ElasticPress/pull/108).
+- Notices related to i18n calls. Props [@felipeelia](https://github.com/felipeelia) and [@archon810](https://github.com/archon810) via [#103](https://github.com/10up/debug-bar-elasticpress/pull/103).
+- Use new plugin name in the admin notice. Props [@burhandodhy](https://github.com/burhandodhy) via [#108](https://github.com/10up/debug-bar-elasticpress/pull/108).
 
 ## [3.1.0] - 2023-09-20
 
 ### Added
-- New button to explain ES queries. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), [@MARQAS](https://github.com/MARQAS), and [@brandwaffle](https://github.com/brandwaffle) via [#79](https://github.com/10up/ElasticPress/pull/79) and [#88](https://github.com/10up/ElasticPress/pull/88).
-- New button to Reload and retrieve raw ES document. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), and [@brandwaffle](https://github.com/brandwaffle) via [#79](https://github.com/10up/ElasticPress/pull/79).
-- Query types (and context when listing queries in the Query Log admin screen.) Props [@felipeelia](https://github.com/felipeelia) and [@burhandodhy](https://github.com/burhandodhy) via [#82](https://github.com/10up/ElasticPress/pull/82).
-- Log query by context, status, and fixed time. Props [@felipeelia](https://github.com/felipeelia) via [#83](https://github.com/10up/ElasticPress/pull/83) and [#86](https://github.com/10up/ElasticPress/pull/86).
-- Official support to Query Monitor. Props [@felipeelia](https://github.com/felipeelia) via [#84](https://github.com/10up/ElasticPress/pull/84).
+- New button to explain ES queries. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), [@MARQAS](https://github.com/MARQAS), and [@brandwaffle](https://github.com/brandwaffle) via [#79](https://github.com/10up/debug-bar-elasticpress/pull/79) and [#88](https://github.com/10up/debug-bar-elasticpress/pull/88).
+- New button to Reload and retrieve raw ES document. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), and [@brandwaffle](https://github.com/brandwaffle) via [#79](https://github.com/10up/debug-bar-elasticpress/pull/79).
+- Query types (and context when listing queries in the Query Log admin screen.) Props [@felipeelia](https://github.com/felipeelia) and [@burhandodhy](https://github.com/burhandodhy) via [#82](https://github.com/10up/debug-bar-elasticpress/pull/82).
+- Log query by context, status, and fixed time. Props [@felipeelia](https://github.com/felipeelia) via [#83](https://github.com/10up/debug-bar-elasticpress/pull/83) and [#86](https://github.com/10up/debug-bar-elasticpress/pull/86).
+- Official support to Query Monitor. Props [@felipeelia](https://github.com/felipeelia) via [#84](https://github.com/10up/debug-bar-elasticpress/pull/84).
 
 ### Security
 - Bumped `tough-cookie` from 4.1.2 to 4.1.3. Props [@dependabot](https://github.com/dependabot) via [#75](https://github.com/10up/debug-bar-elasticpress/pull/75).
@@ -45,7 +45,7 @@ This release drops the support for older versions of ElasticPress and PHP.
 
 ### Added
 - Instructions with error code for failed queries. Props [@MARQAS](https://github.com/MARQAS) and [@felipeelia](https://github.com/felipeelia) via [#58](https://github.com/10up/debug-bar-elasticpress/pull/58).
-- Buttons to copy or download all requests info. Props [@MARQAS](https://github.com/MARQAS), [@felipeelia](https://github.com/felipeelia), and [@burhandodhy](https://github.com/burhandodhy) via [#63](https://github.com/10up/debug-bar-elasticpress/pull/63) and [#74](https://github.com/10up/ElasticPress/pull/74).
+- Buttons to copy or download all requests info. Props [@MARQAS](https://github.com/MARQAS), [@felipeelia](https://github.com/felipeelia), and [@burhandodhy](https://github.com/burhandodhy) via [#63](https://github.com/10up/debug-bar-elasticpress/pull/63) and [#74](https://github.com/10up/debug-bar-elasticpress/pull/74).
 - Compatibility with the WordPress localization system. Props [@burhandodhy](https://github.com/burhandodhy) and [@felipeelia](https://github.com/felipeelia) via [#73](https://github.com/10up/debug-bar-elasticpress/pull/73).
 - SECURITY.md file. Props [@felipeelia](https://github.com/felipeelia) via [#56](https://github.com/10up/debug-bar-elasticpress/pull/56).
 
