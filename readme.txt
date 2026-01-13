@@ -27,6 +27,12 @@ Alternatively, go to ElasticPress > Query Log and set it to record ElasticPress 
 2. Optionally install [Debug Bar](https://wordpress.org/plugins/debug-bar/) or [Query Monitor](https://wordpress.org/plugins/query-monitor/).
 3. Install the plugin in WordPress.
 
+== Frequently Asked Questions ==
+
+= Where do I report security bugs found in this plugin? =
+
+Please report security bugs found in the source code of the ElasticPress Debugging Add-On plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/cc7374da-57fd-4963-905b-92ba5d12a628).  The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 == Changelog ==
 
 = 3.1.1 - 2024-12-11 =
