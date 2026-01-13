@@ -20,6 +20,12 @@ Alternatively, go to ElasticPress > Query Log and set it to record ElasticPress 
 
 If you identify any errors or have an idea for improving the plugin, please [open an issue](https://github.com/10up/debug-bar-elasticpress/issues?state=open).
 
+## Frequently Asked Questions
+
+### Where do I report security bugs found in this plugin?
+
+Please report security bugs found in the source code of the ElasticPress Debugging Add-On plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/cc7374da-57fd-4963-905b-92ba5d12a628).  The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 ## Support Level
 
 **Active:** 10up is actively working on this, and we expect to continue work for the foreseeable future including keeping tested up to the most recent version of WordPress. Bug reports, feature requests, questions, and pull requests are welcome.
