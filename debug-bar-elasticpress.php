@@ -4,7 +4,6 @@
  * Plugin URI:        https://wordpress.org/plugins/debug-bar-elasticpress
  * Description:       Extends the Query Monitor and Debug Bar plugins for ElasticPress queries.
  * Version:           3.1.1
- * Requires Plugins:  elasticpress
  * Requires at least: 5.6
  * Requires PHP:      7.0
  * Author:            10up
