@@ -29,6 +29,6 @@
     "extends": "@10up/eslint-config/wordpress"
   },
   "devDependencies": {
-    "10up-toolkit": "^6.3.0"
+    "10up-toolkit": "^6.5.1"
   }
 }
