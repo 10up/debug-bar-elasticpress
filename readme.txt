@@ -35,6 +35,24 @@ Please report security bugs found in the source code of the ElasticPress Debuggi
 
 == Changelog ==
 
+= 4.0.0 - 2026-XX-XX =
+
+__Added:__
+
+* Compatibility with Query Monitor 4 (including styles when Query Monitor loads the frontend in the Shadow DOM). Props [@burhandodhy](https://github.com/burhandodhy).
+* FAQ on reporting security bugs through the Patchstack Vulnerability Disclosure Program. Props [@jeffpaul](https://github.com/jeffpaul).
+
+__Changed:__
+
+* Bump `Requires PHP` to 7.4. Props [@burhandodhy](https://github.com/burhandodhy) and [@felipeelia](https://github.com/felipeelia).
+* Remove the `Requires Plugins` plugin header so the plugin can be activated when ElasticPress is installed as an mu-plugin. Props [@barryceelen](https://github.com/barryceelen).
+* Updated npm dependencies. Props [@felipeelia](https://github.com/felipeelia).
+
+__Security:__
+
+* Bumped `tar-fs` from 2.1.1 to 3.1.0. Props [@dependabot](https://github.com/dependabot).
+* Bumped `http-proxy-middleware` from 2.0.7 to 2.0.9. Props [@dependabot](https://github.com/dependabot).
+
 = 3.1.1 - 2024-12-11 =
 
 __Added:__

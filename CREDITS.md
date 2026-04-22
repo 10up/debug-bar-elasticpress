@@ -30,6 +30,7 @@ Thank you to all the people who have already contributed to this repository via 
 [Nathaniel Taintor (@goldenapples)](https://github.com/goldenapples),
 [Matt Gross (@mattonomics)](https://github.com/mattonomics),
 [Artem Russakovskii (@archon810)](https://github.com/archon810),
+[Barry Ceelen (@barryceelen)](https://github.com/barryceelen),
 and
 [Christoph Bratschi (@cbratschi)](https://github.com/cbratschi).
 
