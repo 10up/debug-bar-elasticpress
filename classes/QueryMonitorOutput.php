@@ -66,7 +66,7 @@ class QueryMonitorOutput extends \QM_Output_Html {
 	 */
 	protected function output_styles() {
 		printf(
-			'<link rel="stylesheet" href="%s">',
+			'<link rel="stylesheet" href="%s">', // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
 			esc_url( EP_DEBUG_URL . 'assets/css/main.css?ver=' . EP_DEBUG_VERSION )
 		);
 	}

@@ -36,7 +36,7 @@ class CommonPanel {
 	/**
 	 * Enqueue scripts for front end and admin
 	 */
-	public function enqueue_scripts(): void {
+	public function enqueue_scripts() {
 		if ( ! is_user_logged_in() ) {
 			return;
 		}
@@ -49,7 +49,7 @@ class CommonPanel {
 	 *
 	 * @since 3.1.0
 	 */
-	public function enqueue_styles(): void {
+	public function enqueue_styles() {
 		if ( ! is_user_logged_in() ) {
 			return;
 		}
