@@ -36,14 +36,27 @@ class CommonPanel {
 	/**
 	 * Enqueue scripts for front end and admin
 	 */
-	public function enqueue_scripts_styles() {
+	public function enqueue_scripts() {
 		if ( ! is_user_logged_in() ) {
 			return;
 		}
 
-		wp_enqueue_script( 'debug-bar-elasticpress', EP_DEBUG_URL . 'assets/js/main.js', array( 'wp-dom-ready', 'clipboard' ), EP_DEBUG_VERSION, true );
-		wp_enqueue_style( 'debug-bar-elasticpress', EP_DEBUG_URL . 'assets/css/main.css', array(), EP_DEBUG_VERSION );
+		wp_enqueue_script( 'debug-bar-elasticpress', EP_DEBUG_URL . 'assets/js/main.js', [ 'wp-dom-ready', 'clipboard' ], EP_DEBUG_VERSION, true );
 	}
+
+	/**
+	 * Enqueue styles for front end and admin
+	 *
+	 * @since 3.1.0
+	 */
+	public function enqueue_styles() {
+		if ( ! is_user_logged_in() ) {
+			return;
+		}
+
+		wp_enqueue_style( 'debug-bar-elasticpress', EP_DEBUG_URL . 'assets/css/main.css', [], EP_DEBUG_VERSION );
+	}
+
 
 	/**
 	 * Show the contents of the panel

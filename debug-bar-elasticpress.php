@@ -67,7 +67,7 @@ function setup() {
 	if ( class_exists( '\QM_Collectors' ) ) {
 		\QM_Collectors::add( new QueryMonitorCollector() );
 		add_filter( 'qm/outputter/html', $n( 'register_qm_output' ) );
-		add_action( 'qm/output/enqueued-assets', [ new CommonPanel(), 'enqueue_scripts_styles' ] );
+		add_action( 'qm/output/enqueued-assets', [ new CommonPanel(), 'enqueue_scripts' ] );
 	} else {
 		add_filter( 'debug_bar_panels', $n( 'add_debug_bar_panel' ) );
 		add_filter( 'debug_bar_statuses', $n( 'add_debug_bar_stati' ) );

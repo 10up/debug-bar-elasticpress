@@ -478,7 +478,9 @@ class QueryLog {
 			return;
 		}
 
-		( new CommonPanel() )->enqueue_scripts_styles();
+		$common_panel = new CommonPanel();
+		$common_panel->enqueue_scripts();
+		$common_panel->enqueue_styles();
 	}
 
 	/**
