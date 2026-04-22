@@ -15,8 +15,10 @@
 	border-top: 5px solid currentColor;
 	cursor: pointer;
 	display: inline-block;
+	height: 0;
 	margin-left: 5px;
 	vertical-align: middle;
+	width: 0;
 }
 
 .ep-queries-debug .hide-query-results .query-results,
