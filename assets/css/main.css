@@ -10,11 +10,15 @@
 }
 
 .ep-queries-debug .dashicons {
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 5px solid currentColor;
 	cursor: pointer;
-}
-
-.ep-queries-debug .dashicons::before {
-	content: "\f140";
+	display: inline-block;
+	height: 0;
+	margin-left: 5px;
+	vertical-align: middle;
+	width: 0;
 }
 
 .ep-queries-debug .hide-query-results .query-results,
@@ -33,12 +37,13 @@
 	background-color: white;
 }
 
-.ep-queries-debug .hide-query-results .query-result-toggle::before,
-.ep-queries-debug .hide-query-args .query-args-toggle::before,
-.ep-queries-debug .hide-query-headers .query-headers-toggle::before,
-.ep-queries-debug .hide-query-errors .query-errors-toggle::before,
-.ep-queries-debug .hide-query-body .query-body-toggle::before {
-	content: "\f142";
+.ep-queries-debug .hide-query-results .query-result-toggle,
+.ep-queries-debug .hide-query-args .query-args-toggle,
+.ep-queries-debug .hide-query-headers .query-headers-toggle,
+.ep-queries-debug .hide-query-errors .query-errors-toggle,
+.ep-queries-debug .hide-query-body .query-body-toggle {
+	border-bottom: 5px solid currentColor;
+	border-top: none;
 }
 
 .ep-queries-debug .ep-query-failed .ep-query-response-code {
@@ -55,17 +60,9 @@
 }
 
 .ep-queries-debug-container .copy-curl {
-	border-color: #000;
-	border-radius: 3px;
-	border-style: solid;
-	border-width: 1px;
-	color: #000;
 	cursor: pointer;
 	display: inline-block;
 	font-size: 13px;
-	line-height: 2.1538;
-	min-height: 30px;
-	padding: 0 10px;
 	text-decoration: none;
 }
 
@@ -85,7 +82,7 @@
 	background: #f6f7f7 !important;
 	border: 1px solid #2271b1 !important;
 	border-radius: 3px !important;
-	
+
 	/* Overriding some Debug Bar "important" rules */
 	color: #2271b1 !important;
 	cursor: pointer;
