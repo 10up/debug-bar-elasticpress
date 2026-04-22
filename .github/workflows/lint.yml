@@ -45,7 +45,7 @@ jobs:
         coverage: none
 
     - name: PHPCS check
-      run: './vendor/bin/phpcs . -q --report=checkstyle --runtime-set testVersion 7.0- | cs2pr'
+      run: './vendor/bin/phpcs . -q --report=checkstyle --runtime-set testVersion 7.4- | cs2pr'
 
     - name: PHP Compatibility Check
       run: composer run check-php-compat

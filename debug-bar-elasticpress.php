@@ -5,7 +5,7 @@
  * Description:       Extends the Query Monitor and Debug Bar plugins for ElasticPress queries.
  * Version:           3.1.1
  * Requires at least: 5.6
- * Requires PHP:      7.0
+ * Requires PHP:      7.4
  * Author:            10up
  * Author URI:        https://10up.com
  * License:           GPLv2
