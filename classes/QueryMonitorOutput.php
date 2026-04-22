@@ -61,7 +61,7 @@ class QueryMonitorOutput extends \QM_Output_Html {
 	/**
 	 * Output Query Monitor styles so they apply correctly within the Shadow DOM panel.
 	 *
-	 * @since 3.2.0
+	 * @since 4.0.0
 	 * @return void
 	 */
 	protected function output_styles() {

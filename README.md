@@ -7,7 +7,7 @@
 ## Requirements
 
 * [ElasticPress](https://wordpress.org/plugins/elasticpress/) 4.4.0+
-* PHP 7.0+
+* PHP 7.4+
 * Optional: [Debug Bar](https://wordpress.org/plugins/debug-bar/) 1.0+ or [Query Monitor](https://wordpress.org/plugins/query-monitor/)
 
 ## Usage

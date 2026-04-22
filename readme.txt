@@ -3,7 +3,7 @@ Contributors: tlovett1, 10up
 Tags: debug, debug bar, elasticpress, elasticsearch
 Requires at least: 4.6
 Tested up to: 6.7
-Requires PHP: 7.0
+Requires PHP: 7.4
 Stable tag: 3.1.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -20,7 +20,7 @@ Alternatively, go to ElasticPress > Query Log and set it to record ElasticPress 
 
 * [ElasticPress 4.4.0+](https://wordpress.org/plugins/elasticpress)
 * [Debug Bar 1.0+](https://wordpress.org/plugins/debug-bar/)
-* PHP 7.0+
+* PHP 7.4+
 
 == Installation ==
 1. Install [ElasticPress](https://wordpress.org/plugins/elasticpress).
