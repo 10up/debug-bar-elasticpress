@@ -613,9 +613,9 @@ class QueryLog {
 	 * @since 3.1.0
 	 */
 	public function maybe_disable() {
-		$enabled = Utils\get_option( 'ep_enable_logging' );
+		$enabled = intval( Utils\get_option( 'ep_enable_logging' ) );
 
-		$is_time_limit = ! empty( $enabled ) && ! in_array( $enabled, [ '0', 0, '-1' ], true );
+		$is_time_limit = ! empty( $enabled ) && ! in_array( $enabled, [ 0, -1 ], true );
 		if ( ! $is_time_limit || $enabled > wp_date( 'U' ) ) {
 			return;
 		}
