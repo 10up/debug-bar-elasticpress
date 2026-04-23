@@ -253,7 +253,7 @@ class QueryOutput {
 					<strong><?php esc_html_e( 'Query Response Code:', 'debug-bar-elasticpress' ); ?></strong> <?php esc_html_e( 'Request Error', 'debug-bar-elasticpress' ); ?>
 				</div>
 			<?php endif; ?>
-			<a class="copy-curl ep-copy-button" data-clipboard-text="<?php echo esc_attr( addcslashes( $curl_request, '"' ) ); ?>">
+			<a class="copy-curl ep-copy-button" data-clipboard-text="<?php echo esc_attr( $curl_request ); ?>">
 				<?php esc_html_e( 'Copy cURL Request', 'debug-bar-elasticpress' ); ?>
 			</a>
 			<span class="ep-copy-button-wrapper__success" style="display: none;">
