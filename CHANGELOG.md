@@ -24,6 +24,11 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Remove the `Requires Plugins` plugin header so the plugin can be activated when ElasticPress is installed as an mu-plugin. Props [@barryceelen](https://github.com/barryceelen) via [#112](https://github.com/10up/debug-bar-elasticpress/pull/112).
 - Updated npm dependencies. Props [@felipeelia](https://github.com/felipeelia) via [#119](https://github.com/10up/debug-bar-elasticpress/pull/119).
 
+### Fixed
+- Icon styling on the Query Log admin page. Props [@burhandodhy](https://github.com/burhandodhy) via [#124](https://github.com/10up/debug-bar-elasticpress/pull/124).
+- Query Log "Keep Enabled" setting not working. Props [@burhandodhy](https://github.com/burhandodhy) via [#126](https://github.com/10up/debug-bar-elasticpress/pull/126).
+- Extra backslashes in copied cURL commands. Props [@burhandodhy](https://github.com/burhandodhy) via [#127](https://github.com/10up/debug-bar-elasticpress/pull/127).
+
 ### Security
 - Bumped `tar-fs` from 2.1.1 to 3.1.0. Props [@dependabot](https://github.com/dependabot) via [#110](https://github.com/10up/debug-bar-elasticpress/pull/110) and [#111](https://github.com/10up/debug-bar-elasticpress/pull/111).
 - Bumped `http-proxy-middleware` from 2.0.7 to 2.0.9. Props [@dependabot](https://github.com/dependabot) via [#111](https://github.com/10up/debug-bar-elasticpress/pull/111).

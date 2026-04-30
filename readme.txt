@@ -48,6 +48,12 @@ __Changed:__
 * Remove the `Requires Plugins` plugin header so the plugin can be activated when ElasticPress is installed as an mu-plugin. Props [@barryceelen](https://github.com/barryceelen).
 * Updated npm dependencies. Props [@felipeelia](https://github.com/felipeelia).
 
+__Fixed:__
+
+* Icon styling on the Query Log admin page. Props [@burhandodhy](https://github.com/burhandodhy).
+* Query Log "Keep Enabled" setting not working. Props [@burhandodhy](https://github.com/burhandodhy).
+* Extra backslashes in copied cURL commands. Props [@burhandodhy](https://github.com/burhandodhy).
+
 __Security:__
 
 * Bumped `tar-fs` from 2.1.1 to 3.1.0. Props [@dependabot](https://github.com/dependabot).
