@@ -34,6 +34,14 @@
 	display: none;
 }
 
+.debug-menu-target .ep-queries-debug .query-body,
+.debug-menu-target .ep-queries-debug .query-args,
+.debug-menu-target .ep-queries-debug .query-headers,
+.debug-menu-target .ep-queries-debug .query-errors,
+.debug-menu-target .ep-queries-debug .query-results {
+	background-color: white;
+}
+
 .ep-queries-debug .hide-query-results .query-result-toggle,
 .ep-queries-debug .hide-query-args .query-args-toggle,
 .ep-queries-debug .hide-query-headers .query-headers-toggle,
