@@ -2,8 +2,8 @@
 	background-color: #ffffe0;
 	border: 1px solid #e6db55;
 	clear: both;
-	padding: 0.5em 10px;
 	margin-top: 1em;
+	padding: 0.5em 10px;
 }
 
 [data-theme="dark"] .ep-debug-bar-warning {
@@ -102,9 +102,9 @@
 
 #debug-menu-target-EP_Debug_Bar_ElasticPress .button:active,
 #query-monitor-main #qm-elasticpress .button:hover {
-    background-color: #e6eaf4 !important;
-    color: var(--qm-wp-modern, #3858e9) !important;
-    border-color: #2337c8 !important;
+	background-color: #e6eaf4 !important;
+	border-color: #2337c8 !important;
+	color: var(--qm-wp-modern, #3858e9) !important;
 }
 
 #debug-menu-target-EP_Debug_Bar_ElasticPress .button:focus,
@@ -126,7 +126,7 @@
 #debug-menu-target-EP_Debug_Bar_ElasticPress a.button-primary:focus,
 #query-monitor-main #qm-elasticpress a.button-primary:hover,
 #query-monitor-main #qm-elasticpress a.button-primary:focus {
-	background:  #2145e6 !important;
+	background: #2145e6 !important;
 	color: #fff !important;
 }
 
