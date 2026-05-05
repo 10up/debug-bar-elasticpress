@@ -3,10 +3,9 @@
  * Plugin Name:       ElasticPress Debugging Add-On
  * Plugin URI:        https://wordpress.org/plugins/debug-bar-elasticpress
  * Description:       Extends the Query Monitor and Debug Bar plugins for ElasticPress queries.
- * Version:           3.1.1
- * Requires Plugins:  elasticpress
+ * Version:           4.0.0
  * Requires at least: 5.6
- * Requires PHP:      7.0
+ * Requires PHP:      7.4
  * Author:            10up
  * Author URI:        https://10up.com
  * License:           GPLv2
@@ -19,7 +18,7 @@
 
 namespace DebugBarElasticPress;
 
-define( 'EP_DEBUG_VERSION', '3.1.1' );
+define( 'EP_DEBUG_VERSION', '4.0.0' );
 define( 'EP_DEBUG_URL', plugin_dir_url( __FILE__ ) );
 define( 'EP_DEBUG_MIN_EP_VERSION', '4.4.0' );
 
@@ -68,7 +67,7 @@ function setup() {
 	if ( class_exists( '\QM_Collectors' ) ) {
 		\QM_Collectors::add( new QueryMonitorCollector() );
 		add_filter( 'qm/outputter/html', $n( 'register_qm_output' ) );
-		add_action( 'qm/output/enqueued-assets', [ new CommonPanel(), 'enqueue_scripts_styles' ] );
+		add_action( 'qm/output/enqueued-assets', [ new CommonPanel(), 'enqueue_scripts' ] );
 	} else {
 		add_filter( 'debug_bar_panels', $n( 'add_debug_bar_panel' ) );
 		add_filter( 'debug_bar_statuses', $n( 'add_debug_bar_stati' ) );

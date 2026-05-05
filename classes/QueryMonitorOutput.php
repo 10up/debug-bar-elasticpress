@@ -50,11 +50,25 @@ class QueryMonitorOutput extends \QM_Output_Html {
 	 */
 	public function output() {
 		?>
+		<?php $this->output_styles(); ?>
 		<div class="qm qm-non-tabular qm-debug-bar qm-panel-show" id="<?php echo esc_attr( $this->collector->id() ); ?>">
 			<?php $this->render_summary(); ?>
 			<?php $this->common_panel->render(); ?>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Output Query Monitor styles so they apply correctly within the Shadow DOM panel.
+	 *
+	 * @since 4.0.0
+	 * @return void
+	 */
+	protected function output_styles() {
+		printf(
+			'<link rel="stylesheet" href="%s">', // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
+			esc_url( EP_DEBUG_URL . 'assets/css/main.css?ver=' . EP_DEBUG_VERSION )
+		);
 	}
 
 	/**

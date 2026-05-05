@@ -38,14 +38,15 @@ class EP_Debug_Bar_ElasticPress extends \Debug_Bar_Panel {
 		$this->title( esc_html__( 'ElasticPress', 'debug-bar-elasticpress' ) );
 
 		$this->common_panel = new \DebugBarElasticPress\CommonPanel();
-		$this->common_panel->enqueue_scripts_styles();
+		$this->common_panel->enqueue_scripts();
+		$this->common_panel->enqueue_styles();
 	}
 
 	/**
 	 * Enqueue scripts for front end and admin
 	 */
 	public function enqueue_scripts_styles() {
-		_deprecated_function( __METHOD__, '3.1.0', 'DebugBarElasticPress\EP_Panel::enqueue_scripts_styles()' );
+		_deprecated_function( __METHOD__, '3.1.0', 'DebugBarElasticPress\EP_Panel::enqueue_scripts() and DebugBarElasticPress\EP_Panel::enqueue_styles()' );
 	}
 
 	/**

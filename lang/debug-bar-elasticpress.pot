@@ -1,41 +1,47 @@
-# Copyright (C) 2024 10up
+# Copyright (C) 2026 10up
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: ElasticPress Debugging Add-On 3.1.1\n"
+"Project-Id-Version: ElasticPress Debugging Add-On 4.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/debug-bar-elasticpress\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-12-11T17:24:37+00:00\n"
+"POT-Creation-Date: 2026-05-05T13:25:49+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.8.1\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: debug-bar-elasticpress\n"
 
 #. Plugin Name of the plugin
+#: debug-bar-elasticpress.php
 msgid "ElasticPress Debugging Add-On"
 msgstr ""
 
 #. Plugin URI of the plugin
+#: debug-bar-elasticpress.php
 msgid "https://wordpress.org/plugins/debug-bar-elasticpress"
 msgstr ""
 
 #. Description of the plugin
+#: debug-bar-elasticpress.php
 msgid "Extends the Query Monitor and Debug Bar plugins for ElasticPress queries."
 msgstr ""
 
 #. Author of the plugin
+#: debug-bar-elasticpress.php
 msgid "10up"
 msgstr ""
 
 #. Author URI of the plugin
+#: debug-bar-elasticpress.php
 msgid "https://10up.com"
 msgstr ""
 
 #. translators: %d: number of queries
 #: classes/CommonPanel.php:28
+#, php-format
 msgid "ElasticPress (%d)"
 msgstr ""
 
@@ -44,17 +50,19 @@ msgstr ""
 msgid "ElasticPress"
 msgstr ""
 
-#: classes/CommonPanel.php:57
+#: classes/CommonPanel.php:70
 msgid "ElasticPress is currently indexing."
 msgstr ""
 
 #. translators: queries count.
-#: classes/EP_Debug_Bar_ElasticPress.php:77
+#: classes/EP_Debug_Bar_ElasticPress.php:78
+#, php-format
 msgid "<span>Total ElasticPress Queries:</span> %d"
 msgstr ""
 
 #. translators: blocking query time.
-#: classes/EP_Debug_Bar_ElasticPress.php:85
+#: classes/EP_Debug_Bar_ElasticPress.php:86
+#, php-format
 msgid "<span>Total Blocking ElasticPress Query Time:</span> %d ms"
 msgstr ""
 
@@ -133,6 +141,7 @@ msgstr ""
 
 #. translators: date
 #: classes/QueryLog.php:267
+#, php-format
 msgid "Logging queries until <strong>%s</strong>."
 msgstr ""
 
@@ -170,6 +179,7 @@ msgstr ""
 
 #. translators: Current limit
 #: classes/QueryLog.php:314
+#, php-format
 msgid "Please note that logs are stored until the storage limit is reached. The current limit is: <strong>%s</strong>"
 msgstr ""
 
@@ -189,32 +199,33 @@ msgstr ""
 msgid "Elasticsearch check"
 msgstr ""
 
-#: classes/QueryLog.php:499
+#: classes/QueryLog.php:501
 msgid "Main query"
 msgstr ""
 
-#: classes/QueryLog.php:503
+#: classes/QueryLog.php:505
 msgid "Possible values for EP filter"
 msgstr ""
 
-#: classes/QueryLog.php:510
+#: classes/QueryLog.php:512
 msgid "Autosuggest template"
 msgstr ""
 
-#: classes/QueryLog.php:513
+#: classes/QueryLog.php:515
 msgid "Search"
 msgstr ""
 
-#: classes/QueryMonitorOutput.php:78
+#: classes/QueryMonitorOutput.php:92
 msgid "Total ElasticPress Queries:"
 msgstr ""
 
-#: classes/QueryMonitorOutput.php:84
+#: classes/QueryMonitorOutput.php:98
 msgid "Total Blocking ElasticPress Query Time:"
 msgstr ""
 
 #. translators: time spent
-#: classes/QueryMonitorOutput.php:91
+#: classes/QueryMonitorOutput.php:105
+#, php-format
 msgid "%d ms"
 msgstr ""
 
@@ -237,11 +248,13 @@ msgstr ""
 
 #. translators: Debug bar elasticpress error message
 #: classes/QueryOutput.php:144
+#, php-format
 msgid "<strong>Error:</strong> %s"
 msgstr ""
 
 #. translators: Debug bar elasticpress recommended solution for the error
 #: classes/QueryOutput.php:152
+#, php-format
 msgid "<strong>Recommended Solution:</strong> %s"
 msgstr ""
 
@@ -263,6 +276,7 @@ msgstr ""
 
 #. translators: time spent running the query.
 #: classes/QueryOutput.php:188
+#, php-format
 msgid "<strong>Time Taken:</strong> %d ms"
 msgstr ""
 
@@ -292,6 +306,7 @@ msgstr ""
 
 #. translators: Query HTTP Code response
 #: classes/QueryOutput.php:243
+#, php-format
 msgid "<strong>Query Response Code:</strong> HTTP %d"
 msgstr ""
 
@@ -323,19 +338,20 @@ msgstr ""
 msgid "Reload and retrieve raw ES document"
 msgstr ""
 
-#: debug-bar-elasticpress.php:117
+#: debug-bar-elasticpress.php:116
 msgid "ElasticPress Version"
 msgstr ""
 
-#: debug-bar-elasticpress.php:129
+#: debug-bar-elasticpress.php:128
 msgid "ElasticPress.io Managed Platform"
 msgstr ""
 
-#: debug-bar-elasticpress.php:133
+#: debug-bar-elasticpress.php:132
 msgid "Elasticsearch Version"
 msgstr ""
 
 #. translators: Min. EP version
-#: debug-bar-elasticpress.php:165
+#: debug-bar-elasticpress.php:164
+#, php-format
 msgid "ElasticPress Debugging Add-On needs at least ElasticPress %s to work properly."
 msgstr ""

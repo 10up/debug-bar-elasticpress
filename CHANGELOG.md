@@ -13,27 +13,50 @@ All notable changes to this project will be documented in this file, per [the Ke
 ### Security
 -->
 
+## [4.0.0] - 2026-05-05
+
+This version bumps the minimum PHP version to 7.4+.
+
+### Added
+- Compatibility with Query Monitor 4 (including styles when Query Monitor loads the frontend in the Shadow DOM). Props [@burhandodhy](https://github.com/burhandodhy) via [#120](https://github.com/10up/debug-bar-elasticpress/pull/120).
+- FAQ on reporting security bugs through the Patchstack Vulnerability Disclosure Program. Props [@jeffpaul](https://github.com/jeffpaul) via [#113](https://github.com/10up/debug-bar-elasticpress/pull/113).
+
+### Changed
+- Bump `Requires PHP` to 7.4. Props [@burhandodhy](https://github.com/burhandodhy) and [@felipeelia](https://github.com/felipeelia) via [#122](https://github.com/10up/debug-bar-elasticpress/pull/122).
+- Remove the `Requires Plugins` plugin header so the plugin can be activated when ElasticPress is installed as an mu-plugin. Props [@barryceelen](https://github.com/barryceelen) via [#112](https://github.com/10up/debug-bar-elasticpress/pull/112).
+- Updated npm dependencies. Props [@felipeelia](https://github.com/felipeelia) via [#119](https://github.com/10up/debug-bar-elasticpress/pull/119).
+
+### Fixed
+- Icon styling on the Query Log admin page. Props [@burhandodhy](https://github.com/burhandodhy) via [#124](https://github.com/10up/debug-bar-elasticpress/pull/124).
+- Query Log "Keep Enabled" setting not working. Props [@burhandodhy](https://github.com/burhandodhy) via [#126](https://github.com/10up/debug-bar-elasticpress/pull/126).
+- Extra backslashes in copied cURL commands. Props [@burhandodhy](https://github.com/burhandodhy) via [#127](https://github.com/10up/debug-bar-elasticpress/pull/127).
+- Styling issues with Query Monitor Dark Mode. Props [@burhandodhy](https://github.com/burhandodhy) and [@felipeelia](https://github.com/felipeelia) via [#128](https://github.com/10up/debug-bar-elasticpress/pull/128).
+
+### Security
+- Bumped `tar-fs` from 2.1.1 to 3.1.0. Props [@dependabot](https://github.com/dependabot) via [#110](https://github.com/10up/debug-bar-elasticpress/pull/110) and [#111](https://github.com/10up/debug-bar-elasticpress/pull/111).
+- Bumped `http-proxy-middleware` from 2.0.7 to 2.0.9. Props [@dependabot](https://github.com/dependabot) via [#111](https://github.com/10up/debug-bar-elasticpress/pull/111).
+
 ## [3.1.1] - 2024-12-11
 
 ### Added
-- Display the number of queries in Query Monitor's tab title. Props [@felipeelia](https://github.com/felipeelia) and [@burhandodhy](https://github.com/burhandodhy) via [#105](https://github.com/10up/ElasticPress/pull/105).
-- ElasticPress as a plugin dependency. Props [@jeffpaul](https://github.com/jeffpaul) via [#99](https://github.com/10up/ElasticPress/pull/99).
+- Display the number of queries in Query Monitor's tab title. Props [@felipeelia](https://github.com/felipeelia) and [@burhandodhy](https://github.com/burhandodhy) via [#105](https://github.com/10up/debug-bar-elasticpress/pull/105).
+- ElasticPress as a plugin dependency. Props [@jeffpaul](https://github.com/jeffpaul) via [#99](https://github.com/10up/debug-bar-elasticpress/pull/99).
 
 ### Changed
-- More modern versions of GitHub Actions, node, and node packages. Props [@felipeelia](https://github.com/felipeelia) via [#104](https://github.com/10up/ElasticPress/pull/104).
+- More modern versions of GitHub Actions, node, and node packages. Props [@felipeelia](https://github.com/felipeelia) via [#104](https://github.com/10up/debug-bar-elasticpress/pull/104).
 
 ### Fixed
-- Notices related to i18n calls. Props [@felipeelia](https://github.com/felipeelia) and [@archon810](https://github.com/archon810) via [#103](https://github.com/10up/ElasticPress/pull/103).
-- Use new plugin name in the admin notice. Props [@burhandodhy](https://github.com/burhandodhy) via [#108](https://github.com/10up/ElasticPress/pull/108).
+- Notices related to i18n calls. Props [@felipeelia](https://github.com/felipeelia) and [@archon810](https://github.com/archon810) via [#103](https://github.com/10up/debug-bar-elasticpress/pull/103).
+- Use new plugin name in the admin notice. Props [@burhandodhy](https://github.com/burhandodhy) via [#108](https://github.com/10up/debug-bar-elasticpress/pull/108).
 
 ## [3.1.0] - 2023-09-20
 
 ### Added
-- New button to explain ES queries. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), [@MARQAS](https://github.com/MARQAS), and [@brandwaffle](https://github.com/brandwaffle) via [#79](https://github.com/10up/ElasticPress/pull/79) and [#88](https://github.com/10up/ElasticPress/pull/88).
-- New button to Reload and retrieve raw ES document. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), and [@brandwaffle](https://github.com/brandwaffle) via [#79](https://github.com/10up/ElasticPress/pull/79).
-- Query types (and context when listing queries in the Query Log admin screen.) Props [@felipeelia](https://github.com/felipeelia) and [@burhandodhy](https://github.com/burhandodhy) via [#82](https://github.com/10up/ElasticPress/pull/82).
-- Log query by context, status, and fixed time. Props [@felipeelia](https://github.com/felipeelia) via [#83](https://github.com/10up/ElasticPress/pull/83) and [#86](https://github.com/10up/ElasticPress/pull/86).
-- Official support to Query Monitor. Props [@felipeelia](https://github.com/felipeelia) via [#84](https://github.com/10up/ElasticPress/pull/84).
+- New button to explain ES queries. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), [@MARQAS](https://github.com/MARQAS), and [@brandwaffle](https://github.com/brandwaffle) via [#79](https://github.com/10up/debug-bar-elasticpress/pull/79) and [#88](https://github.com/10up/debug-bar-elasticpress/pull/88).
+- New button to Reload and retrieve raw ES document. Props [@burhandodhy](https://github.com/burhandodhy), [@felipeelia](https://github.com/felipeelia), and [@brandwaffle](https://github.com/brandwaffle) via [#79](https://github.com/10up/debug-bar-elasticpress/pull/79).
+- Query types (and context when listing queries in the Query Log admin screen.) Props [@felipeelia](https://github.com/felipeelia) and [@burhandodhy](https://github.com/burhandodhy) via [#82](https://github.com/10up/debug-bar-elasticpress/pull/82).
+- Log query by context, status, and fixed time. Props [@felipeelia](https://github.com/felipeelia) via [#83](https://github.com/10up/debug-bar-elasticpress/pull/83) and [#86](https://github.com/10up/debug-bar-elasticpress/pull/86).
+- Official support to Query Monitor. Props [@felipeelia](https://github.com/felipeelia) via [#84](https://github.com/10up/debug-bar-elasticpress/pull/84).
 
 ### Security
 - Bumped `tough-cookie` from 4.1.2 to 4.1.3. Props [@dependabot](https://github.com/dependabot) via [#75](https://github.com/10up/debug-bar-elasticpress/pull/75).
@@ -45,7 +68,7 @@ This release drops the support for older versions of ElasticPress and PHP.
 
 ### Added
 - Instructions with error code for failed queries. Props [@MARQAS](https://github.com/MARQAS) and [@felipeelia](https://github.com/felipeelia) via [#58](https://github.com/10up/debug-bar-elasticpress/pull/58).
-- Buttons to copy or download all requests info. Props [@MARQAS](https://github.com/MARQAS), [@felipeelia](https://github.com/felipeelia), and [@burhandodhy](https://github.com/burhandodhy) via [#63](https://github.com/10up/debug-bar-elasticpress/pull/63) and [#74](https://github.com/10up/ElasticPress/pull/74).
+- Buttons to copy or download all requests info. Props [@MARQAS](https://github.com/MARQAS), [@felipeelia](https://github.com/felipeelia), and [@burhandodhy](https://github.com/burhandodhy) via [#63](https://github.com/10up/debug-bar-elasticpress/pull/63) and [#74](https://github.com/10up/debug-bar-elasticpress/pull/74).
 - Compatibility with the WordPress localization system. Props [@burhandodhy](https://github.com/burhandodhy) and [@felipeelia](https://github.com/felipeelia) via [#73](https://github.com/10up/debug-bar-elasticpress/pull/73).
 - SECURITY.md file. Props [@felipeelia](https://github.com/felipeelia) via [#56](https://github.com/10up/debug-bar-elasticpress/pull/56).
 
@@ -109,6 +132,7 @@ This release drops the support for older versions of WordPress Core, ElasticPres
 * Initial release
 
 [Unreleased]: https://github.com/10up/debug-bar-elasticpress/compare/trunk...develop
+[4.0.0]: https://github.com/10up/debug-bar-elasticpress/compare/3.1.1...4.0.0
 [3.1.1]: https://github.com/10up/debug-bar-elasticpress/compare/3.1.0...3.1.1
 [3.1.0]: https://github.com/10up/debug-bar-elasticpress/compare/3.0.0...3.1.0
 [3.0.0]: https://github.com/10up/debug-bar-elasticpress/compare/2.1.1...3.0.0

@@ -2,9 +2,9 @@
 Contributors: tlovett1, 10up
 Tags: debug, debug bar, elasticpress, elasticsearch
 Requires at least: 4.6
-Tested up to: 6.7
-Requires PHP: 7.0
-Stable tag: 3.1.1
+Tested up to: 7.0
+Requires PHP: 7.4
+Stable tag: 4.0.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,15 +19,48 @@ Alternatively, go to ElasticPress > Query Log and set it to record ElasticPress 
 = Requirements: =
 
 * [ElasticPress 4.4.0+](https://wordpress.org/plugins/elasticpress)
-* [Debug Bar 1.0+](https://wordpress.org/plugins/debug-bar/)
-* PHP 7.0+
+* PHP 7.4+
+* Additional functionalities with [Debug Bar 1.0+](https://wordpress.org/plugins/debug-bar/) or [Query Monitor](https://wordpress.org/plugins/query-monitor/)
 
 == Installation ==
 1. Install [ElasticPress](https://wordpress.org/plugins/elasticpress).
 2. Optionally install [Debug Bar](https://wordpress.org/plugins/debug-bar/) or [Query Monitor](https://wordpress.org/plugins/query-monitor/).
 3. Install the plugin in WordPress.
 
+== Frequently Asked Questions ==
+
+= Where do I report security bugs found in this plugin? =
+
+Please report security bugs found in the source code of the ElasticPress Debugging Add-On plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/cc7374da-57fd-4963-905b-92ba5d12a628).  The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 == Changelog ==
+
+= 4.0.0 - 2026-05-05 =
+
+This version bumps the minimum PHP version to 7.4+.
+
+__Added:__
+
+* Compatibility with Query Monitor 4 (including styles when Query Monitor loads the frontend in the Shadow DOM). Props [@burhandodhy](https://github.com/burhandodhy).
+* FAQ on reporting security bugs through the Patchstack Vulnerability Disclosure Program. Props [@jeffpaul](https://github.com/jeffpaul).
+
+__Changed:__
+
+* Bump `Requires PHP` to 7.4. Props [@burhandodhy](https://github.com/burhandodhy) and [@felipeelia](https://github.com/felipeelia).
+* Remove the `Requires Plugins` plugin header so the plugin can be activated when ElasticPress is installed as an mu-plugin. Props [@barryceelen](https://github.com/barryceelen).
+* Updated npm dependencies. Props [@felipeelia](https://github.com/felipeelia).
+
+__Fixed:__
+
+* Icon styling on the Query Log admin page. Props [@burhandodhy](https://github.com/burhandodhy).
+* Query Log "Keep Enabled" setting not working. Props [@burhandodhy](https://github.com/burhandodhy).
+* Extra backslashes in copied cURL commands. Props [@burhandodhy](https://github.com/burhandodhy).
+* Styling issues with Query Monitor Dark Mode. Props [@burhandodhy](https://github.com/burhandodhy) and [@felipeelia](https://github.com/felipeelia).
+
+__Security:__
+
+* Bumped `tar-fs` from 2.1.1 to 3.1.0. Props [@dependabot](https://github.com/dependabot).
+* Bumped `http-proxy-middleware` from 2.0.7 to 2.0.9. Props [@dependabot](https://github.com/dependabot).
 
 = 3.1.1 - 2024-12-11 =
 
