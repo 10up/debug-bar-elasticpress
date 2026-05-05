@@ -13,6 +13,29 @@ All notable changes to this project will be documented in this file, per [the Ke
 ### Security
 -->
 
+## [4.0.0] - 2026-05-05
+
+This version bumps the minimum PHP version to 7.4+.
+
+### Added
+- Compatibility with Query Monitor 4 (including styles when Query Monitor loads the frontend in the Shadow DOM). Props [@burhandodhy](https://github.com/burhandodhy) via [#120](https://github.com/10up/debug-bar-elasticpress/pull/120).
+- FAQ on reporting security bugs through the Patchstack Vulnerability Disclosure Program. Props [@jeffpaul](https://github.com/jeffpaul) via [#113](https://github.com/10up/debug-bar-elasticpress/pull/113).
+
+### Changed
+- Bump `Requires PHP` to 7.4. Props [@burhandodhy](https://github.com/burhandodhy) and [@felipeelia](https://github.com/felipeelia) via [#122](https://github.com/10up/debug-bar-elasticpress/pull/122).
+- Remove the `Requires Plugins` plugin header so the plugin can be activated when ElasticPress is installed as an mu-plugin. Props [@barryceelen](https://github.com/barryceelen) via [#112](https://github.com/10up/debug-bar-elasticpress/pull/112).
+- Updated npm dependencies. Props [@felipeelia](https://github.com/felipeelia) via [#119](https://github.com/10up/debug-bar-elasticpress/pull/119).
+
+### Fixed
+- Icon styling on the Query Log admin page. Props [@burhandodhy](https://github.com/burhandodhy) via [#124](https://github.com/10up/debug-bar-elasticpress/pull/124).
+- Query Log "Keep Enabled" setting not working. Props [@burhandodhy](https://github.com/burhandodhy) via [#126](https://github.com/10up/debug-bar-elasticpress/pull/126).
+- Extra backslashes in copied cURL commands. Props [@burhandodhy](https://github.com/burhandodhy) via [#127](https://github.com/10up/debug-bar-elasticpress/pull/127).
+- Styling issues with Query Monitor Dark Mode. Props [@burhandodhy](https://github.com/burhandodhy) and [@felipeelia](https://github.com/felipeelia) via [#128](https://github.com/10up/debug-bar-elasticpress/pull/128).
+
+### Security
+- Bumped `tar-fs` from 2.1.1 to 3.1.0. Props [@dependabot](https://github.com/dependabot) via [#110](https://github.com/10up/debug-bar-elasticpress/pull/110) and [#111](https://github.com/10up/debug-bar-elasticpress/pull/111).
+- Bumped `http-proxy-middleware` from 2.0.7 to 2.0.9. Props [@dependabot](https://github.com/dependabot) via [#111](https://github.com/10up/debug-bar-elasticpress/pull/111).
+
 ## [3.1.1] - 2024-12-11
 
 ### Added
@@ -109,6 +132,7 @@ This release drops the support for older versions of WordPress Core, ElasticPres
 * Initial release
 
 [Unreleased]: https://github.com/10up/debug-bar-elasticpress/compare/trunk...develop
+[4.0.0]: https://github.com/10up/debug-bar-elasticpress/compare/3.1.1...4.0.0
 [3.1.1]: https://github.com/10up/debug-bar-elasticpress/compare/3.1.0...3.1.1
 [3.1.0]: https://github.com/10up/debug-bar-elasticpress/compare/3.0.0...3.1.0
 [3.0.0]: https://github.com/10up/debug-bar-elasticpress/compare/2.1.1...3.0.0
