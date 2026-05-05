@@ -53,6 +53,7 @@ __Fixed:__
 * Icon styling on the Query Log admin page. Props [@burhandodhy](https://github.com/burhandodhy).
 * Query Log "Keep Enabled" setting not working. Props [@burhandodhy](https://github.com/burhandodhy).
 * Extra backslashes in copied cURL commands. Props [@burhandodhy](https://github.com/burhandodhy).
+* Styling issues with Query Monitor Dark Mode. Props [@burhandodhy](https://github.com/burhandodhy) and [@felipeelia](https://github.com/felipeelia).
 
 __Security:__
 
