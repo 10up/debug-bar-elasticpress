@@ -19,8 +19,8 @@ Alternatively, go to ElasticPress > Query Log and set it to record ElasticPress 
 = Requirements: =
 
 * [ElasticPress 4.4.0+](https://wordpress.org/plugins/elasticpress)
-* [Debug Bar 1.0+](https://wordpress.org/plugins/debug-bar/)
 * PHP 7.4+
+* Additional functionalities with [Debug Bar 1.0+](https://wordpress.org/plugins/debug-bar/) or [Query Monitor](https://wordpress.org/plugins/query-monitor/)
 
 == Installation ==
 1. Install [ElasticPress](https://wordpress.org/plugins/elasticpress).
@@ -36,6 +36,8 @@ Please report security bugs found in the source code of the ElasticPress Debuggi
 == Changelog ==
 
 = 4.0.0 - 2026-XX-XX =
+
+This version bumps the minimum PHP version to 7.4+.
 
 __Added:__
 

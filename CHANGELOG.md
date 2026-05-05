@@ -15,6 +15,8 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [4.0.0] - 2026-XX-XX
 
+This version bumps the minimum PHP version to 7.4+.
+
 ### Added
 - Compatibility with Query Monitor 4 (including styles when Query Monitor loads the frontend in the Shadow DOM). Props [@burhandodhy](https://github.com/burhandodhy) via [#120](https://github.com/10up/debug-bar-elasticpress/pull/120).
 - FAQ on reporting security bugs through the Patchstack Vulnerability Disclosure Program. Props [@jeffpaul](https://github.com/jeffpaul) via [#113](https://github.com/10up/debug-bar-elasticpress/pull/113).
