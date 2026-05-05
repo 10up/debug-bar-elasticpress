@@ -35,7 +35,7 @@ Please report security bugs found in the source code of the ElasticPress Debuggi
 
 == Changelog ==
 
-= 4.0.0 - 2026-XX-XX =
+= 4.0.0 - 2026-05-05 =
 
 This version bumps the minimum PHP version to 7.4+.
 

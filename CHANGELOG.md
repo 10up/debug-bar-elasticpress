@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 ### Security
 -->
 
-## [4.0.0] - 2026-XX-XX
+## [4.0.0] - 2026-05-05
 
 This version bumps the minimum PHP version to 7.4+.
 
