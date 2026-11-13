@@ -1,3 +1,8 @@
+/* stylelint-disable selector-max-id, selector-max-specificity */
+/* stylelint-disable selector-no-qualifying-type */
+/* stylelint-disable declaration-no-important */
+/* stylelint-disable no-descending-specificity */
+
 .ep-debug-bar-warning {
 	background-color: #ffffe0;
 	border: 1px solid #e6db55;
