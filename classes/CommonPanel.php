@@ -37,7 +37,10 @@ class CommonPanel {
 	 * Enqueue scripts for front end and admin
 	 */
 	public function enqueue_scripts() {
-		if ( ! is_user_logged_in() ) {
+		$is_logged_in           = is_user_logged_in();
+		$can_view_query_monitor = class_exists( '\QM_Dispatcher' ) && \QM_Dispatcher::user_can_view();
+
+		if ( ! $is_logged_in && ! $can_view_query_monitor ) {
 			return;
 		}
 
